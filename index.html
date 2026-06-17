@@ -150,7 +150,7 @@ LOGIN
 <br><br>
 
 
-<button class="adminBtn">
+<button class="adminBtn" onclick="showAdminLogin()">
 HR ADMIN LOGIN
 </button>
 
@@ -196,6 +196,14 @@ const API_URL = "https://script.google.com/macros/s/AKfycbzOhTHL9eSvXiZBtFNOOqSk
 
 
 function login(){
+
+function showAdminLogin(){
+
+ document.getElementById("loginPage").style.display="none";
+
+ alert("HR LOGIN PAGE TEST");
+
+}
 
   let username = document.getElementById("username").value;
   let pin = document.getElementById("pin").value;
