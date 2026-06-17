@@ -192,14 +192,40 @@ Portal successfully loaded from GitHub Pages.
 <script>
 
 
+const API_URL = "https://script.google.com/macros/s/AKfycbzOhTHL9eSvXiZBtFNOOqSklkkelcPORIsBMYuWPZyPrqktTXFb6at4WrrYpi1T_e7FaA/exec";
+
+
 function login(){
 
+  let username = document.getElementById("username").value;
+  let pin = document.getElementById("pin").value;
 
-document.getElementById("loginPage").style.display="none";
+  fetch(API_URL,{
+    method:"POST",
+    body:JSON.stringify({
+      action:"login",
+      username:username,
+      pin:pin,
+      deviceID:navigator.userAgent
+    })
+  })
 
+  .then(res=>res.json())
 
-document.getElementById("dashboard").style.display="block";
+  .then(data=>{
 
+    if(data.result=="SUCCESS"){
+
+      document.getElementById("loginPage").style.display="none";
+      document.getElementById("dashboard").style.display="block";
+
+    }else{
+
+      alert(data.error || "Invalid Login");
+
+    }
+
+  });
 
 }
 
