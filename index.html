@@ -17,6 +17,7 @@ html,body{
   min-height:100%;
 }
 
+
 /* LOGIN PAGE */
 
 .loginPage{
@@ -25,12 +26,7 @@ html,body{
   display:flex;
   justify-content:center;
   align-items:center;
-
-  background:linear-gradient(
-    135deg,
-    #004aad,
-    #00b4d8
-  );
+  background:linear-gradient(135deg,#004aad,#00b4d8);
 
 }
 
@@ -122,7 +118,7 @@ button{
 <body>
 
 
-<!-- LOGIN -->
+<!-- EMPLOYEE LOGIN -->
 
 <div class="loginPage" id="loginPage">
 
@@ -138,14 +134,15 @@ button{
 <h2>Employee Portal</h2>
 
 
-<input placeholder="Username">
+<input id="username" placeholder="Username">
 
-<input placeholder="PIN">
+<input id="pin" placeholder="PIN">
 
 
 <button onclick="login()">
 LOGIN
 </button>
+
 
 <br><br>
 
@@ -162,13 +159,47 @@ HR ADMIN LOGIN
 
 
 
-<!-- DASHBOARD -->
+<!-- HR LOGIN -->
+
+<div class="loginPage" id="adminLoginPage" style="display:none;">
+
+
+<div class="loginBox">
+
+
+<div class="loginIcon">
+🛡
+</div>
+
+
+<h2>HR Admin Portal</h2>
+
+
+<input placeholder="Admin Username">
+
+<input placeholder="Password">
+
+
+<button>
+LOGIN
+</button>
+
+
+</div>
+
+</div>
+
+
+
+
+
+<!-- EMPLOYEE DASHBOARD -->
 
 <div class="dashboard" id="dashboard">
 
 
 <h1>
-🛡 PLC EMPLOYEE DASHBOARD
+PLC EMPLOYEE DASHBOARD
 </h1>
 
 
@@ -177,7 +208,7 @@ HR ADMIN LOGIN
 <h2>Welcome Employee</h2>
 
 <p>
-Portal successfully loaded from GitHub Pages.
+Portal successfully loaded.
 </p>
 
 </div>
@@ -195,47 +226,81 @@ Portal successfully loaded from GitHub Pages.
 const API_URL = "https://script.google.com/macros/s/AKfycbzOhTHL9eSvXiZBtFNOOqSklkkelcPORIsBMYuWPZyPrqktTXFb6at4WrrYpi1T_e7FaA/exec";
 
 
+
+// EMPLOYEE LOGIN
+
 function login(){
 
-function showAdminLogin(){
+
+ let username=document.getElementById("username").value;
+
+ let pin=document.getElementById("pin").value;
+
+
+
+ fetch(API_URL,{
+
+ method:"POST",
+
+ body:JSON.stringify({
+
+ action:"login",
+
+ username:username,
+
+ pin:pin,
+
+ deviceID:navigator.userAgent
+
+ })
+
+ })
+
+
+ .then(res=>res.json())
+
+
+ .then(data=>{
+
+
+ if(data.result=="SUCCESS"){
+
 
  document.getElementById("loginPage").style.display="none";
 
- alert("HR LOGIN PAGE TEST");
+ document.getElementById("dashboard").style.display="block";
+
+
+ }else{
+
+
+ alert(data.error || "Invalid Login");
+
+
+ }
+
+
+ });
+
 
 }
 
-  let username = document.getElementById("username").value;
-  let pin = document.getElementById("pin").value;
 
-  fetch(API_URL,{
-    method:"POST",
-    body:JSON.stringify({
-      action:"login",
-      username:username,
-      pin:pin,
-      deviceID:navigator.userAgent
-    })
-  })
 
-  .then(res=>res.json())
 
-  .then(data=>{
+// OPEN HR LOGIN
 
-    if(data.result=="SUCCESS"){
 
-      document.getElementById("loginPage").style.display="none";
-      document.getElementById("dashboard").style.display="block";
+function showAdminLogin(){
 
-    }else{
 
-      alert(data.error || "Invalid Login");
+ document.getElementById("loginPage").style.display="none";
 
-    }
+ document.getElementById("adminLoginPage").style.display="flex";
 
-  });
 
 }
+
 
 
 </script>
