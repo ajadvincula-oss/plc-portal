@@ -1,91 +1,94 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <title>PLC Employee Portal</title>
 
+
 <style>
 
 *{
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
 html,body{
-  margin:0;
-  width:100%;
-  min-height:100%;
+margin:0;
+width:100%;
+min-height:100%;
 }
 
 
-/* LOGIN PAGE */
+/* LOGIN DESIGN */
+
 
 .loginPage{
 
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(135deg,#004aad,#00b4d8);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#004aad,#00b4d8);
 
 }
 
 
 .loginBox{
 
-  background:white;
-  width:420px;
-  padding:45px;
-  border-radius:25px;
-  box-shadow:0 20px 50px rgba(0,0,0,.25);
-  text-align:center;
+background:white;
+width:420px;
+padding:45px;
+border-radius:25px;
+box-shadow:0 20px 50px rgba(0,0,0,.25);
+text-align:center;
 
 }
 
 
 .loginIcon{
 
-  font-size:55px;
+font-size:55px;
 
 }
 
 
 h2{
 
-  letter-spacing:2px;
+letter-spacing:3px;
 
 }
 
 
 input{
 
-  width:100%;
-  padding:16px;
-  margin:12px 0;
-  border-radius:12px;
-  border:1px solid #ccc;
-  font-size:18px;
+width:100%;
+padding:16px;
+margin:12px 0;
+border-radius:12px;
+border:1px solid #ccc;
+font-size:18px;
 
 }
 
 
 button{
 
-  padding:15px 35px;
-  border:0;
-  border-radius:12px;
-  cursor:pointer;
-  font-size:17px;
-  color:white;
-  background:#0057d9;
-  margin-top:10px;
+padding:15px 35px;
+border:0;
+border-radius:12px;
+cursor:pointer;
+font-size:17px;
+color:white;
+background:#0057d9;
+margin-top:10px;
 
 }
 
 
 .adminBtn{
 
- background:#222;
+background:#222;
 
 }
 
@@ -94,18 +97,18 @@ button{
 
 .dashboard{
 
- display:none;
- padding:40px;
+display:none;
+padding:40px;
 
 }
 
 
 .card{
 
- background:white;
- padding:30px;
- border-radius:20px;
- box-shadow:0 10px 30px #ddd;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px #ddd;
 
 }
 
@@ -115,13 +118,15 @@ button{
 </head>
 
 
+
 <body>
+
 
 
 <!-- EMPLOYEE LOGIN -->
 
-<div class="loginPage" id="loginPage">
 
+<div class="loginPage" id="loginPage">
 
 <div class="loginBox">
 
@@ -131,7 +136,9 @@ button{
 </div>
 
 
-<h2>Employee Portal</h2>
+<h2>
+Employee Portal
+</h2>
 
 
 <input id="username" placeholder="Username">
@@ -159,7 +166,9 @@ HR ADMIN LOGIN
 
 
 
+
 <!-- HR LOGIN -->
+
 
 <div class="loginPage" id="adminLoginPage" style="display:none;">
 
@@ -172,16 +181,26 @@ HR ADMIN LOGIN
 </div>
 
 
-<h2>HR Admin Portal</h2>
+<h2>
+HR Admin Portal
+</h2>
 
 
-<input placeholder="Admin Username">
+<input id="adminUser" placeholder="Admin Username">
 
-<input placeholder="Password">
+<input id="adminPass" placeholder="Password">
 
 
-<button>
+<button onclick="adminLogin()">
 LOGIN
+</button>
+
+
+<br><br>
+
+
+<button class="adminBtn" onclick="backEmployee()">
+BACK TO EMPLOYEE LOGIN
 </button>
 
 
@@ -195,6 +214,7 @@ LOGIN
 
 <!-- EMPLOYEE DASHBOARD -->
 
+
 <div class="dashboard" id="dashboard">
 
 
@@ -205,16 +225,56 @@ PLC EMPLOYEE DASHBOARD
 
 <div class="card">
 
-<h2>Welcome Employee</h2>
+<h2>
+Welcome Employee
+</h2>
+
 
 <p>
-Portal successfully loaded.
+Employee portal successfully loaded.
 </p>
 
+
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- HR DASHBOARD -->
+
+
+<div class="dashboard" id="hrDashboard">
+
+
+<h1>
+HR ADMIN DASHBOARD
+</h1>
+
+
+<div class="card">
+
+
+<h2>
+Welcome HR Admin
+</h2>
+
+
+<p>
+HR Management Panel Loaded.
+</p>
+
+
 </div>
 
 
 </div>
+
+
+
 
 
 
@@ -223,67 +283,102 @@ Portal successfully loaded.
 <script>
 
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzOhTHL9eSvXiZBtFNOOqSklkkelcPORIsBMYuWPZyPrqktTXFb6at4WrrYpi1T_e7FaA/exec";
+const API_URL="https://script.google.com/macros/s/AKfycbzOhTHL9eSvXiZBtFNOOqSklkkelcPORIsBMYuWPZyPrqktTXFb6at4WrrYpi1T_e7FaA/exec";
+
 
 
 
 // EMPLOYEE LOGIN
 
+
 function login(){
 
 
- let username=document.getElementById("username").value;
+let username=document.getElementById("username").value.trim();
 
- let pin=document.getElementById("pin").value;
-
-
-
- fetch(API_URL,{
-
- method:"POST",
-
- body:JSON.stringify({
-
- action:"login",
-
- username:username,
-
- pin:pin,
-
- deviceID:navigator.userAgent
-
- })
-
- })
+let pin=document.getElementById("pin").value.trim();
 
 
- .then(res=>res.json())
+
+if(username=="" || pin==""){
+
+alert("Please enter username and PIN");
+
+return;
+
+}
 
 
- .then(data=>{
 
 
- if(data.result=="SUCCESS"){
+fetch(API_URL,{
+
+method:"POST",
+
+body:JSON.stringify({
+
+action:"login",
+
+username:username,
+
+pin:pin,
+
+deviceID:navigator.userAgent
+
+})
+
+})
 
 
- document.getElementById("loginPage").style.display="none";
-
- document.getElementById("dashboard").style.display="block";
+.then(res=>res.json())
 
 
- }else{
+.then(data=>{
 
 
- alert(data.error || "Invalid Login");
+console.log(data);
 
 
- }
+if(data.result=="SUCCESS"){
 
 
- });
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("dashboard").style.display="block";
 
 
 }
+
+
+else{
+
+
+alert(data.error || "Invalid Login");
+
+
+}
+
+
+
+})
+
+
+.catch(error=>{
+
+
+alert("Connection Error. Check Apps Script.");
+
+console.log(error);
+
+
+});
+
+
+}
+
+
+
+
 
 
 
@@ -294,9 +389,66 @@ function login(){
 function showAdminLogin(){
 
 
- document.getElementById("loginPage").style.display="none";
+document.getElementById("loginPage").style.display="none";
 
- document.getElementById("adminLoginPage").style.display="flex";
+document.getElementById("adminLoginPage").style.display="flex";
+
+
+}
+
+
+
+
+
+// BACK EMPLOYEE LOGIN
+
+
+function backEmployee(){
+
+
+document.getElementById("adminLoginPage").style.display="none";
+
+document.getElementById("loginPage").style.display="flex";
+
+
+}
+
+
+
+
+
+
+
+// HR LOGIN
+
+
+function adminLogin(){
+
+
+let user=document.getElementById("adminUser").value;
+
+let pass=document.getElementById("adminPass").value;
+
+
+
+if(user=="admin" && pass=="123456"){
+
+
+document.getElementById("adminLoginPage").style.display="none";
+
+document.getElementById("hrDashboard").style.display="block";
+
+
+}
+
+
+else{
+
+
+alert("Invalid HR Login");
+
+
+}
 
 
 }
@@ -308,4 +460,5 @@ function showAdminLogin(){
 
 
 </body>
+
 </html>
