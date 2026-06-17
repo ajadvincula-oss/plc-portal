@@ -5,7 +5,6 @@
 
 <title>PLC Employee Portal</title>
 
-
 <style>
 
 *{
@@ -13,14 +12,15 @@ box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
 
-html,body{
+body{
 margin:0;
-width:100%;
-min-height:100%;
+background:#f4f6f9;
 }
 
 
-/* LOGIN DESIGN */
+/* =====================
+LOGIN DESIGN
+===================== */
 
 
 .loginPage{
@@ -29,7 +29,11 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#004aad,#00b4d8);
+background:linear-gradient(
+135deg,
+#004aad,
+#00b4d8
+);
 
 }
 
@@ -37,16 +41,16 @@ background:linear-gradient(135deg,#004aad,#00b4d8);
 .loginBox{
 
 background:white;
-width:420px;
+width:430px;
 padding:45px;
 border-radius:25px;
-box-shadow:0 20px 50px rgba(0,0,0,.25);
 text-align:center;
+box-shadow:0 20px 50px rgba(0,0,0,.25);
 
 }
 
 
-.loginIcon{
+.icon{
 
 font-size:55px;
 
@@ -55,7 +59,7 @@ font-size:55px;
 
 h2{
 
-letter-spacing:3px;
+letter-spacing:4px;
 
 }
 
@@ -63,25 +67,25 @@ letter-spacing:3px;
 input{
 
 width:100%;
-padding:16px;
+padding:15px;
 margin:12px 0;
+font-size:17px;
 border-radius:12px;
 border:1px solid #ccc;
-font-size:18px;
 
 }
 
 
 button{
 
-padding:15px 35px;
+padding:14px 35px;
 border:0;
 border-radius:12px;
-cursor:pointer;
-font-size:17px;
-color:white;
 background:#0057d9;
-margin-top:10px;
+color:white;
+cursor:pointer;
+font-size:16px;
+margin:5px;
 
 }
 
@@ -93,14 +97,76 @@ background:#222;
 }
 
 
-/* DASHBOARD */
+
+.backBtn{
+
+background:#777;
+
+}
+
+
+
+/* =====================
+DASHBOARD
+===================== */
+
 
 .dashboard{
 
 display:none;
+height:100vh;
+
+}
+
+
+
+.sidebar{
+
+width:260px;
+height:100vh;
+background:#003566;
+color:white;
+float:left;
+padding:25px;
+
+}
+
+
+
+.sidebar h2{
+
+font-size:20px;
+
+}
+
+
+
+.menu{
+
+padding:15px;
+cursor:pointer;
+border-bottom:1px solid rgba(255,255,255,.2);
+
+}
+
+
+
+.menu:hover{
+
+background:#0057d9;
+
+}
+
+
+
+
+.content{
+
+margin-left:260px;
 padding:40px;
 
 }
+
 
 
 .card{
@@ -109,32 +175,37 @@ background:white;
 padding:30px;
 border-radius:20px;
 box-shadow:0 10px 30px #ddd;
+margin-bottom:20px;
 
 }
 
 
-</style>
+table{
 
-</head>
+width:100%;
+border-collapse:collapse;
 
-
-
-<body>
-
+}
 
 
-<!-- EMPLOYEE LOGIN -->
+td,th{
 
+padding:12px;
+border-bottom:1px solid #ddd;
+
+}
+
+<!-- =====================
+EMPLOYEE LOGIN
+===================== -->
 
 <div class="loginPage" id="loginPage">
 
 <div class="loginBox">
 
-
-<div class="loginIcon">
+<div class="icon">
 👤
 </div>
-
 
 <h2>
 Employee Portal
@@ -143,10 +214,10 @@ Employee Portal
 
 <input id="username" placeholder="Username">
 
-<input id="pin" placeholder="PIN">
+<input id="pin" placeholder="PIN" type="password">
 
 
-<button onclick="login()">
+<button onclick="employeeLogin()">
 LOGIN
 </button>
 
@@ -167,7 +238,10 @@ HR ADMIN LOGIN
 
 
 
-<!-- HR LOGIN -->
+
+<!-- =====================
+HR ADMIN LOGIN
+===================== -->
 
 
 <div class="loginPage" id="adminLoginPage" style="display:none;">
@@ -176,7 +250,7 @@ HR ADMIN LOGIN
 <div class="loginBox">
 
 
-<div class="loginIcon">
+<div class="icon">
 🛡
 </div>
 
@@ -188,7 +262,8 @@ HR Admin Portal
 
 <input id="adminUser" placeholder="Admin Username">
 
-<input id="adminPass" placeholder="Password">
+
+<input id="adminPass" placeholder="Password" type="password">
 
 
 <button onclick="adminLogin()">
@@ -196,11 +271,11 @@ LOGIN
 </button>
 
 
-<br><br>
+<br>
 
 
-<button class="adminBtn" onclick="backEmployee()">
-BACK TO EMPLOYEE LOGIN
+<button class="backBtn" onclick="backEmployee()">
+BACK TO EMPLOYEE
 </button>
 
 
@@ -208,46 +283,196 @@ BACK TO EMPLOYEE LOGIN
 
 </div>
 
+</style>
+
+</head>
 
 
 
 
-<!-- EMPLOYEE DASHBOARD -->
+
+<!-- =====================
+EMPLOYEE DASHBOARD
+===================== -->
 
 
-<div class="dashboard" id="dashboard">
+<div class="dashboard" id="employeeDashboard">
 
 
-<h1>
-PLC EMPLOYEE DASHBOARD
-</h1>
+<div class="sidebar">
 
-
-<div class="card">
 
 <h2>
-Welcome Employee
+EMPLOYEE
 </h2>
 
 
-<p>
-Employee portal successfully loaded.
+<div class="menu" onclick="showPage('profile')">
+👤 Profile
+</div>
+
+
+<div class="menu" onclick="showPage('leave')">
+🏖 Leave
+</div>
+
+
+<div class="menu" onclick="showPage('cash')">
+💰 Cash Advance
+</div>
+
+
+<div class="menu" onclick="showPage('medical')">
+💉 Medical
+</div>
+
+
+<div class="menu" onclick="showPage('evaluation')">
+⭐ Evaluation
+</div>
+
+
+<div class="menu" onclick="showPage('violation')">
+⚠ Violation
+</div>
+
+
+<div class="menu" onclick="logout()">
+🚪 Logout
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="content">
+
+
+<h1 id="welcomeName">
+Welcome Employee
+</h1>
+
+
+
+<div class="card" id="profile">
+
+<h2>Profile</h2>
+
+<p id="profileData">
+Loading...
 </p>
 
-
-</div>
-
 </div>
 
 
 
 
+<div class="card" id="leave">
+
+<h2>Leave Records</h2>
+
+<table id="leaveTable">
+
+</table>
+
+</div>
 
 
-<!-- HR DASHBOARD -->
 
 
-<div class="dashboard" id="hrDashboard">
+
+<div class="card" id="cash">
+
+<h2>Cash Advance</h2>
+
+<table id="cashTable">
+
+</table>
+
+</div>
+
+
+
+
+
+<div class="card" id="medical">
+
+<h2>Medical Records</h2>
+
+<table id="medicalTable">
+
+</table>
+
+</div>
+
+
+
+
+
+<div class="card" id="evaluation">
+
+<h2>Evaluation</h2>
+
+<table id="evaluationTable">
+
+</table>
+
+</div>
+
+
+
+
+
+<div class="card" id="violation">
+
+<h2>Violations</h2>
+
+<table id="violationTable">
+
+</table>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+<!-- =====================
+HR ADMIN DASHBOARD
+===================== -->
+
+<div class="dashboard" id="adminDashboard">
+
+
+<div class="sidebar">
+
+<h2>
+HR ADMIN
+</h2>
+
+
+<div class="menu">
+👥 Employees
+</div>
+
+
+<div class="menu" onclick="logout()">
+🚪 Logout
+</div>
+
+
+</div>
+
+
+
+<div class="content">
 
 
 <h1>
@@ -259,13 +484,13 @@ HR ADMIN DASHBOARD
 
 
 <h2>
-Welcome HR Admin
+Employee Management
 </h2>
 
 
-<p>
-HR Management Panel Loaded.
-</p>
+<table id="employeeList">
+
+</table>
 
 
 </div>
@@ -274,7 +499,7 @@ HR Management Panel Loaded.
 </div>
 
 
-
+</div>
 
 
 
@@ -283,31 +508,29 @@ HR Management Panel Loaded.
 <script>
 
 
-const API_URL="https://script.google.com/macros/s/AKfycbzOhTHL9eSvXiZBtFNOOqSklkkelcPORIsBMYuWPZyPrqktTXFb6at4WrrYpi1T_e7FaA/exec";
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzOhTHL9eSvXiZBtFNOOqSklkkelcPORIsBMYuWPZyPrqktTXFb6at4WrrYpi1T_e7FaA/exec";
 
 
 
+let currentEmployee="";
 
+
+
+// =====================
 // EMPLOYEE LOGIN
+// =====================
 
 
-function login(){
+function employeeLogin(){
 
 
-let username=document.getElementById("username").value.trim();
-
-let pin=document.getElementById("pin").value.trim();
-
+let username =
+document.getElementById("username").value;
 
 
-if(username=="" || pin==""){
-
-alert("Please enter username and PIN");
-
-return;
-
-}
-
+let pin =
+document.getElementById("pin").value;
 
 
 
@@ -330,27 +553,32 @@ deviceID:navigator.userAgent
 })
 
 
-.then(res=>res.json())
+.then(r=>r.json())
 
 
 .then(data=>{
 
 
-console.log(data);
-
-
 if(data.result=="SUCCESS"){
+
+
+currentEmployee=data.employeeID;
 
 
 document.getElementById("loginPage").style.display="none";
 
-document.getElementById("dashboard").style.display="block";
+
+document.getElementById("employeeDashboard").style.display="block";
 
 
-}
+document.getElementById("welcomeName").innerHTML =
+"Welcome " + data.name;
 
 
-else{
+loadEmployeeData();
+
+
+}else{
 
 
 alert(data.error || "Invalid Login");
@@ -359,16 +587,132 @@ alert(data.error || "Invalid Login");
 }
 
 
+});
+
+
+}
+
+
+
+
+
+
+
+// =====================
+// LOAD EMPLOYEE DATA
+// =====================
+
+
+function loadEmployeeData(){
+
+
+document.getElementById("profileData").innerHTML =
+"Employee ID: "+currentEmployee;
+
+
+}
+
+
+
+
+
+
+
+// =====================
+// ADMIN LOGIN PAGE SWITCH
+// =====================
+
+
+function showAdminLogin(){
+
+
+document.getElementById("loginPage").style.display="none";
+
+
+document.getElementById("adminLoginPage").style.display="flex";
+
+
+}
+
+
+
+
+function backEmployee(){
+
+
+document.getElementById("adminLoginPage").style.display="none";
+
+
+document.getElementById("loginPage").style.display="flex";
+
+
+}
+
+
+
+
+
+
+
+// =====================
+// ADMIN LOGIN
+// =====================
+
+
+function adminLogin(){
+
+
+
+let username =
+document.getElementById("adminUser").value;
+
+
+
+let password =
+document.getElementById("adminPass").value;
+
+
+
+
+fetch(API_URL,{
+
+method:"POST",
+
+body:JSON.stringify({
+
+action:"adminLogin",
+
+username:username,
+
+password:password
 
 })
 
+})
 
-.catch(error=>{
+.then(r=>r.json())
 
 
-alert("Connection Error. Check Apps Script.");
+.then(data=>{
 
-console.log(error);
+
+if(data.result=="SUCCESS"){
+
+
+
+document.getElementById("adminLoginPage").style.display="none";
+
+
+document.getElementById("adminDashboard").style.display="block";
+
+
+}else{
+
+
+alert(data.error || "Invalid Admin Login");
+
+
+}
 
 
 });
@@ -383,32 +727,27 @@ console.log(error);
 
 
 
-// OPEN HR LOGIN
+// =====================
+// MENU SWITCH
+// =====================
 
 
-function showAdminLogin(){
-
-
-document.getElementById("loginPage").style.display="none";
-
-document.getElementById("adminLoginPage").style.display="flex";
-
-
-}
+function showPage(id){
 
 
 
+let cards =
+document.querySelectorAll(".card");
 
 
-// BACK EMPLOYEE LOGIN
+cards.forEach(c=>{
+
+c.style.display="none";
+
+});
 
 
-function backEmployee(){
-
-
-document.getElementById("adminLoginPage").style.display="none";
-
-document.getElementById("loginPage").style.display="flex";
+document.getElementById(id).style.display="block";
 
 
 }
@@ -418,37 +757,15 @@ document.getElementById("loginPage").style.display="flex";
 
 
 
-
-// HR LOGIN
-
-
-function adminLogin(){
+// =====================
+// LOGOUT
+// =====================
 
 
-let user=document.getElementById("adminUser").value;
-
-let pass=document.getElementById("adminPass").value;
+function logout(){
 
 
-
-if(user=="admin" && pass=="123456"){
-
-
-document.getElementById("adminLoginPage").style.display="none";
-
-document.getElementById("hrDashboard").style.display="block";
-
-
-}
-
-
-else{
-
-
-alert("Invalid HR Login");
-
-
-}
+location.reload();
 
 
 }
@@ -458,7 +775,9 @@ alert("Invalid HR Login");
 </script>
 
 
-
 </body>
 
+
 </html>
+
+<body>
