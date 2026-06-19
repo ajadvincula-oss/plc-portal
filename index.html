@@ -413,6 +413,8 @@ const API_URL =
 "https://script.google.com/macros/s/AKfycbzOhTHL9eSvXiZBtFNOOqSklkkelcPORIsBMYuWPZyPrqktTXFb6at4WrrYpi1T_e7FaA/exec";
 
 
+let employeeData={};
+
 
 
 // ==========================
@@ -460,6 +462,9 @@ deviceID:navigator.userAgent
 if(data.result=="SUCCESS"){
 
 
+employeeData = data;
+
+
 document.getElementById("loginPage").style.display="none";
 
 
@@ -470,8 +475,10 @@ document.getElementById("welcomeName").innerHTML =
 "Welcome " + data.name;
 
 
-document.getElementById("profileData").innerHTML =
-"Employee ID: " + data.employeeID;
+loadProfile();
+
+
+}
 
 
 
@@ -618,7 +625,85 @@ alert("Connection Error");
 
 
 
+// ==========================
+// LOAD EMPLOYEE PROFILE
+// ==========================
 
+
+function loadProfile(){
+
+
+document.getElementById("profileData").innerHTML =
+
+`
+
+<center>
+
+<img src="${employeeData.photo}"
+style="
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #0057d9;
+">
+
+</center>
+
+
+<br>
+
+
+<b>Employee ID:</b>
+${employeeData.employeeID}
+
+<br><br>
+
+
+<b>Name:</b>
+${employeeData.name}
+
+<br><br>
+
+
+<b>Department:</b>
+${employeeData.department}
+
+<br><br>
+
+
+<b>Position:</b>
+${employeeData.position}
+
+<br><br>
+
+
+<b>Date Hired:</b>
+${employeeData.dateHired}
+
+<br><br>
+
+
+<b>Status:</b>
+${employeeData.empStatus}
+
+<br><br>
+
+
+<b>Leave Balance:</b>
+${employeeData.leave}
+
+<br><br>
+
+
+<b>Cash Advance Balance:</b>
+${employeeData.ca}
+
+
+`;
+
+
+}
 
 
 
