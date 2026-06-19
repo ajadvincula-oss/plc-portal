@@ -299,32 +299,32 @@ Position
 </div>
 
 
-<div class="menu">
+<div class="menu" onclick="showPage('profilePage')">
 👤 Profile
 </div>
 
 
-<div class="menu">
+<div class="menu" onclick="showPage('leavePage')">
 🏖 Leave Records
 </div>
 
 
-<div class="menu">
+<div class="menu" onclick="showPage('cashPage')">
 💰 Cash Advance
 </div>
 
 
-<div class="menu">
+<div class="menu" onclick="showPage('medicalPage')">
 💉 Medical
 </div>
 
 
-<div class="menu">
+<div class="menu" onclick="showPage('evaluationPage')">
 ⭐ Evaluation
 </div>
 
 
-<div class="menu">
+<div class="menu" onclick="showPage('violationPage')">
 ⚠ Violation
 </div>
 
@@ -346,7 +346,7 @@ PLC EMPLOYEE DASHBOARD
 </h1>
 
 
-<div class="card">
+<div class="card page" id="profilePage">
 
 <h2>
 Employee Profile
@@ -362,6 +362,74 @@ Employee data loading...
 
 </div>
 
+
+</div>
+
+<div class="card page" id="leavePage" style="display:none;">
+
+<h2>
+Leave Records
+</h2>
+
+<p>
+No leave records loaded.
+</p>
+
+</div>
+
+
+
+<div class="card page" id="cashPage" style="display:none;">
+
+<h2>
+Cash Advance History
+</h2>
+
+<p>
+No cash advance records loaded.
+</p>
+
+</div>
+
+
+
+<div class="card page" id="medicalPage" style="display:none;">
+
+<h2>
+Medical Records
+</h2>
+
+<p>
+No medical records loaded.
+</p>
+
+</div>
+
+
+
+<div class="card page" id="evaluationPage" style="display:none;">
+
+<h2>
+Evaluation Records
+</h2>
+
+<p>
+No evaluation records loaded.
+</p>
+
+</div>
+
+
+
+<div class="card page" id="violationPage" style="display:none;">
+
+<h2>
+Violation Records
+</h2>
+
+<p>
+No violation records loaded.
+</p>
 
 </div>
 
@@ -701,6 +769,23 @@ employeeData.position;
 
 }
 
+function showPage(pageID){
+
+let pages =
+document.querySelectorAll(".page");
+
+
+pages.forEach(p=>{
+
+p.style.display="none";
+
+});
+
+
+document.getElementById(pageID).style.display="block";
+
+
+}
 
 
 // ==========================
