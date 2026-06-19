@@ -9,7 +9,7 @@
 
 *{
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:Arial, sans-serif;
 }
 
 body{
@@ -18,10 +18,7 @@ background:#f4f6f9;
 }
 
 
-/* =====================
-LOGIN DESIGN
-===================== */
-
+/* LOGIN */
 
 .loginPage{
 
@@ -29,6 +26,7 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+
 background:linear-gradient(
 135deg,
 #004aad,
@@ -59,7 +57,7 @@ font-size:55px;
 
 h2{
 
-letter-spacing:4px;
+letter-spacing:3px;
 
 }
 
@@ -69,9 +67,9 @@ input{
 width:100%;
 padding:15px;
 margin:12px 0;
-font-size:17px;
 border-radius:12px;
 border:1px solid #ccc;
+font-size:17px;
 
 }
 
@@ -83,9 +81,9 @@ border:0;
 border-radius:12px;
 background:#0057d9;
 color:white;
-cursor:pointer;
 font-size:16px;
-margin:5px;
+cursor:pointer;
+margin-top:10px;
 
 }
 
@@ -97,7 +95,6 @@ background:#222;
 }
 
 
-
 .backBtn{
 
 background:#777;
@@ -106,9 +103,7 @@ background:#777;
 
 
 
-/* =====================
-DASHBOARD
-===================== */
+/* DASHBOARD */
 
 
 .dashboard{
@@ -119,36 +114,25 @@ height:100vh;
 }
 
 
-
 .sidebar{
 
 width:260px;
 height:100vh;
+float:left;
 background:#003566;
 color:white;
-float:left;
 padding:25px;
 
 }
 
 
-
-.sidebar h2{
-
-font-size:20px;
-
-}
-
-
-
 .menu{
 
 padding:15px;
-cursor:pointer;
 border-bottom:1px solid rgba(255,255,255,.2);
+cursor:pointer;
 
 }
-
 
 
 .menu:hover{
@@ -156,7 +140,6 @@ border-bottom:1px solid rgba(255,255,255,.2);
 background:#0057d9;
 
 }
-
 
 
 
@@ -180,24 +163,11 @@ margin-bottom:20px;
 }
 
 
-table{
+</style>
 
-width:100%;
-border-collapse:collapse;
+</head>
 
-}
-
-
-td,th{
-
-padding:12px;
-border-bottom:1px solid #ddd;
-
-}
-
-<!-- =====================
-EMPLOYEE LOGIN
-===================== -->
+<!-- EMPLOYEE LOGIN -->
 
 <div class="loginPage" id="loginPage">
 
@@ -238,17 +208,12 @@ HR ADMIN LOGIN
 
 
 
-
-<!-- =====================
-HR ADMIN LOGIN
-===================== -->
+<!-- HR ADMIN LOGIN -->
 
 
 <div class="loginPage" id="adminLoginPage" style="display:none;">
 
-
 <div class="loginBox">
-
 
 <div class="icon">
 🛡
@@ -262,7 +227,6 @@ HR Admin Portal
 
 <input id="adminUser" placeholder="Admin Username">
 
-
 <input id="adminPass" placeholder="Password" type="password">
 
 
@@ -271,7 +235,7 @@ LOGIN
 </button>
 
 
-<br>
+<br><br>
 
 
 <button class="backBtn" onclick="backEmployee()">
@@ -283,17 +247,11 @@ BACK TO EMPLOYEE
 
 </div>
 
-</style>
-
-</head>
 
 
 
 
-
-<!-- =====================
-EMPLOYEE DASHBOARD
-===================== -->
+<!-- EMPLOYEE DASHBOARD -->
 
 
 <div class="dashboard" id="employeeDashboard">
@@ -307,32 +265,32 @@ EMPLOYEE
 </h2>
 
 
-<div class="menu" onclick="showPage('profile')">
+<div class="menu">
 👤 Profile
 </div>
 
 
-<div class="menu" onclick="showPage('leave')">
-🏖 Leave
+<div class="menu">
+🏖 Leave Records
 </div>
 
 
-<div class="menu" onclick="showPage('cash')">
+<div class="menu">
 💰 Cash Advance
 </div>
 
 
-<div class="menu" onclick="showPage('medical')">
+<div class="menu">
 💉 Medical
 </div>
 
 
-<div class="menu" onclick="showPage('evaluation')">
+<div class="menu">
 ⭐ Evaluation
 </div>
 
 
-<div class="menu" onclick="showPage('violation')">
+<div class="menu">
 ⚠ Violation
 </div>
 
@@ -346,97 +304,24 @@ EMPLOYEE
 
 
 
-
-
 <div class="content">
 
 
 <h1 id="welcomeName">
-Welcome Employee
+PLC EMPLOYEE DASHBOARD
 </h1>
 
 
+<div class="card">
 
-<div class="card" id="profile">
-
-<h2>Profile</h2>
+<h2>
+Welcome Employee
+</h2>
 
 <p id="profileData">
-Loading...
+Employee data loading...
 </p>
 
-</div>
-
-
-
-
-<div class="card" id="leave">
-
-<h2>Leave Records</h2>
-
-<table id="leaveTable">
-
-</table>
-
-</div>
-
-
-
-
-
-<div class="card" id="cash">
-
-<h2>Cash Advance</h2>
-
-<table id="cashTable">
-
-</table>
-
-</div>
-
-
-
-
-
-<div class="card" id="medical">
-
-<h2>Medical Records</h2>
-
-<table id="medicalTable">
-
-</table>
-
-</div>
-
-
-
-
-
-<div class="card" id="evaluation">
-
-<h2>Evaluation</h2>
-
-<table id="evaluationTable">
-
-</table>
-
-</div>
-
-
-
-
-
-<div class="card" id="violation">
-
-<h2>Violations</h2>
-
-<table id="violationTable">
-
-</table>
-
-</div>
-
-
 
 </div>
 
@@ -444,14 +329,16 @@ Loading...
 </div>
 
 
-<!-- =====================
-HR ADMIN DASHBOARD
-===================== -->
+</div>
+
+<!-- HR ADMIN DASHBOARD -->
+
 
 <div class="dashboard" id="adminDashboard">
 
 
 <div class="sidebar">
+
 
 <h2>
 HR ADMIN
@@ -460,6 +347,21 @@ HR ADMIN
 
 <div class="menu">
 👥 Employees
+</div>
+
+
+<div class="menu">
+📋 Leave Approval
+</div>
+
+
+<div class="menu">
+💰 Cash Advance
+</div>
+
+
+<div class="menu">
+⚙ Settings
 </div>
 
 
@@ -482,15 +384,14 @@ HR ADMIN DASHBOARD
 
 <div class="card">
 
-
 <h2>
-Employee Management
+Welcome HR Admin
 </h2>
 
 
-<table id="employeeList">
-
-</table>
+<p>
+HR Management Panel Loaded.
+</p>
 
 
 </div>
@@ -513,13 +414,10 @@ const API_URL =
 
 
 
-let currentEmployee="";
 
-
-
-// =====================
+// ==========================
 // EMPLOYEE LOGIN
-// =====================
+// ==========================
 
 
 function employeeLogin(){
@@ -553,16 +451,13 @@ deviceID:navigator.userAgent
 })
 
 
-.then(r=>r.json())
+.then(res=>res.json())
 
 
 .then(data=>{
 
 
 if(data.result=="SUCCESS"){
-
-
-currentEmployee=data.employeeID;
 
 
 document.getElementById("loginPage").style.display="none";
@@ -575,7 +470,9 @@ document.getElementById("welcomeName").innerHTML =
 "Welcome " + data.name;
 
 
-loadEmployeeData();
+document.getElementById("profileData").innerHTML =
+"Employee ID: " + data.employeeID;
+
 
 
 }else{
@@ -586,6 +483,12 @@ alert(data.error || "Invalid Login");
 
 }
 
+
+})
+
+.catch(err=>{
+
+alert("Connection Error");
 
 });
 
@@ -598,29 +501,9 @@ alert(data.error || "Invalid Login");
 
 
 
-// =====================
-// LOAD EMPLOYEE DATA
-// =====================
-
-
-function loadEmployeeData(){
-
-
-document.getElementById("profileData").innerHTML =
-"Employee ID: "+currentEmployee;
-
-
-}
-
-
-
-
-
-
-
-// =====================
-// ADMIN LOGIN PAGE SWITCH
-// =====================
+// ==========================
+// SHOW ADMIN LOGIN
+// ==========================
 
 
 function showAdminLogin(){
@@ -635,6 +518,12 @@ document.getElementById("adminLoginPage").style.display="flex";
 }
 
 
+
+
+
+// ==========================
+// BACK EMPLOYEE LOGIN
+// ==========================
 
 
 function backEmployee(){
@@ -654,23 +543,20 @@ document.getElementById("loginPage").style.display="flex";
 
 
 
-// =====================
+// ==========================
 // ADMIN LOGIN
-// =====================
+// ==========================
 
 
 function adminLogin(){
 
 
-
-let username =
+let user =
 document.getElementById("adminUser").value;
 
 
-
-let password =
+let pass =
 document.getElementById("adminPass").value;
-
 
 
 
@@ -682,22 +568,22 @@ body:JSON.stringify({
 
 action:"adminLogin",
 
-username:username,
+username:user,
 
-password:password
-
-})
+password:pass
 
 })
 
-.then(r=>r.json())
+})
+
+
+.then(res=>res.json())
 
 
 .then(data=>{
 
 
 if(data.result=="SUCCESS"){
-
 
 
 document.getElementById("adminLoginPage").style.display="none";
@@ -715,6 +601,15 @@ alert(data.error || "Invalid Admin Login");
 }
 
 
+})
+
+
+.catch(err=>{
+
+
+alert("Connection Error");
+
+
 });
 
 
@@ -727,45 +622,21 @@ alert(data.error || "Invalid Admin Login");
 
 
 
-// =====================
-// MENU SWITCH
-// =====================
-
-
-function showPage(id){
-
-
-
-let cards =
-document.querySelectorAll(".card");
-
-
-cards.forEach(c=>{
-
-c.style.display="none";
-
-});
-
-
-document.getElementById(id).style.display="block";
-
-
-}
-
-
-
-
-
-
-// =====================
+// ==========================
 // LOGOUT
-// =====================
+// ==========================
 
 
 function logout(){
 
 
-location.reload();
+document.getElementById("loginPage").style.display="flex";
+
+document.getElementById("employeeDashboard").style.display="none";
+
+document.getElementById("adminDashboard").style.display="none";
+
+document.getElementById("adminLoginPage").style.display="none";
 
 
 }
