@@ -113,6 +113,16 @@ height:100vh;
 
 }
 
+.sidebar{
+
+width:260px;
+height:100vh;
+float:left;
+background:#003566;
+color:white;
+padding:25px;
+
+}
 
 .sidebarPhoto{
 
@@ -518,26 +528,7 @@ alert(data.error || "Invalid Login");
 alert("Connection Error");
 
 });
-
-
-document.getElementById("sidePhoto").src =
-employeeData.photo;
-
-
-document.getElementById("sideName").innerHTML =
-employeeData.name;
-
-
-document.getElementById("sidePosition").innerHTML =
-employeeData.position;
   
-}
-
-
-
-
-
-
 
 // ==========================
 // SHOW ADMIN LOGIN
@@ -699,6 +690,17 @@ document.getElementById("profileData").innerHTML =
 "<br><br>"+
 
 "<b>Cash Advance:</b> "+employeeData.ca;
+
+document.getElementById("sidePhoto").src =
+employeeData.photo;
+
+
+document.getElementById("sideName").innerHTML =
+employeeData.name;
+
+
+document.getElementById("sidePosition").innerHTML =
+employeeData.position;
 
 }
 
