@@ -114,14 +114,24 @@ height:100vh;
 }
 
 
-.sidebar{
+.sidebarPhoto{
 
-width:260px;
-height:100vh;
-float:left;
-background:#003566;
-color:white;
-padding:25px;
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:auto;
+border:3px solid white;
+
+}
+
+
+.sidebarInfo{
+
+text-align:center;
+margin-top:15px;
+font-size:14px;
 
 }
 
@@ -263,6 +273,20 @@ BACK TO EMPLOYEE
 <h2>
 EMPLOYEE
 </h2>
+
+<div class="sidebarInfo">
+
+<img id="sidePhoto" class="sidebarPhoto">
+
+<h3 id="sideName">
+Employee Name
+</h3>
+
+<p id="sidePosition">
+Position
+</p>
+
+</div>
 
 
 <div class="menu">
@@ -496,6 +520,17 @@ alert("Connection Error");
 });
 
 
+document.getElementById("sidePhoto").src =
+employeeData.photo;
+
+
+document.getElementById("sideName").innerHTML =
+employeeData.name;
+
+
+document.getElementById("sidePosition").innerHTML =
+employeeData.position;
+  
 }
 
 
@@ -630,7 +665,7 @@ function loadProfile(){
 document.getElementById("profileData").innerHTML =
 
 "<center>"+
-"<img src='"+employeeData.photo+"' style='width:120px;height:120px;border-radius:50%;object-fit:cover;'>"+
+"<img src='"+employeeData.photo+"' style='width:180px;height:180px;border-radius:50%;object-fit:cover;'>"+
 "</center>"+
 
 "<br>"+
