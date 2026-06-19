@@ -629,79 +629,45 @@ alert("Connection Error");
 // LOAD EMPLOYEE PROFILE
 // ==========================
 
-
 function loadProfile(){
-
 
 document.getElementById("profileData").innerHTML =
 
-`
+"<center>"+
+"<img src='"+employeeData.photo+"' style='width:120px;height:120px;border-radius:50%;object-fit:cover;'>"+
+"</center>"+
 
-<center>
+"<br>"+
 
-<img src="${employeeData.photo}"
-style="
-width:120px;
-height:120px;
-border-radius:50%;
-object-fit:cover;
-border:3px solid #0057d9;
-">
+"<b>Employee ID:</b> "+employeeData.employeeID+
 
-</center>
+"<br><br>"+
 
+"<b>Name:</b> "+employeeData.name+
 
-<br>
+"<br><br>"+
 
+"<b>Department:</b> "+employeeData.department+
 
-<b>Employee ID:</b>
-${employeeData.employeeID}
+"<br><br>"+
 
-<br><br>
+"<b>Position:</b> "+employeeData.position+
 
+"<br><br>"+
 
-<b>Name:</b>
-${employeeData.name}
+"<b>Date Hired:</b> "+employeeData.dateHired+
 
-<br><br>
+"<br><br>"+
 
+"<b>Status:</b> "+employeeData.empStatus+
 
-<b>Department:</b>
-${employeeData.department}
+"<br><br>"+
 
-<br><br>
+"<b>Leave Balance:</b> "+employeeData.leave+
 
+"<br><br>"+
 
-<b>Position:</b>
-${employeeData.position}
-
-<br><br>
-
-
-<b>Date Hired:</b>
-${employeeData.dateHired}
-
-<br><br>
-
-
-<b>Status:</b>
-${employeeData.empStatus}
-
-<br><br>
-
-
-<b>Leave Balance:</b>
-${employeeData.leave}
-
-<br><br>
-
-
-<b>Cash Advance Balance:</b>
-${employeeData.ca}
-
-
-`;
-
+"<b>Cash Advance:</b> "+employeeData.ca;
 
 }
 
