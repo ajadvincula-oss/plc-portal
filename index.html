@@ -1248,6 +1248,29 @@ document.getElementById("movementPage").innerHTML =
 }
 
 // ==========================
+// SHOW EMPLOYEE PAGE
+// ==========================
+
+function showPage(pageID){
+
+
+let pages =
+document.querySelectorAll(".page");
+
+
+pages.forEach(p=>{
+
+p.style.display="none";
+
+});
+
+
+document.getElementById(pageID).style.display="block";
+
+
+}
+
+// ==========================
 // LOGOUT
 // ==========================
 
