@@ -767,6 +767,155 @@ employeeData.name;
 document.getElementById("sidePosition").innerHTML =
 employeeData.position;
 
+
+loadLeave();
+loadCash();
+loadMedical();
+loadEvaluation();
+loadViolation();
+
+}
+
+// ==========================
+// LOAD LEAVE
+// ==========================
+
+function loadLeave(){
+
+let html="";
+
+employeeData.leaveHistory.forEach(r=>{
+
+html +=
+"<b>Date:</b> "+r.date+
+"<br>"+
+"<b>Type:</b> "+r.type+
+"<br>"+
+"<b>Days:</b> "+r.days+
+"<br>"+
+"<b>Status:</b> "+r.remarks+
+"<hr>";
+
+});
+
+
+document.getElementById("leavePage").innerHTML =
+"<h2>Leave Records</h2>"+html;
+
+}
+
+
+
+// ==========================
+// LOAD CASH ADVANCE
+// ==========================
+
+function loadCash(){
+
+let html="";
+
+employeeData.caHistory.forEach(r=>{
+
+html +=
+"<b>Date:</b> "+r.date+
+"<br>"+
+"<b>Amount:</b> "+r.amount+
+"<br>"+
+"<b>Deduction:</b> "+r.deduction+
+"<hr>";
+
+});
+
+
+document.getElementById("cashPage").innerHTML =
+"<h2>Cash Advance History</h2>"+html;
+
+}
+
+
+
+
+// ==========================
+// LOAD MEDICAL
+// ==========================
+
+function loadMedical(){
+
+let html="";
+
+employeeData.medical.forEach(r=>{
+
+html +=
+"<b>Type:</b> "+r.type+
+"<br>"+
+"<b>Date:</b> "+r.date+
+"<br>"+
+"<b>Status:</b> "+r.status+
+"<hr>";
+
+});
+
+
+document.getElementById("medicalPage").innerHTML =
+"<h2>Medical Records</h2>"+html;
+
+}
+
+
+
+// ==========================
+// LOAD EVALUATION
+// ==========================
+
+function loadEvaluation(){
+
+let html="";
+
+employeeData.evaluation.forEach(r=>{
+
+html +=
+"<b>Date:</b> "+r.date+
+"<br>"+
+"<b>Score:</b> "+r.score+
+"<br>"+
+"<b>Result:</b> "+r.result+
+"<hr>";
+
+});
+
+
+document.getElementById("evaluationPage").innerHTML =
+"<h2>Evaluation Records</h2>"+html;
+
+}
+
+
+
+
+// ==========================
+// LOAD VIOLATION
+// ==========================
+
+function loadViolation(){
+
+let html="";
+
+employeeData.violation.forEach(r=>{
+
+html +=
+"<b>Date:</b> "+r.date+
+"<br>"+
+"<b>Violation:</b> "+r.violation+
+"<br>"+
+"<b>Action:</b> "+r.action+
+"<hr>";
+
+});
+
+
+document.getElementById("violationPage").innerHTML =
+"<h2>Violation Records</h2>"+html;
+
 }
 
 function showPage(pageID){
