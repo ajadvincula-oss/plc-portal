@@ -802,37 +802,49 @@ html =
 }else{
 
 
+html +=
+"<table style='width:100%;border-collapse:collapse;'>"+
+
+"<tr style='background:#003566;color:white;'>"+
+
+"<th>Date Filed</th>"+
+"<th>Date of Leave</th>"+
+"<th>Type</th>"+
+"<th>No. of Leave</th>"+
+"<th>Reason</th>"+
+"<th>Remarks</th>"+
+
+"</tr>";
+
+
+
 employeeData.leaveHistory.forEach(r=>{
 
 
 html +=
 
-"<b>Date Filed:</b> "+r.dateFiled+
+"<tr>"+
 
-"<br>"+
+"<td>"+r.dateFiled+"</td>"+
 
-"<b>Date of Leave:</b> "+r.dateLeave+
+"<td>"+r.dateLeave+"</td>"+
 
-"<br>"+
+"<td>"+r.type+"</td>"+
 
-"<b>Type:</b> "+r.type+
+"<td>"+r.days+"</td>"+
 
-"<br>"+
+"<td>"+r.reason+"</td>"+
 
-"<b>No. of Leave:</b> "+r.days+
+"<td>"+r.remarks+"</td>"+
 
-"<br>"+
-
-"<b>Reason:</b> "+r.reason+
-
-"<br>"+
-
-"<b>Remarks:</b> "+r.remarks+
-
-"<hr>";
+"</tr>";
 
 
 });
+
+
+
+html += "</table>";
 
 
 }
