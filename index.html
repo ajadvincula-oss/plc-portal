@@ -794,9 +794,6 @@ function loadLeave(){
 
 let html="";
 
-function loadLeave(){
-
-let html="";
 
 if(!employeeData.leaveHistory || employeeData.leaveHistory.length==0){
 
@@ -805,23 +802,39 @@ html =
 
 }else{
 
+
 employeeData.leaveHistory.forEach(r=>{
 
+
 html +=
+
 "<b>Date Filed:</b> "+r.dateFiled+
+
 "<br>"+
+
 "<b>Date of Leave:</b> "+r.dateLeave+
+
 "<br>"+
+
 "<b>Type:</b> "+r.type+
+
 "<br>"+
+
 "<b>No. of Leave:</b> "+r.days+
+
 "<br>"+
+
 "<b>Reason:</b> "+r.reason+
+
 "<br>"+
+
 "<b>Remarks:</b> "+r.remarks+
+
 "<hr>";
 
+
 });
+
 
 }
 
@@ -829,24 +842,6 @@ html +=
 document.getElementById("leavePage").innerHTML =
 "<h2>Leave Records</h2>"+html;
 
-
-}
-
-html +=
-"<b>Date:</b> "+r.date+
-"<br>"+
-"<b>Type:</b> "+r.type+
-"<br>"+
-"<b>Days:</b> "+r.days+
-"<br>"+
-"<b>Status:</b> "+r.remarks+
-"<hr>";
-
-});
-
-
-document.getElementById("leavePage").innerHTML =
-"<h2>Leave Records</h2>"+html;
 
 }
 
