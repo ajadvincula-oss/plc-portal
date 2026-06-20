@@ -447,8 +447,18 @@ HR ADMIN
 </h2>
 
 
-<div class="menu">
+<div class="menu" onclick="showAdminPage('adminEmployees')">
 👥 Employees
+</div>
+
+
+<div class="menu" onclick="showAdminPage('adminLeave')">
+📋 Leave Approval
+</div>
+
+
+<div class="menu" onclick="showAdminPage('adminCash')">
+💰 Cash Advance
 </div>
 
 
@@ -784,7 +794,43 @@ function loadLeave(){
 
 let html="";
 
+function loadLeave(){
+
+let html="";
+
+if(!employeeData.leaveHistory || employeeData.leaveHistory.length==0){
+
+html =
+"No leave records found.";
+
+}else{
+
 employeeData.leaveHistory.forEach(r=>{
+
+html +=
+"<b>Date Filed:</b> "+r.dateFiled+
+"<br>"+
+"<b>Date of Leave:</b> "+r.dateLeave+
+"<br>"+
+"<b>Type:</b> "+r.type+
+"<br>"+
+"<b>No. of Leave:</b> "+r.days+
+"<br>"+
+"<b>Reason:</b> "+r.reason+
+"<br>"+
+"<b>Remarks:</b> "+r.remarks+
+"<hr>";
+
+});
+
+}
+
+
+document.getElementById("leavePage").innerHTML =
+"<h2>Leave Records</h2>"+html;
+
+
+}
 
 html +=
 "<b>Date:</b> "+r.date+
@@ -936,6 +982,11 @@ document.getElementById(pageID).style.display="block";
 
 }
 
+function showAdminPage(page){
+
+alert(page + " loading...");
+
+}
 
 // ==========================
 // LOGOUT
