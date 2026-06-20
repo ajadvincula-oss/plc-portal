@@ -895,21 +895,55 @@ function loadMedical(){
 
 let html="";
 
-employeeData.medical.forEach(r=>{
+
+if(!employeeData.medicalHistory || employeeData.medicalHistory.length==0){
+
+html =
+"No medical records found.";
+
+}else{
+
 
 html +=
-"<b>Type:</b> "+r.type+
-"<br>"+
-"<b>Date:</b> "+r.date+
-"<br>"+
-"<b>Status:</b> "+r.status+
-"<hr>";
+"<table style='width:100%;border-collapse:collapse;text-align:center;'>"+
+
+"<tr style='background:#003566;color:white;'>"+
+
+"<th>TYPE</th>"+
+"<th>DATE</th>"+
+"<th>STATUS</th>"+
+
+"</tr>";
+
+
+
+employeeData.medicalHistory.forEach(r=>{
+
+
+html +=
+
+"<tr>"+
+
+"<td>"+r.type+"</td>"+
+
+"<td>"+r.date+"</td>"+
+
+"<td>"+r.status+"</td>"+
+
+"</tr>";
+
 
 });
 
 
+html += "</table>";
+
+}
+
+
 document.getElementById("medicalPage").innerHTML =
 "<h2>Medical Records</h2>"+html;
+
 
 }
 
