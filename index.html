@@ -328,6 +328,10 @@ Position
 ⚠ Violation
 </div>
 
+<div class="menu" onclick="showPage('movementPage')">
+🔄 Employment Movement
+</div>
+
 
 <div class="menu" onclick="logout()">
 🚪 Logout
@@ -422,6 +426,18 @@ Violation Records
 
 <p>
 No violation records loaded.
+</p>
+
+</div>
+
+<div class="card page" id="movementPage" style="display:none;">
+
+<h2>
+Employment Movement
+</h2>
+
+<p>
+No movement records loaded.
 </p>
 
 </div>
@@ -782,6 +798,7 @@ loadCash();
 loadMedical();
 loadEvaluation();
 loadViolation();
+loadMovement();
 
 }
 
@@ -803,16 +820,23 @@ html =
 
 
 html +=
-"<table style='width:100%;border-collapse:collapse;'>"+
 
-"<tr style='background:#003566;color:white;'>"+
+"<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
 
-"<th>Date Filed</th>"+
-"<th>Date of Leave</th>"+
-"<th>Type</th>"+
-"<th>No. of Leave</th>"+
-"<th>Reason</th>"+
-"<th>Remarks</th>"+
+
+"<tr style='background:#003566;color:white;height:35px;'>"+
+
+"<th style='padding:10px;'>Date Filed</th>"+
+
+"<th style='padding:10px;'>Date of Leave</th>"+
+
+"<th style='padding:10px;'>Type</th>"+
+
+"<th style='padding:10px;'>No. of Leave</th>"+
+
+"<th style='padding:10px;'>Reason</th>"+
+
+"<th style='padding:10px;'>Remarks</th>"+
 
 "</tr>";
 
@@ -823,19 +847,19 @@ employeeData.leaveHistory.forEach(r=>{
 
 html +=
 
-"<tr>"+
+"<tr style='border-bottom:1px solid #ddd;'>"+
 
-"<td>"+r.dateFiled+"</td>"+
+"<td style='padding:10px;'>"+r.dateFiled+"</td>"+
 
-"<td>"+r.dateLeave+"</td>"+
+"<td style='padding:10px;'>"+r.dateLeave+"</td>"+
 
-"<td>"+r.type+"</td>"+
+"<td style='padding:10px;'>"+r.type+"</td>"+
 
-"<td>"+r.days+"</td>"+
+"<td style='padding:10px;'>"+r.days+"</td>"+
 
-"<td>"+r.reason+"</td>"+
+"<td style='padding:10px;'>"+r.reason+"</td>"+
 
-"<td>"+r.remarks+"</td>"+
+"<td style='padding:10px;'>"+r.remarks+"</td>"+
 
 "</tr>";
 
@@ -866,24 +890,71 @@ function loadCash(){
 
 let html="";
 
-employeeData.caHistory.forEach(r=>{
+
+if(!employeeData.cashHistory || employeeData.cashHistory.length==0){
+
+html =
+"No cash advance records found.";
+
+}else{
+
 
 html +=
-"<b>Date:</b> "+r.date+
-"<br>"+
-"<b>Amount:</b> "+r.amount+
-"<br>"+
-"<b>Deduction:</b> "+r.deduction+
-"<hr>";
+
+"<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
+
+
+"<tr style='background:#003566;color:white;height:35px;'>"+
+
+"<th style='padding:10px;'>Date</th>"+
+
+"<th style='padding:10px;'>Amount</th>"+
+
+"<th style='padding:10px;'>Deduction</th>"+
+
+"<th style='padding:10px;'>Balance</th>"+
+
+"<th style='padding:10px;'>Remarks</th>"+
+
+"</tr>";
+
+
+
+employeeData.cashHistory.forEach(r=>{
+
+
+html +=
+
+"<tr style='border-bottom:1px solid #ddd;'>"+
+
+"<td style='padding:10px;'>"+r.date+"</td>"+
+
+"<td style='padding:10px;'>"+r.amount+"</td>"+
+
+"<td style='padding:10px;'>"+r.deduction+"</td>"+
+
+"<td style='padding:10px;'>"+r.balance+"</td>"+
+
+"<td style='padding:10px;'>"+r.remarks+"</td>"+
+
+"</tr>";
+
 
 });
+
+
+
+html += "</table>";
+
+
+}
 
 
 document.getElementById("cashPage").innerHTML =
 "<h2>Cash Advance History</h2>"+html;
 
-}
 
+}
 
 
 
@@ -905,13 +976,17 @@ html =
 
 
 html +=
-"<table style='width:100%;border-collapse:collapse;text-align:center;'>"+
 
-"<tr style='background:#003566;color:white;'>"+
+"<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
 
-"<th>TYPE</th>"+
-"<th>DATE</th>"+
-"<th>STATUS</th>"+
+
+"<tr style='background:#003566;color:white;height:35px;'>"+
+
+"<th style='padding:10px;'>Type</th>"+
+
+"<th style='padding:10px;'>Date</th>"+
+
+"<th style='padding:10px;'>Status</th>"+
 
 "</tr>";
 
@@ -922,13 +997,13 @@ employeeData.medicalHistory.forEach(r=>{
 
 html +=
 
-"<tr>"+
+"<tr style='border-bottom:1px solid #ddd;'>"+
 
-"<td>"+r.type+"</td>"+
+"<td style='padding:10px;'>"+r.type+"</td>"+
 
-"<td>"+r.date+"</td>"+
+"<td style='padding:10px;'>"+r.date+"</td>"+
 
-"<td>"+r.status+"</td>"+
+"<td style='padding:10px;'>"+r.status+"</td>"+
 
 "</tr>";
 
@@ -936,7 +1011,9 @@ html +=
 });
 
 
+
 html += "</table>";
+
 
 }
 
@@ -957,21 +1034,69 @@ function loadEvaluation(){
 
 let html="";
 
-employeeData.evaluation.forEach(r=>{
+
+if(!employeeData.evaluationHistory || employeeData.evaluationHistory.length==0){
+
+html =
+"No evaluation records found.";
+
+}else{
+
 
 html +=
-"<b>Date:</b> "+r.date+
-"<br>"+
-"<b>Score:</b> "+r.score+
-"<br>"+
-"<b>Result:</b> "+r.result+
-"<hr>";
+
+"<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
+
+
+"<tr style='background:#003566;color:white;height:35px;'>"+
+
+"<th style='padding:10px;'>Date</th>"+
+
+"<th style='padding:10px;'>Evaluation Type</th>"+
+
+"<th style='padding:10px;'>Score</th>"+
+
+"<th style='padding:10px;'>Rating</th>"+
+
+"<th style='padding:10px;'>Remarks</th>"+
+
+"</tr>";
+
+
+
+employeeData.evaluationHistory.forEach(r=>{
+
+
+html +=
+
+"<tr style='border-bottom:1px solid #ddd;'>"+
+
+"<td style='padding:10px;'>"+r.date+"</td>"+
+
+"<td style='padding:10px;'>"+r.type+"</td>"+
+
+"<td style='padding:10px;'>"+r.score+"</td>"+
+
+"<td style='padding:10px;'>"+r.rating+"</td>"+
+
+"<td style='padding:10px;'>"+r.remarks+"</td>"+
+
+"</tr>";
+
 
 });
 
 
+
+html += "</table>";
+
+
+}
+
+
 document.getElementById("evaluationPage").innerHTML =
 "<h2>Evaluation Records</h2>"+html;
+
 
 }
 
@@ -986,45 +1111,139 @@ function loadViolation(){
 
 let html="";
 
-employeeData.violation.forEach(r=>{
+
+if(!employeeData.violationHistory || employeeData.violationHistory.length==0){
+
+html =
+"No violation records found.";
+
+}else{
+
 
 html +=
-"<b>Date:</b> "+r.date+
-"<br>"+
-"<b>Violation:</b> "+r.violation+
-"<br>"+
-"<b>Action:</b> "+r.action+
-"<hr>";
+
+"<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
+
+
+"<tr style='background:#003566;color:white;height:35px;'>"+
+
+"<th style='padding:10px;'>Date</th>"+
+
+"<th style='padding:10px;'>Violation</th>"+
+
+"<th style='padding:10px;'>Action Taken</th>"+
+
+"<th style='padding:10px;'>Status</th>"+
+
+"<th style='padding:10px;'>Remarks</th>"+
+
+"</tr>";
+
+
+
+employeeData.violationHistory.forEach(r=>{
+
+
+html +=
+
+"<tr style='border-bottom:1px solid #ddd;'>"+
+
+"<td style='padding:10px;'>"+r.date+"</td>"+
+
+"<td style='padding:10px;'>"+r.violation+"</td>"+
+
+"<td style='padding:10px;'>"+r.action+"</td>"+
+
+"<td style='padding:10px;'>"+r.status+"</td>"+
+
+"<td style='padding:10px;'>"+r.remarks+"</td>"+
+
+"</tr>";
+
 
 });
+
+
+
+html += "</table>";
+
+
+}
 
 
 document.getElementById("violationPage").innerHTML =
 "<h2>Violation Records</h2>"+html;
 
+
 }
 
-function showPage(pageID){
 
-let pages =
-document.querySelectorAll(".page");
+// ==========================
+// LOAD MOVEMENT
+// ==========================
+
+function loadMovement(){
+
+let html="";
 
 
-pages.forEach(p=>{
+if(!employeeData.movement || employeeData.movement.length==0){
 
-p.style.display="none";
+html =
+"No movement records found.";
+
+}else{
+
+
+html +=
+
+"<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
+
+
+"<tr style='background:#003566;color:white;height:35px;'>"+
+
+"<th style='padding:10px;'>Date</th>"+
+
+"<th style='padding:10px;'>Movement</th>"+
+
+"<th style='padding:10px;'>Old</th>"+
+
+"<th style='padding:10px;'>New</th>"+
+
+"</tr>";
+
+
+
+employeeData.movement.forEach(r=>{
+
+
+html +=
+
+"<tr style='border-bottom:1px solid #ddd;'>"+
+
+"<td style='padding:10px;'>"+r.date+"</td>"+
+
+"<td style='padding:10px;'>"+r.movement+"</td>"+
+
+"<td style='padding:10px;'>"+r.old+"</td>"+
+
+"<td style='padding:10px;'>"+r.new+"</td>"+
+
+"</tr>";
+
 
 });
 
 
-document.getElementById(pageID).style.display="block";
+html += "</table>";
 
 
 }
 
-function showAdminPage(page){
 
-alert(page + " loading...");
+document.getElementById("movementPage").innerHTML =
+"<h2>Employment Movement</h2>"+html;
+
 
 }
 
