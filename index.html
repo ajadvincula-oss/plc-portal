@@ -1334,7 +1334,20 @@ document.getElementById(pageID).style.display="block";
 
 function showAdminPage(pageID){
 
-alert(pageID+" loading...");
+
+let pages =
+document.querySelectorAll(".adminPage");
+
+
+pages.forEach(p=>{
+
+p.style.display="none";
+
+});
+
+
+document.getElementById(pageID).style.display="block";
+
 
 }
 
