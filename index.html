@@ -116,7 +116,7 @@ height:100vh;
 .sidebar{
 
 width:260px;
-height:100vh;
+min-height:100vh;
 float:left;
 background:#003566;
 color:white;
@@ -473,16 +473,6 @@ HR ADMIN
 
 
 <div class="menu" onclick="showAdminPage('adminCash')">
-💰 Cash Advance
-</div>
-
-
-<div class="menu">
-📋 Leave Approval
-</div>
-
-
-<div class="menu">
 💰 Cash Advance
 </div>
 
@@ -1267,6 +1257,16 @@ p.style.display="none";
 
 document.getElementById(pageID).style.display="block";
 
+
+}
+
+// ==========================
+// SHOW ADMIN PAGE
+// ==========================
+
+function showAdminPage(pageID){
+
+alert(pageID+" loading...");
 
 }
 
