@@ -1456,19 +1456,25 @@ let html="";
 
 html +=
 
-"<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
+"<input id='leaveSearch' onkeyup='searchLeave()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
 
-"<tr style='background:#003566;color:white;'>"+
+
+html +=
+
+"<table id='leaveTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;table-layout:fixed;'>"+
+
+
+"<tr style='background:#003566;color:white;height:35px;'>"+
 
 "<th>Date Filed</th>"+
 
 "<th>Employee</th>"+
 
-"<th>Date of Leave</th>"+
+"<th>Date Leave</th>"+
 
 "<th>Type</th>"+
 
-"<th>No. Leave</th>"+
+"<th>No.</th>"+
 
 "<th>Reason</th>"+
 
@@ -1487,21 +1493,21 @@ html +=
 
 "<tr style='border-bottom:1px solid #ddd;'>"+
 
-"<td>"+l.dateFiled+"</td>"+
+"<td style='padding:8px;'>"+l.dateFiled+"</td>"+
 
-"<td>"+l.name+"</td>"+
+"<td style='padding:8px;'>"+l.name+"</td>"+
 
-"<td>"+l.dateLeave+"</td>"+
+"<td style='padding:8px;'>"+l.dateLeave+"</td>"+
 
-"<td>"+l.type+"</td>"+
+"<td style='padding:8px;'>"+l.type+"</td>"+
 
-"<td>"+l.days+"</td>"+
+"<td style='padding:8px;'>"+l.days+"</td>"+
 
-"<td>"+l.reason+"</td>"+
+"<td style='padding:8px;'>"+l.reason+"</td>"+
 
-"<td>"+l.remarks+"</td>"+
+"<td style='padding:8px;'>"+l.remarks+"</td>"+
 
-"<td>"+l.status+"</td>"+
+"<td style='padding:8px;'>"+l.status+"</td>"+
 
 "</tr>";
 
@@ -1520,6 +1526,37 @@ html;
 
 
 }
+
+
+// ==========================
+// SEARCH LEAVE
+// ==========================
+
+function searchLeave(){
+
+let input =
+document.getElementById("leaveSearch").value.toLowerCase();
+
+
+let rows =
+document.querySelectorAll("#leaveTable tr");
+
+
+for(let i=1;i<rows.length;i++){
+
+let name =
+rows[i].cells[1].innerText.toLowerCase();
+
+
+rows[i].style.display =
+name.includes(input) ? "" : "none";
+
+
+}
+
+
+}
+
 
 // ==========================
 // LOGOUT
