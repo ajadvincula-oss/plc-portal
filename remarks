@@ -933,7 +933,9 @@ html +=
 
 "<td style='padding:10px;'>"+r.reason+"</td>"+
 
-"<td style='padding:10px;'>"+r.remarks+"</td>"+
+"<td style='padding:10px;'>"+r.pay status+"</td>"+
+
+"<td style='padding:10px;'>"+r.status+"</td>"+
 
 "</tr>";
 
