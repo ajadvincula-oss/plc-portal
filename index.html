@@ -1574,6 +1574,19 @@ action:"getAdminCash"
 .then(data=>{
 
 
+console.log("CASH RESULT:",data);
+
+
+if(!data.cash){
+
+document.getElementById("adminCashTable").innerHTML =
+"No cash records found.";
+
+return;
+
+}
+
+
 let html="";
 
 
@@ -1586,7 +1599,7 @@ html +=
 
 "<table id='cashTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'>"+
 
-"<tr style='background:#003566;color:white;'>"+
+"<tr style='background:#003566;color:white;height:35px;'>"+
 
 "<th>Date</th>"+
 "<th>Employee</th>"+
@@ -1604,7 +1617,7 @@ data.cash.forEach(c=>{
 
 html +=
 
-"<tr>"+
+"<tr style='border-bottom:1px solid #ddd;'>"+
 
 "<td>"+c.date+"</td>"+
 
@@ -1624,11 +1637,21 @@ html +=
 });
 
 
-html+="</table>";
+html += "</table>";
 
 
-document.getElementById("adminCashTable").innerHTML=html;
+document.getElementById("adminCashTable").innerHTML =
+html;
 
+
+})
+
+.catch(err=>{
+
+document.getElementById("adminCashTable").innerHTML =
+"Cash connection error";
+
+console.log(err);
 
 });
 
