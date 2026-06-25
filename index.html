@@ -853,7 +853,7 @@ document.getElementById("profileData").innerHTML =
 
 "<br><br>"+
 
-"<b>Balance After Deduction:</b> "+employeeData.ca;
+"<b>Balance After Deduction:</b> "+employeeData.caBalance;
 
 document.getElementById("sidePhoto").src =
 employeeData.photo;
@@ -989,10 +989,6 @@ html +=
 
 "<th style='padding:10px;'>Deduction</th>"+
 
-"<th style='padding:10px;'>Balance</th>"+
-
-"<th style='padding:10px;'>Remarks</th>"+
-
 "</tr>";
 
 
@@ -1009,10 +1005,6 @@ html +=
 "<td style='padding:10px;'>"+r.amount+"</td>"+
 
 "<td style='padding:10px;'>"+r.deduction+"</td>"+
-
-"<td style='padding:10px;'>"+r.balance+"</td>"+
-
-"<td style='padding:10px;'>"+r.remarks+"</td>"+
 
 "</tr>";
 
