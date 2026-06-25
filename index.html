@@ -466,7 +466,7 @@ HR ADMIN
 </div>
 
 
-<div class="menu" onclick="showAdminPage('adminCashPage')">
+<div class="menu" onclick="loadAdminCash()">
 💰 Cash Advance
 </div>
 
@@ -576,6 +576,18 @@ Leave Approval
 
 <div id="adminLeaveTable">
 Leave records loading...
+</div>
+
+<div class="card adminPage" id="adminCashPage" style="display:none;">
+
+<h2>
+Cash Advance Records
+</h2>
+
+<div id="adminCashTable">
+Cash advance loading...
+</div>
+
 </div>
 
 </div>
@@ -1523,6 +1535,129 @@ html;
 
 
 });
+
+
+}
+
+
+// ==========================
+// LOAD ADMIN CASH
+// ==========================
+
+function loadAdminCash(){
+
+
+showAdminPage("adminCashPage");
+
+
+fetch(API_URL,{
+
+method:"POST",
+
+body:JSON.stringify({
+
+action:"getAdminCash"
+
+})
+
+})
+
+
+.then(res=>res.json())
+
+
+.then(data=>{
+
+
+let html="";
+
+
+html +=
+
+"<input id='cashSearch' onkeyup='searchCash()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+
+
+html +=
+
+"<table id='cashTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'>"+
+
+"<tr style='background:#003566;color:white;'>"+
+
+"<th>Date</th>"+
+"<th>Employee</th>"+
+"<th>Amount</th>"+
+"<th>Deduction</th>"+
+"<th>Balance</th>"+
+"<th>Remarks</th>"+
+
+"</tr>";
+
+
+
+data.cash.forEach(c=>{
+
+
+html +=
+
+"<tr>"+
+
+"<td>"+c.date+"</td>"+
+
+"<td>"+c.name+"</td>"+
+
+"<td>"+c.amount+"</td>"+
+
+"<td>"+c.deduction+"</td>"+
+
+"<td>"+c.balance+"</td>"+
+
+"<td>"+c.remarks+"</td>"+
+
+"</tr>";
+
+
+});
+
+
+html+="</table>";
+
+
+document.getElementById("adminCashTable").innerHTML=html;
+
+
+});
+
+
+}
+
+
+// ==========================
+// SEARCH CASH
+// ==========================
+
+function searchCash(){
+
+let input =
+document.getElementById("cashSearch")
+.value.toLowerCase();
+
+
+let rows =
+document.querySelectorAll("#cashTable tr");
+
+
+for(let i=1;i<rows.length;i++){
+
+
+let name =
+rows[i].cells[1].innerText.toLowerCase();
+
+
+rows[i].style.display =
+name.includes(input) ? "" : "none";
+
+
+}
 
 
 }
