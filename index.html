@@ -182,6 +182,32 @@ margin-bottom:20px;
 
 }
 
+.dashboardGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+}
+
+.dashboardCard{
+background:white;
+border-radius:15px;
+padding:25px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.dashboardCard h3{
+margin:0;
+font-size:16px;
+color:#666;
+}
+
+.dashboardCard h1{
+margin-top:12px;
+font-size:42px;
+color:#004aad;
+}
+
 
 </style>
 
@@ -450,14 +476,28 @@ No movement records loaded.
 
 <div class="sidebar">
 
-
 <h2>
 HR ADMIN
 </h2>
 
+<div class="menu" onclick="loadDashboard()">
+🏠 Dashboard
+</div>
 
 <div class="menu" onclick="loadAdminEmployees()">
 👥 Employees
+</div>
+
+<div class="menu" onclick="loadAdminLeaves()">
+📋 Leave Approval
+</div>
+
+<div class="menu" onclick="loadAdminCash()">
+💰 Cash Advance
+</div>
+
+<div class="menu" onclick="logout()">
+🚪 Logout
 </div>
 
 
@@ -773,16 +813,11 @@ password:pass
 
 if(data.result=="SUCCESS"){
 
+    document.getElementById("adminLoginPage").style.display="none";
 
-document.getElementById("adminLoginPage").style.display="none";
+    document.getElementById("adminDashboard").style.display="block";
 
-
-document.getElementById("adminDashboard").style.display="block";
-
-showAdminPage('adminHomePage');
-
-loadDashboard();
-
+    loadDashboard();
 
 }else{
 
@@ -1401,6 +1436,9 @@ html;
 
 }
 
+
+
+
 // ==========================
 // LOAD ADMIN LEAVES
 // ==========================
@@ -1680,17 +1718,14 @@ name.includes(input) ? "" : "none";
 
 function loadDashboard(){
 
-fetch(API_URL,{
+    showAdminPage("adminHomePage");
 
-method:"POST",
-
-body:JSON.stringify({
-
-action:"dashboard"
-
-})
-
-})
+    fetch(API_URL,{
+        method:"POST",
+        body:JSON.stringify({
+            action:"dashboard"
+        })
+    })
 
 .then(res=>res.json())
 
