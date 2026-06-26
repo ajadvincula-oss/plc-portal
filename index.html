@@ -1036,7 +1036,7 @@ function loadMedical(){
 let html="";
 
 
-if(!employeeData.medicalHistory || employeeData.medicalHistory.length==0){
+if(!employeeData.medical || employeeData.medical.length==0){
 
 html =
 "No medical records found.";
@@ -1061,7 +1061,7 @@ html +=
 
 
 
-employeeData.medicalHistory.forEach(r=>{
+employeeData.medical.forEach(r=>{
 
 
 html +=
@@ -1104,7 +1104,7 @@ function loadEvaluation(){
 let html="";
 
 
-if(!employeeData.evaluationHistory || employeeData.evaluationHistory.length==0){
+if(!employeeData.evaluation || employeeData.evaluation.length==0){
 
 html =
 "No evaluation records found.";
@@ -1133,7 +1133,7 @@ html +=
 
 
 
-employeeData.evaluationHistory.forEach(r=>{
+employeeData.evaluation.forEach(...)
 
 
 html +=
@@ -1181,7 +1181,7 @@ function loadViolation(){
 let html="";
 
 
-if(!employeeData.violationHistory || employeeData.violationHistory.length==0){
+if(!employeeData.violation || employeeData.violation.length==0){
 
 html =
 "No violation records found.";
@@ -1210,7 +1210,7 @@ html +=
 
 
 
-employeeData.violationHistory.forEach(r=>{
+employeeData.violation.forEach(...)
 
 
 html +=
@@ -1412,7 +1412,7 @@ html +=
 
 "<td>"+e.position+"</td>"+
 
-"<td>"+(e.status || "")+"</td>"+
+"<td>"+(e.access || "")+"</td>"+
 
 "<td>"+(e.device || "")+"</td>"+
 
