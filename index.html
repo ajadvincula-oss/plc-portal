@@ -1118,9 +1118,7 @@ html +=
 
 "<th style='padding:10px;'>Score</th>"+
 
-"<th style='padding:10px;'>Rating</th>"+
-
-"<th style='padding:10px;'>Remarks</th>"+
+"<th style='padding:10px;'>Result</th>"+
 
 "</tr>";
 
@@ -1133,8 +1131,7 @@ employeeData.evaluation.forEach(r => {
     "<td style='padding:10px;'>"+r.date+"</td>"+
     "<td style='padding:10px;'>"+r.type+"</td>"+
     "<td style='padding:10px;'>"+r.score+"</td>"+
-    "<td style='padding:10px;'>"+r.rating+"</td>"+
-    "<td style='padding:10px;'>"+r.remarks+"</td>"+
+    "<td style='padding:10px;'>"+r.result+"</td>"+
     "</tr>";
 
 });
@@ -1188,8 +1185,6 @@ html +=
 
 "<th style='padding:10px;'>Status</th>"+
 
-"<th style='padding:10px;'>Remarks</th>"+
-
 "</tr>";
 
 
@@ -1202,7 +1197,6 @@ employeeData.violation.forEach(r => {
     "<td style='padding:10px;'>"+r.violation+"</td>"+
     "<td style='padding:10px;'>"+r.action+"</td>"+
     "<td style='padding:10px;'>"+r.status+"</td>"+
-    "<td style='padding:10px;'>"+r.remarks+"</td>"+
     "</tr>";
 
 });
