@@ -489,15 +489,13 @@ HR ADMIN DASHBOARD
 
 <div class="card adminPage" id="adminHomePage">
 
-<h2>
-Welcome HR Admin
-</h2>
+<h2>HR Dashboard</h2>
 
+<div id="dashboardCards">
 
-<p>
-HR Management Panel Loaded.
-</p>
+Loading dashboard...
 
+</div>
 
 </div>
 
@@ -782,6 +780,8 @@ document.getElementById("adminLoginPage").style.display="none";
 document.getElementById("adminDashboard").style.display="block";
 
 showAdminPage('adminHomePage');
+
+loadDashboard();
 
 
 }else{
@@ -1678,6 +1678,86 @@ name.includes(input) ? "" : "none";
 }
 
 
+function loadDashboard(){
+
+fetch(API_URL,{
+
+method:"POST",
+
+body:JSON.stringify({
+
+action:"dashboard"
+
+})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+document.getElementById("dashboardCards").innerHTML=
+
+`
+
+<div class="dashboardGrid">
+
+<div class="dashboardCard">
+
+<h3>Total Employees</h3>
+
+<h1>${data.totalEmployees}</h1>
+
+</div>
+
+<div class="dashboardCard">
+
+<h3>Active</h3>
+
+<h1>${data.active}</h1>
+
+</div>
+
+<div class="dashboardCard">
+
+<h3>Inactive</h3>
+
+<h1>${data.inactive}</h1>
+
+</div>
+
+<div class="dashboardCard">
+
+<h3>Pending Leave</h3>
+
+<h1>${data.pendingLeave}</h1>
+
+</div>
+
+<div class="dashboardCard">
+
+<h3>Cash Advances</h3>
+
+<h1>${data.cashAdvance}</h1>
+
+</div>
+
+<div class="dashboardCard">
+
+<h3>Locked Devices</h3>
+
+<h1>${data.locked}</h1>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
 // ==========================
 // LOGOUT
 // ==========================
@@ -1706,3 +1786,38 @@ document.getElementById("adminLoginPage").style.display="none";
 
 
 </html>
+
+
+.dashboardGrid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+
+}
+
+.dashboardCard{
+
+background:white;
+border-radius:15px;
+padding:25px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+}
+
+.dashboardCard h3{
+
+margin:0;
+font-size:16px;
+color:#666;
+
+}
+
+.dashboardCard h1{
+
+margin-top:12px;
+font-size:42px;
+color:#004aad;
+
+}
