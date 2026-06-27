@@ -1406,7 +1406,13 @@ html +=
 
 "<td>"+(e.device || "")+"</td>"+
 
-"<td><button onclick=\"resetDevice('"+e.id+"')\">Reset</button></td>"+
+"<td>" +
+
+"<button onclick=\"resetPIN('"+e.id+"')\" style='margin-right:8px;'>Reset PIN</button>" +
+
+"<button onclick=\"resetDevice('"+e.id+"')\">Reset Device</button>" +
+
+"</td>"+
 
 "</tr>";
 
@@ -1812,6 +1818,39 @@ document.getElementById("dashboardCards").innerHTML=
 });
 
 }
+
+function resetPIN(empID){
+
+    if(!confirm("Reset PIN of this employee to 123456?")){
+        return;
+    }
+
+    fetch(API_URL,{
+        method:"POST",
+        body:JSON.stringify({
+            action:"resetPIN",
+            employeeID:empID
+        })
+    })
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        alert(data.message);
+
+        loadAdminEmployees();
+
+    })
+
+    .catch(err=>{
+
+        alert("Connection Error");
+
+    });
+
+}
+
 
 // ==========================
 // LOGOUT
