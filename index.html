@@ -532,7 +532,9 @@ Loading dashboard...
 Employee Management
 </h2>
 
-
+html +=
+"<input id='employeeSearch' onkeyup='searchEmployee()' placeholder='Search Employee...' style='width:320px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+  
 <table style="width:100%;border-collapse:collapse;text-align:center;">
 
 
@@ -1408,12 +1410,12 @@ html +=
 
 "<td>" +
 
-"<button onclick=\"resetPIN('"+e.id+"')\" style='margin-right:8px;'>Reset PIN</button>" +
+"<button onclick=\"resetPIN('"+e.id+"')\" style='padding:6px 12px;font-size:12px;margin-right:5px;'>Reset PIN</button>" +
 
-"<button onclick=\"resetDevice('"+e.id+"')\">Reset Device</button>" +
+"<button onclick=\"resetDevice('"+e.id+"')\" style='padding:6px 12px;font-size:12px;'>Reset Device</button>" +
 
 "</td>"+
-
+  
 "</tr>";
 
 });
@@ -1848,6 +1850,28 @@ function resetPIN(empID){
         alert("Connection Error");
 
     });
+
+}
+
+
+function searchEmployee(){
+
+let input =
+document.getElementById("employeeSearch")
+.value.toLowerCase();
+
+let rows =
+document.querySelectorAll("#adminEmployeeTable tr");
+
+for(let i=0;i<rows.length;i++){
+
+let text =
+rows[i].innerText.toLowerCase();
+
+rows[i].style.display =
+text.includes(input) ? "" : "none";
+
+}
 
 }
 
