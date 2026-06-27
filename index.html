@@ -1406,7 +1406,7 @@ html +=
 
 "<td>"+(e.device || "")+"</td>"+
 
-"<td><button>Reset</button></td>"+
+"<td><button onclick=\"resetDevice('"+e.id+"')\">Reset</button></td>"+
 
 "</tr>";
 
@@ -1422,6 +1422,40 @@ html;
 
 }
 
+
+function resetDevice(employeeID){
+
+    if(!confirm("Reset this employee's device?")) return;
+
+    fetch(API_URL,{
+        method:"POST",
+        body:JSON.stringify({
+            action:"resetDevice",
+            employeeID:employeeID
+        })
+    })
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        alert(data.message);
+
+        loadAdminEmployees();
+
+        loadDashboard();
+
+    })
+
+    .catch(err=>{
+
+        alert("Reset Failed");
+
+        console.log(err);
+
+    });
+
+}
 
 
 
