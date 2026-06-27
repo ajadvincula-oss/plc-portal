@@ -532,11 +532,9 @@ Loading dashboard...
 Employee Management
 </h2>
 
-html +=
-"<input id='employeeSearch' onkeyup='searchEmployee()' placeholder='Search Employee...' style='width:320px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+<div id="employeeSearchBar"></div>
   
 <table style="width:100%;border-collapse:collapse;text-align:center;">
-
 
 <thead>
 
@@ -1388,6 +1386,8 @@ console.log(data);
 
 let html="";
 
+html += "<input id='employeeSearch' onkeyup='searchEmployee()' placeholder='Search Employee...' style='width:320px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+
 
 data.employees.forEach(e=>{
 
@@ -1424,11 +1424,26 @@ html +=
 document.getElementById("adminEmployeeTable").innerHTML =
 html;
 
+document.getElementById("employeeSearchBar").innerHTML = `
+<input
+    id="employeeSearch"
+    onkeyup="searchEmployee()"
+    placeholder="Search Employee..."
+    style="width:320px;
+           padding:10px;
+           margin-bottom:15px;
+           border-radius:8px;
+           border:1px solid #ccc;">
+`;
+
 
 });
 
 
 }
+
+
+
 
 
 function resetDevice(employeeID){
@@ -1872,6 +1887,31 @@ rows[i].style.display =
 text.includes(input) ? "" : "none";
 
 }
+
+}
+
+
+// ==========================
+// SEARCH EMPLOYEE
+// ==========================
+
+function searchEmployee(){
+
+    let input =
+    document.getElementById("employeeSearch").value.toLowerCase();
+
+    let rows =
+    document.querySelectorAll("#adminEmployeeTable tr");
+
+    rows.forEach(row=>{
+
+        let text =
+        row.innerText.toLowerCase();
+
+        row.style.display =
+        text.includes(input) ? "" : "none";
+
+    });
 
 }
 
