@@ -1386,7 +1386,7 @@ console.log(data);
 
 let html="";
 
-html += "<input id='employeeSearch' onkeyup='searchEmployee()' placeholder='Search Employee...' style='width:320px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+"<input id='employeeSearch' onkeyup='searchEmployee()' placeholder='Search Employee...' style='width:320px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
 
 
 data.employees.forEach(e=>{
@@ -1429,30 +1429,12 @@ document.getElementById("employeeSearchBar").innerHTML = `
     id="employeeSearch"
     onkeyup="searchEmployee()"
     placeholder="Search Employee..."
-    style="width:280px;
+    style="width:320px;
            padding:10px;
            margin-bottom:15px;
            border-radius:8px;
            border:1px solid #ccc;">
-<select
-    id="employeeSearchField"
-    onchange="searchEmployee()"
-    style="padding:10px;
-           margin-bottom:15px;
-           margin-left:8px;
-           border-radius:8px;
-           border:1px solid #ccc;">
-    <option value="all">All Fields</option>
-    <option value="0">Employee ID</option>
-    <option value="1">Name</option>
-    <option value="2">Department</option>
-    <option value="3">Position</option>
-    <option value="5">Device Status</option>
-</select>
 `;
-
-
-});
 
  
 }
@@ -1889,22 +1871,12 @@ function searchEmployee(){
     let input =
     document.getElementById("employeeSearch").value.toLowerCase();
 
-    let field =
-    document.getElementById("employeeSearchField").value;
-
     let rows =
     document.querySelectorAll("#adminEmployeeTable tr");
 
     rows.forEach(row=>{
 
-        let text = "";
-
-        if(field === "all"){
-            text = row.innerText.toLowerCase();
-        }else{
-            let cell = row.cells[field];
-            text = cell ? cell.innerText.toLowerCase() : "";
-        }
+        let text = row.innerText.toLowerCase();
 
         row.style.display =
         text.includes(input) ? "" : "none";
