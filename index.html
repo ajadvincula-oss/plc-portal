@@ -1429,11 +1429,26 @@ document.getElementById("employeeSearchBar").innerHTML = `
     id="employeeSearch"
     onkeyup="searchEmployee()"
     placeholder="Search Employee..."
-    style="width:320px;
+    style="width:280px;
            padding:10px;
            margin-bottom:15px;
            border-radius:8px;
            border:1px solid #ccc;">
+<select
+    id="employeeSearchField"
+    onchange="searchEmployee()"
+    style="padding:10px;
+           margin-bottom:15px;
+           margin-left:8px;
+           border-radius:8px;
+           border:1px solid #ccc;">
+    <option value="all">All Fields</option>
+    <option value="0">Employee ID</option>
+    <option value="1">Name</option>
+    <option value="2">Department</option>
+    <option value="3">Position</option>
+    <option value="5">Device Status</option>
+</select>
 `;
 
 
@@ -1871,42 +1886,25 @@ function resetPIN(empID){
 
 function searchEmployee(){
 
-let input =
-document.getElementById("employeeSearch")
-.value.toLowerCase();
-
-let rows =
-document.querySelectorAll("#adminEmployeeTable tr");
-
-for(let i=0;i<rows.length;i++){
-
-let text =
-rows[i].innerText.toLowerCase();
-
-rows[i].style.display =
-text.includes(input) ? "" : "none";
-
-}
-
-}
-
-
-// ==========================
-// SEARCH EMPLOYEE
-// ==========================
-
-function searchEmployee(){
-
     let input =
     document.getElementById("employeeSearch").value.toLowerCase();
+
+    let field =
+    document.getElementById("employeeSearchField").value;
 
     let rows =
     document.querySelectorAll("#adminEmployeeTable tr");
 
     rows.forEach(row=>{
 
-        let text =
-        row.innerText.toLowerCase();
+        let text = "";
+
+        if(field === "all"){
+            text = row.innerText.toLowerCase();
+        }else{
+            let cell = row.cells[field];
+            text = cell ? cell.innerText.toLowerCase() : "";
+        }
 
         row.style.display =
         text.includes(input) ? "" : "none";
@@ -1915,6 +1913,7 @@ function searchEmployee(){
 
 }
 
+}
 
 // ==========================
 // LOGOUT
