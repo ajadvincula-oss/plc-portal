@@ -880,6 +880,8 @@ if(data.result=="SUCCESS"){
 data.username = username;
 data.pin = pin;
 employeeData = data;
+localStorage.setItem("employeeSession", JSON.stringify(data));
+localStorage.removeItem("adminSession");
 
 
 document.getElementById("loginPage").style.display="none";
@@ -999,6 +1001,9 @@ password:pass
 
 
 if(data.result=="SUCCESS"){
+
+    localStorage.setItem("adminSession", JSON.stringify(data));
+    localStorage.removeItem("employeeSession");
 
     document.getElementById("adminLoginPage").style.display="none";
 
@@ -2406,6 +2411,42 @@ function startAutoRefresh(){
     }, 15000);
 }
 
+// ==========================
+// RESTORE SESSION
+// ==========================
+
+function restoreSession(){
+
+    let empSession = localStorage.getItem("employeeSession");
+    let adminSession = localStorage.getItem("adminSession");
+
+    if(empSession){
+        try{
+            employeeData = JSON.parse(empSession);
+            document.getElementById("loginPage").style.display="none";
+            document.getElementById("employeeDashboard").style.display="block";
+            document.getElementById("welcomeName").innerHTML = "Welcome " + employeeData.name;
+            loadProfile();
+        }catch(e){
+            localStorage.removeItem("employeeSession");
+        }
+    }
+
+    else if(adminSession){
+        try{
+            document.getElementById("loginPage").style.display="none";
+            document.getElementById("adminLoginPage").style.display="none";
+            document.getElementById("adminDashboard").style.display="block";
+            loadDashboard();
+        }catch(e){
+            localStorage.removeItem("adminSession");
+        }
+    }
+
+}
+
+restoreSession();  
+
 // Start auto-refresh
 startAutoRefresh();
 
@@ -2416,6 +2457,8 @@ startAutoRefresh();
 
 function logout(){
 
+localStorage.removeItem("employeeSession");
+localStorage.removeItem("adminSession");
 
 document.getElementById("loginPage").style.display="flex";
 
@@ -2424,7 +2467,6 @@ document.getElementById("employeeDashboard").style.display="none";
 document.getElementById("adminDashboard").style.display="none";
 
 document.getElementById("adminLoginPage").style.display="none";
-
 
 }
 
