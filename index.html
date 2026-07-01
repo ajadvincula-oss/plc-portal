@@ -2157,10 +2157,10 @@ function changePIN(){
         return;
     }
 
-    if(newP.length < 4){
-        showError("Minimum 4 digits ang bagong PIN.");
-        return;
-    }
+    if(newP.length !== 6 || isNaN(newP)){
+    showError("6 digits lang ang PIN. Numbers only.");
+    return;
+}
 
     if(newP !== confirm){
         showError("Hindi magkatugma ang bagong PIN.");
@@ -2170,11 +2170,11 @@ function changePIN(){
     fetch(API_URL,{
         method:"POST",
         body:JSON.stringify({
-            action:"changePIN",
-            employeeID: employeeData.employeeID,
-            currentPIN: current,
-            newPIN: newP
-        })
+    action:"changePin",
+    employeeID: employeeData.employeeID,
+    currentPin: current,
+    newPin: newP
+})
     })
 
     .then(res=>res.json())
