@@ -1401,9 +1401,9 @@ html +=
 
 "<td>"+e.position+"</td>"+
 
-"<td>"+(e.access || "")+"</td>"+
+"<td>"+getBadge(e.access)+"</td>"+
 
-"<td>"+(e.device || "")+"</td>"+
+"<td>"+getBadge(e.device)+"</td>"+
 
 "<td>" +
 
@@ -1860,6 +1860,34 @@ function resetPIN(empID){
         alert("Connection Error");
 
     });
+
+}
+
+// ==========================
+// GET STATUS BADGE
+// ==========================
+
+function getBadge(value){
+
+    if(!value) return "";
+
+    let color = "#aaa";
+
+    let v = value.toUpperCase();
+
+    if(v === "ACTIVE")   color = "#28a745";
+    if(v === "INACTIVE") color = "#6c757d";
+    if(v === "LOCKED")   color = "#dc3545";
+    if(v === "UNLOCKED") color = "#28a745";
+
+    return "<span style='"+
+        "background:"+color+";"+
+        "color:white;"+
+        "padding:3px 10px;"+
+        "border-radius:20px;"+
+        "font-size:11px;"+
+        "font-weight:bold;"+
+        "'>"+value+"</span>";
 
 }
 
