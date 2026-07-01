@@ -531,7 +531,7 @@ PLC EMPLOYEE DASHBOARD
 
 <!-- HEADER BANNER -->
 <div style="background:linear-gradient(135deg,#003566,#0057d9);padding:40px;text-align:center;">
-    <img id="companyLogo" style="width:180px;height:180px;border-radius:50%;object-fit:cover;border:4px solid white;box-shadow:0 8px 25px rgba(0,0,0,0.3);margin-bottom:20px;">
+    <img id="companyLogo" style="width:220px;object-fit:contain;margin-bottom:20px;filter:drop-shadow(0 8px 15px rgba(0,0,0,0.2));"
     <h2 id="companyName" style="color:white;margin:0;font-size:26px;letter-spacing:2px;"></h2>
     <p id="companyEmail" style="color:rgba(255,255,255,0.8);margin-top:8px;font-size:14px;"></p>
 </div>
@@ -693,10 +693,6 @@ HR ADMIN
 
 <div class="menu" onclick="loadDashboard()">
 🏠 Dashboard
-</div>
-
-<div class="menu" onclick="showAdminCompanyProfile()">
-🏢 Company Profile
 </div>
 
 <div class="menu" onclick="loadAdminEmployees()">
@@ -2157,8 +2153,18 @@ function silentRefreshDashboard(){
     })
     .then(res=>res.json())
     .then(data=>{
-        document.getElementById("dashboardCards").innerHTML=`
-        <div class="dashboardGrid">
+       document.getElementById("dashboardCards").innerHTML=
+
+`
+<div style="text-align:center;margin-bottom:30px;">
+    <img id="adminCompanyLogo" src="${data.logo||''}" style="width:180px;object-fit:contain;filter:drop-shadow(0 8px 15px rgba(0,0,0,0.2));margin-bottom:15px;">
+    <h2 id="adminCompanyName" style="color:#003566;margin:0;letter-spacing:2px;">${data.companyName||''}</h2>
+    <p style="color:#666;margin-top:5px;">${data.companyEmail||''}</p>
+</div>
+
+<hr style="margin-bottom:25px;">
+
+<div class="dashboardGrid">
         <div class="dashboardCard"><h3>Total Employees</h3><h1>${data.totalEmployees}</h1></div>
         <div class="dashboardCard"><h3>Active</h3><h1>${data.active}</h1></div>
         <div class="dashboardCard"><h3>Inactive</h3><h1>${data.inactive}</h1></div>
@@ -2187,10 +2193,34 @@ function loadDashboard(){
 document.getElementById("dashboardCards").innerHTML=
 
 `
+<div style="text-align:center;margin-bottom:30px;padding:30px;background:linear-gradient(135deg,#003566,#0057d9);border-radius:15px;">
+    <img src="${data.logo||''}" style="width:180px;object-fit:contain;filter:drop-shadow(0 8px 15px rgba(0,0,0,0.3));margin-bottom:15px;">
+    <h2 style="color:white;margin:0;letter-spacing:2px;">${data.companyName||''}</h2>
+    <p style="color:rgba(255,255,255,0.8);margin-top:5px;font-size:14px;">${data.companyEmail||''}</p>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:25px;">
+
+    <div style="background:#f0f4ff;border-left:5px solid #0057d9;border-radius:10px;padding:20px;">
+        <h3 style="color:#003566;margin:0 0 10px 0;font-size:15px;">🎯 Our Mission</h3>
+        <p style="color:#444;line-height:1.7;margin:0;font-size:14px;">${data.mission||''}</p>
+    </div>
+
+    <div style="background:#f0fff4;border-left:5px solid #28a745;border-radius:10px;padding:20px;">
+        <h3 style="color:#1a6e35;margin:0 0 10px 0;font-size:15px;">👁 Our Vision</h3>
+        <p style="color:#444;line-height:1.7;margin:0;font-size:14px;">${data.vision||''}</p>
+    </div>
+
+    <div style="background:#fff8f0;border-left:5px solid #fd7e14;border-radius:10px;padding:20px;">
+        <h3 style="color:#8a4500;margin:0 0 10px 0;font-size:15px;">💎 Our Values</h3>
+        <p style="color:#444;line-height:1.7;margin:0;font-size:14px;">${data.values||''}</p>
+    </div>
+
+</div>
+
+<h3 style="color:#003566;margin-bottom:15px;">📊 Dashboard Summary</h3>
 
 <div class="dashboardGrid">
-
-<div class="dashboardCard">
 
 <h3>Total Employees</h3>
 
