@@ -2267,61 +2267,77 @@ function changePIN(){
 // AUTO REFRESH
 // ==========================
 
+// ==========================
+// AUTO REFRESH
+// ==========================
+
+let lastTimestamp = 0;
+
 function startAutoRefresh(){
     setInterval(function(){
 
-        // Kung naka-login ang Employee
-if(document.getElementById("employeeDashboard").style.display=="block"){
-    fetch(API_URL,{
-        method:"POST",
-        body:JSON.stringify({
-            action:"getEmployeeData",
-            employeeID:employeeData.employeeID
+        fetch(API_URL,{
+            method:"POST",
+            body:JSON.stringify({
+                action:"getLastModified"
+            })
         })
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        if(data.result=="SUCCESS"){
-            employeeData.leaveHistory = data.leaveHistory;
-            employeeData.cashHistory = data.caHistory.records;
-            employeeData.caBalance = data.caHistory.balance;
-            employeeData.medical = data.medical;
-            employeeData.evaluation = data.evaluation;
-            employeeData.violation = data.violation;
-            employeeData.movement = data.movement;
-            loadLeave();
-            loadCash();
-            loadMedical();
-            loadEvaluation();
-            loadViolation();
-            loadMovement();
-        }
-    })
-    .catch(err=>console.log("Auto-refresh error:",err));
+        .then(res=>res.json())
+        .then(data=>{
+
+            if(data.timestamp === lastTimestamp) return;
+
+            lastTimestamp = data.timestamp;
+
+            // Kung naka-login ang Employee
+            if(document.getElementById("employeeDashboard").style.display=="block"){
+                fetch(API_URL,{
+                    method:"POST",
+                    body:JSON.stringify({
+                        action:"getEmployeeData",
+                        employeeID:employeeData.employeeID
+                    })
+                })
+                .then(res=>res.json())
+                .then(data=>{
+                    if(data.result=="SUCCESS"){
+                        employeeData.leaveHistory = data.leaveHistory;
+                        employeeData.cashHistory = data.caHistory.records;
+                        employeeData.caBalance = data.caHistory.balance;
+                        employeeData.medical = data.medical;
+                        employeeData.evaluation = data.evaluation;
+                        employeeData.violation = data.violation;
+                        employeeData.movement = data.movement;
+                        loadLeave();
+                        loadCash();
+                        loadMedical();
+                        loadEvaluation();
+                        loadViolation();
+                        loadMovement();
+                    }
+                })
+                .catch(err=>console.log("Employee refresh error:",err));
+            }
+
+            // Kung naka-login ang HR Admin
+            if(document.getElementById("adminDashboard").style.display=="block"){
+
+                if(document.getElementById("adminEmployeesPage").style.display=="block"){
+                    loadAdminEmployees();
+                }else if(document.getElementById("adminLeavePage").style.display=="block"){
+                    loadAdminLeaves();
+                }else if(document.getElementById("adminCashPage").style.display=="block"){
+                    loadAdminCash();
+                }else{
+                    loadDashboard();
+                }
+            }
+
+        })
+        .catch(err=>console.log("Timestamp check error:",err));
+
+    }, 15000);
 }
-
-        // Kung naka-login ang HR Admin
-        if(document.getElementById("adminDashboard").style.display=="block"){
-            loadDashboard();
-
-            // Kung nasa Employees page
-            if(document.getElementById("adminEmployeesPage").style.display=="block"){
-                loadAdminEmployees();
-            }
-
-            // Kung nasa Leave page
-            if(document.getElementById("adminLeavePage").style.display=="block"){
-                loadAdminLeaves();
-            }
-
-            // Kung nasa Cash page
-            if(document.getElementById("adminCashPage").style.display=="block"){
-                loadAdminCash();
-            }
-        }
-
-    }, 15000); // 15 seconds
-}  
 
 // Start auto-refresh
 startAutoRefresh();
