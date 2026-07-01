@@ -684,6 +684,8 @@ Action
 
 </table>
 
+<div id="paginationBar"></div>
+
 </div>
 
   
@@ -745,6 +747,9 @@ const API_URL =
 
 
 let employeeData={};
+let allEmployees=[];
+let currentPage=1;
+const rowsPerPage=10;
 
 
 
@@ -1501,7 +1506,22 @@ console.log(data);
 
 let html="";
 
-data.employees.forEach(e=>{
+allEmployees = data.employees;
+currentPage = 1;
+renderEmployeeTable();
+
+});
+}
+
+function renderEmployeeTable(){
+
+let start = (currentPage-1) * rowsPerPage;
+let end = start + rowsPerPage;
+let pageData = allEmployees.slice(start, end);
+
+let html="";
+
+pageData.forEach(e=>{
 
 
 html +=
@@ -1529,9 +1549,7 @@ html +=
 
 });
 
-
-document.getElementById("adminEmployeeTable").innerHTML =
-html;
+document.getElementById("adminEmployeeTable").innerHTML = html;
 
 document.getElementById("employeeSearchBar").innerHTML = `
 <input
@@ -1545,10 +1563,38 @@ document.getElementById("employeeSearchBar").innerHTML = `
            border:1px solid #ccc;">
 `;
 
-    });
+renderPagination();
 
 }
 
+function renderPagination(){
+
+let totalPages = Math.ceil(allEmployees.length / rowsPerPage);
+
+if(totalPages <= 1){
+    document.getElementById("paginationBar").innerHTML = "";
+    return;
+}
+
+let html = "<div style='margin-top:15px;text-align:center;'>";
+
+for(let i=1; i<=totalPages; i++){
+    let active = i===currentPage
+        ? "background:#003566;color:white;"
+        : "background:#eee;color:#333;";
+    html += "<button onclick='goToPage("+i+")' style='"+active+"border:none;padding:7px 14px;margin:2px;border-radius:6px;cursor:pointer;font-size:13px;'>"+i+"</button>";
+}
+
+html += "</div>";
+
+document.getElementById("paginationBar").innerHTML = html;
+
+}
+
+function goToPage(page){
+    currentPage = page;
+    renderEmployeeTable();
+}
 
 
 
