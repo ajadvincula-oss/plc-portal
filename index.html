@@ -208,6 +208,40 @@ font-size:42px;
 color:#004aad;
 }
 
+/* ANIMATIONS */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(15px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.card{
+    animation:fadeIn 0.3s ease;
+}
+
+.dashboardCard{
+    animation:fadeIn 0.4s ease;
+}
+
+.menu{
+    transition:background 0.2s ease;
+}
+
+.loginBox{
+    animation:fadeIn 0.5s ease;
+}
+
+tbody tr{
+    animation:fadeIn 0.3s ease;
+}
+
+.confirmBox{
+    animation:fadeIn 0.2s ease;
+}
+
+.successBox{
+    animation:fadeIn 0.2s ease;
+}
+
 /* CUSTOM CONFIRM DIALOG */
 .confirmOverlay{
     display:none;
@@ -1468,7 +1502,11 @@ p.style.display="none";
 });
 
 
-document.getElementById(pageID).style.display="block";
+let el = document.getElementById(pageID);
+el.style.display="block";
+el.style.animation="none";
+el.offsetHeight;
+el.style.animation="fadeIn 0.3s ease";
 
 
 }
@@ -1491,7 +1529,11 @@ p.style.display="none";
 });
 
 
-document.getElementById(pageID).style.display="block";
+let el = document.getElementById(pageID);
+el.style.display="block";
+el.style.animation="none";
+el.offsetHeight;
+el.style.animation="fadeIn 0.3s ease";
 
 
 }
