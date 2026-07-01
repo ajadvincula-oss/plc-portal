@@ -877,7 +877,8 @@ deviceID:navigator.userAgent
 
 if(data.result=="SUCCESS"){
 
-
+data.username = username;
+data.pin = pin;
 employeeData = data;
 
 
@@ -2261,6 +2262,60 @@ function changePIN(){
     });
 
 } 
+
+// ==========================
+// AUTO REFRESH
+// ==========================
+
+function startAutoRefresh(){
+    setInterval(function(){
+
+        // Kung naka-login ang Employee
+        if(document.getElementById("employeeDashboard").style.display=="block"){
+            fetch(API_URL,{
+                method:"POST",
+                body:JSON.stringify({
+                    action:"login",
+                    username:employeeData.username,
+                    pin:employeeData.pin,
+                    deviceID:navigator.userAgent
+                })
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if(data.result=="SUCCESS"){
+                    employeeData = data;
+                    loadProfile();
+                }
+            })
+            .catch(err=>console.log("Auto-refresh error:",err));
+        }
+
+        // Kung naka-login ang HR Admin
+        if(document.getElementById("adminDashboard").style.display=="block"){
+            loadDashboard();
+
+            // Kung nasa Employees page
+            if(document.getElementById("adminEmployeesPage").style.display=="block"){
+                loadAdminEmployees();
+            }
+
+            // Kung nasa Leave page
+            if(document.getElementById("adminLeavePage").style.display=="block"){
+                loadAdminLeaves();
+            }
+
+            // Kung nasa Cash page
+            if(document.getElementById("adminCashPage").style.display=="block"){
+                loadAdminCash();
+            }
+        }
+
+    }, 15000); // 15 seconds
+}  
+
+// Start auto-refresh
+startAutoRefresh();
 
 // ==========================
 // LOGOUT
