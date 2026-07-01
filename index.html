@@ -5,6 +5,65 @@
 
 <title>PLC Employee Portal</title>
 
+/* CUSTOM CONFIRM DIALOG */
+.confirmOverlay{
+    display:none;
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.5);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+}
+
+.confirmBox{
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    text-align:center;
+    width:320px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+}
+
+.confirmBox h3{
+    margin:0 0 10px 0;
+    font-size:18px;
+}
+
+.confirmBox p{
+    color:#666;
+    margin-bottom:25px;
+    font-size:14px;
+}
+
+.confirmButtons{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+}
+
+.confirmYes{
+    padding:10px 25px;
+    background:#dc3545;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.confirmNo{
+    padding:10px 25px;
+    background:#aaa;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:14px;
+    cursor:pointer;
+}
+
+  
 <style>
 
 *{
@@ -620,7 +679,17 @@ Cash advance loading...
 
 </div>
 
-
+<!-- CUSTOM CONFIRM DIALOG -->
+<div class="confirmOverlay" id="confirmOverlay">
+    <div class="confirmBox">
+        <h3 id="confirmTitle">Are you sure?</h3>
+        <p id="confirmMessage">This action cannot be undone.</p>
+        <div class="confirmButtons">
+            <button class="confirmYes" id="confirmYesBtn">Yes, Proceed</button>
+            <button class="confirmNo" onclick="closeConfirm()">Cancel</button>
+        </div>
+    </div>
+</div>
 
 <script>
 
@@ -1440,7 +1509,10 @@ document.getElementById("employeeSearchBar").innerHTML = `
 
 function resetDevice(employeeID){
 
-    if(!confirm("Reset this employee's device?")) return;
+    showConfirm(
+    "Reset Device",
+    "I-reset ang device ng empleyado?",
+    function(){
 
     fetch(API_URL,{
         method:"POST",
@@ -1463,12 +1535,10 @@ function resetDevice(employeeID){
     })
 
     .catch(err=>{
-
         alert("Reset Failed");
-
         console.log(err);
-
     });
+    }); // end showConfirm
 
 }
 
@@ -1830,9 +1900,10 @@ document.getElementById("dashboardCards").innerHTML=
 
 function resetPIN(empID){
 
-    if(!confirm("Reset PIN of this employee to 123456?")){
-        return;
-    }
+    showConfirm(
+    "Reset PIN",
+    "I-reset ang PIN ng empleyado to 123456?",
+    function(){
 
     fetch(API_URL,{
         method:"POST",
@@ -1853,13 +1924,12 @@ function resetPIN(empID){
     })
 
     .catch(err=>{
-
         alert("Connection Error");
-
     });
+    }); // end showConfirm
 
 }
-
+  
 // ==========================
 // GET STATUS BADGE
 // ==========================
@@ -1907,6 +1977,25 @@ function searchEmployee(){
     });
 
 }
+
+// ==========================
+// CUSTOM CONFIRM DIALOG
+// ==========================
+
+function showConfirm(title, message, onYes){
+    document.getElementById("confirmTitle").innerHTML = title;
+    document.getElementById("confirmMessage").innerHTML = message;
+    document.getElementById("confirmOverlay").style.display = "flex";
+    document.getElementById("confirmYesBtn").onclick = function(){
+        closeConfirm();
+        onYes();
+    };
+}
+
+function closeConfirm(){
+    document.getElementById("confirmOverlay").style.display = "none";
+}
+  
 
 // ==========================
 // LOGOUT
