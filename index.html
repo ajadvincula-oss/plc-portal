@@ -2015,6 +2015,43 @@ name.includes(input) ? "" : "none";
 
 }
 
+function silentRefreshLeaves(){
+    fetch(API_URL,{
+        method:"POST",
+        body:JSON.stringify({ action:"getAdminLeaves" })
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        let html="";
+        html += "<input id='leaveSearch' onkeyup='searchLeave()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+        html += "<table id='leaveTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;table-layout:fixed;'><tr style='background:#003566;color:white;height:35px;'><th>Date Filed</th><th>Employee</th><th>Date Leave</th><th>Type</th><th>No.</th><th>Reason</th><th>Pay Status</th><th>Status</th></tr>";
+        data.leaves.forEach(l=>{
+            html += "<tr style='border-bottom:1px solid #ddd;'><td style='padding:8px;'>"+l.dateFiled+"</td><td style='padding:8px;'>"+l.name+"</td><td style='padding:8px;'>"+l.dateLeave+"</td><td style='padding:8px;'>"+l.type+"</td><td style='padding:8px;'>"+l.days+"</td><td style='padding:8px;'>"+l.reason+"</td><td style='padding:8px;'>"+l.payStatus+"</td><td style='padding:8px;'>"+l.status+"</td></tr>";
+        });
+        html += "</table>";
+        document.getElementById("adminLeaveTable").innerHTML = html;
+    });
+}
+
+function silentRefreshCash(){
+    fetch(API_URL,{
+        method:"POST",
+        body:JSON.stringify({ action:"getAdminCash" })
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        if(!data.cash) return;
+        let html="";
+        html += "<input id='cashSearch' onkeyup='searchCash()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+        html += "<table id='cashTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'><tr style='background:#003566;color:white;height:35px;'><th>Date</th><th>Employee</th><th>Amount</th><th>Deduction</th></tr>";
+        data.cash.forEach(c=>{
+            html += "<tr style='border-bottom:1px solid #ddd;'><td>"+c.date+"</td><td>"+c.name+"</td><td>"+c.amount+"</td><td>"+c.deduction+"</td></tr>";
+        });
+        html += "</table>";
+        document.getElementById("adminCashTable").innerHTML = html;
+    });
+}
+
 function silentRefreshDashboard(){
     fetch(API_URL,{
         method:"POST",
@@ -2301,10 +2338,6 @@ function changePIN(){
 // AUTO REFRESH
 // ==========================
 
-// ==========================
-// AUTO REFRESH
-// ==========================
-
 let lastTimestamp = 0;
 
 function startAutoRefresh(){
@@ -2359,9 +2392,9 @@ function startAutoRefresh(){
                 if(document.getElementById("adminEmployeesPage").style.display=="block"){
     silentRefreshEmployees();
 }else if(document.getElementById("adminLeavePage").style.display=="block"){
-    loadAdminLeaves();
+    silentRefreshLeaves();
 }else if(document.getElementById("adminCashPage").style.display=="block"){
-    loadAdminCash();
+    silentRefreshCash();
 }else{
     silentRefreshDashboard();
 }
