@@ -475,6 +475,9 @@ Position
 
 </div>
 
+<div class="menu" onclick="showPage('companyPage')">
+🏢 Company Profile
+</div>  
 
 <div class="menu" onclick="showPage('profilePage')">
 👤 Profile
@@ -522,8 +525,30 @@ Position
 
 <h1 id="welcomeName">
 PLC EMPLOYEE DASHBOARD
-</h1>
+</h1> 
 
+<div class="card page" id="companyPage" style="display:none;">
+
+<div style="text-align:center;margin-bottom:20px;">
+<img id="companyLogo" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid #003566;">
+</div>
+
+<h2 id="companyName" style="text-align:center;color:#003566;margin-bottom:5px;"></h2>
+<p id="companyEmail" style="text-align:center;color:#666;margin-bottom:25px;"></p>
+
+<hr style="margin-bottom:20px;">
+
+<h3 style="color:#003566;">Our Mission</h3>
+<p id="companyMission" style="color:#444;line-height:1.6;"></p>
+
+<h3 style="color:#003566;">Our Vision</h3>
+<p id="companyVision" style="color:#444;line-height:1.6;"></p>
+
+<h3 style="color:#003566;">Our Values</h3>
+<p id="companyValues" style="color:#444;line-height:1.6;"></p>
+
+</div>
+  
 
 <div class="card page" id="profilePage">
 
@@ -1093,6 +1118,7 @@ loadMedical();
 loadEvaluation();
 loadViolation();
 loadMovement();
+loadCompanyProfile();
 
 }
 
@@ -1511,6 +1537,24 @@ document.getElementById("movementPage").innerHTML =
 
 
 }
+
+// ==========================
+// LOAD COMPANY PROFILE
+// ==========================
+
+function loadCompanyProfile(){
+
+    document.getElementById("companyLogo").src = employeeData.logo || "";
+    document.getElementById("companyName").innerHTML = employeeData.companyName || "";
+    document.getElementById("companyEmail").innerHTML = employeeData.companyEmail || "";
+    document.getElementById("companyMission").innerHTML = employeeData.mission || "";
+    document.getElementById("companyVision").innerHTML = employeeData.vision || "";
+    document.getElementById("companyValues").innerHTML = employeeData.values || "";
+
+    showPage("companyPage");
+
+}
+
 
 // ==========================
 // SHOW EMPLOYEE PAGE
