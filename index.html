@@ -1602,6 +1602,20 @@ renderEmployeeTable();
 });
 }
 
+function silentRefreshEmployees(){
+    fetch(API_URL,{
+        method:"POST",
+        body:JSON.stringify({
+            action:"getEmployees"
+        })
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        allEmployees = data.employees;
+        renderEmployeeTable();
+    });
+}
+
 function renderEmployeeTable(){
 
 let start = (currentPage-1) * rowsPerPage;
@@ -2323,14 +2337,14 @@ function startAutoRefresh(){
             if(document.getElementById("adminDashboard").style.display=="block"){
 
                 if(document.getElementById("adminEmployeesPage").style.display=="block"){
-                    loadAdminEmployees();
-                }else if(document.getElementById("adminLeavePage").style.display=="block"){
-                    loadAdminLeaves();
-                }else if(document.getElementById("adminCashPage").style.display=="block"){
-                    loadAdminCash();
-                }else{
-                    loadDashboard();
-                }
+    silentRefreshEmployees();
+}else if(document.getElementById("adminLeavePage").style.display=="block"){
+    loadAdminLeaves();
+}else if(document.getElementById("adminCashPage").style.display=="block"){
+    loadAdminCash();
+}else{
+    loadDashboard();
+}
             }
 
         })
