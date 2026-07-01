@@ -448,6 +448,10 @@ Position
 🔄 Employment Movement
 </div>
 
+<div class="menu" onclick="showPage('changePINPage')">
+🔑 Change PIN
+</div>
+
 <div class="menu" onclick="logout()">
 🚪 Logout
 </div>
@@ -554,6 +558,26 @@ Employment Movement
 <p>
 No movement records loaded.
 </p>
+
+</div>
+
+<div class="card page" id="changePINPage" style="display:none;">
+
+<h2>Change PIN</h2>
+
+<p style="color:#666;margin-bottom:20px;">
+Palitan ang iyong PIN. Minimum 4 digits.
+</p>
+
+<input id="currentPIN" type="password" placeholder="Current PIN" style="width:300px;margin-bottom:10px;">
+<input id="newPIN" type="password" placeholder="New PIN" style="width:300px;margin-bottom:10px;">
+<input id="confirmPIN" type="password" placeholder="Confirm New PIN" style="width:300px;margin-bottom:15px;">
+
+<br>
+
+<button onclick="changePIN()" style="width:300px;padding:12px;background:#0057d9;color:white;border:none;border-radius:10px;font-size:15px;cursor:pointer;">
+Change PIN
+</button>
 
 </div>
 
@@ -2100,7 +2124,79 @@ function showConfirm(title, message, onYes){
 function closeConfirm(){
     document.getElementById("confirmOverlay").style.display = "none";
 }
+
+// ==========================
+// CUSTOM ERROR POPUP
+// ==========================
+
+function showError(message){
+    document.getElementById("successIcon").innerHTML = "❌";
+    document.getElementById("successTitle").innerHTML = "<span style='color:#dc3545;'>Error</span>";
+    document.getElementById("successMessage").innerHTML = message;
+    document.getElementById("successOverlay").style.display = "flex";
+    setTimeout(function(){
+        document.getElementById("successOverlay").style.display = "none";
+        document.getElementById("successIcon").innerHTML = "✅";
+        document.getElementById("successTitle").innerHTML = "<span style='color:#28a745;'>Success!</span>";
+    }, 2500);
+}
   
+
+ // ==========================
+// CHANGE PIN
+// ==========================
+
+function changePIN(){
+
+    let current = document.getElementById("currentPIN").value;
+    let newP = document.getElementById("newPIN").value;
+    let confirm = document.getElementById("confirmPIN").value;
+
+    if(!current || !newP || !confirm){
+        showError("Punan ang lahat ng fields.");
+        return;
+    }
+
+    if(newP.length < 4){
+        showError("Minimum 4 digits ang bagong PIN.");
+        return;
+    }
+
+    if(newP !== confirm){
+        showError("Hindi magkatugma ang bagong PIN.");
+        return;
+    }
+
+    fetch(API_URL,{
+        method:"POST",
+        body:JSON.stringify({
+            action:"changePIN",
+            employeeID: employeeData.employeeID,
+            currentPIN: current,
+            newPIN: newP
+        })
+    })
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+        if(data.result === "SUCCESS"){
+            showSuccess("PIN Changed!", "Matagumpay na nabago ang iyong PIN.");
+            document.getElementById("currentPIN").value = "";
+            document.getElementById("newPIN").value = "";
+            document.getElementById("confirmPIN").value = "";
+        }else{
+            showError(data.error || "Hindi na-change ang PIN.");
+        }
+
+    })
+
+    .catch(err=>{
+        showError("Connection Error.");
+    });
+
+} 
 
 // ==========================
 // LOGOUT
