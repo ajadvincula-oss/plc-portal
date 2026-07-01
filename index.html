@@ -531,7 +531,7 @@ PLC EMPLOYEE DASHBOARD
 
 <!-- HEADER BANNER -->
 <div style="background:linear-gradient(135deg,#003566,#0057d9);padding:40px;text-align:center;">
-    <img id="companyLogo" style="width:220px;object-fit:contain;margin-bottom:20px;filter:drop-shadow(0 8px 15px rgba(0,0,0,0.2));"
+    <img id="companyLogo" style="width:220px;object-fit:contain;margin-bottom:20px;filter:drop-shadow(0 8px 15px rgba(0,0,0,0.2));">
     <h2 id="companyName" style="color:white;margin:0;font-size:26px;letter-spacing:2px;"></h2>
     <p id="companyEmail" style="color:rgba(255,255,255,0.8);margin-top:8px;font-size:14px;"></p>
 </div>
@@ -2186,13 +2186,11 @@ function loadDashboard(){
         })
     })
 
-.then(res=>res.json())
+    .then(res=>res.json())
 
-.then(data=>{
+    .then(data=>{
 
-document.getElementById("dashboardCards").innerHTML=
-
-`
+        document.getElementById("dashboardCards").innerHTML=`
 <div style="text-align:center;margin-bottom:30px;padding:30px;background:linear-gradient(135deg,#003566,#0057d9);border-radius:15px;">
     <img src="${data.logo||''}" style="width:180px;object-fit:contain;filter:drop-shadow(0 8px 15px rgba(0,0,0,0.3));margin-bottom:15px;">
     <h2 style="color:white;margin:0;letter-spacing:2px;">${data.companyName||''}</h2>
@@ -2221,16 +2219,13 @@ document.getElementById("dashboardCards").innerHTML=
 <h3 style="color:#003566;margin-bottom:15px;">📊 Dashboard Summary</h3>
 
 <div class="dashboardGrid">
-
-<h3>Total Employees</h3>
-
-<h1>${data.totalEmployees}</h1>
-
+    <div class="dashboardCard"><h3>Total Employees</h3><h1>${data.totalEmployees}</h1></div>
+    <div class="dashboardCard"><h3>Active</h3><h1>${data.active}</h1></div>
+    <div class="dashboardCard"><h3>Inactive</h3><h1>${data.inactive}</h1></div>
+    <div class="dashboardCard"><h3>Pending Leave</h3><h1>${data.pendingLeave}</h1></div>
+    <div class="dashboardCard"><h3>Cash Advances</h3><h1>${data.cashAdvance}</h1></div>
+    <div class="dashboardCard"><h3>Locked Devices</h3><h1>${data.locked}</h1></div>
 </div>
-
-<div class="dashboardCard">
-
-<h3>Active</h3>
 
 <h1>${data.active}</h1>
 
