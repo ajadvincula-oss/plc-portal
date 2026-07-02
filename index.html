@@ -2686,10 +2686,11 @@ let overviewHtml = `
     <tr><td style="text-align:left;color:#666;padding:10px;">Name</td><td style="text-align:left;padding:10px;">${emp.name||''}</td></tr>
     <tr><td style="text-align:left;color:#666;padding:10px;">Department</td><td style="text-align:left;padding:10px;">${emp.department||''}</td></tr>
     <tr><td style="text-align:left;color:#666;padding:10px;">Position</td><td style="text-align:left;padding:10px;">${emp.position||''}</td></tr>
-   <tr><td style="text-align:left;color:#666;padding:10px;">Date Hired</td><td style="text-align:left;padding:10px;">${profile.dateHired||emp.dateHired||''}</td></tr>
-<tr><td style="text-align:left;color:#666;padding:10px;">Status</td><td style="text-align:left;padding:10px;">${getBadge(emp.access||'')}</td></tr>
-<tr><td style="text-align:left;color:#666;padding:10px;">Leave Balance</td><td style="text-align:left;padding:10px;">${profile.leaveBalance||emp.leaveBalance||''}</td></tr>
-<tr><td style="text-align:left;color:#666;padding:10px;">Balance After Deduction</td><td style="text-align:left;padding:10px;">${profile.caBalance||emp.caBalance||''}</td></tr>
+  <tr><td style="text-align:left;color:#666;padding:10px;">Date Hired</td><td style="text-align:left;padding:10px;">${emp.dateHired||''}</td></tr>
+<tr><td style="text-align:left;color:#666;padding:10px;">Employment Status</td><td style="text-align:left;padding:10px;">${emp.empStatus||''}</td></tr>
+<tr><td style="text-align:left;color:#666;padding:10px;">Access Status</td><td style="text-align:left;padding:10px;">${getBadge(emp.access||'')}</td></tr>
+<tr><td style="text-align:left;color:#666;padding:10px;">Leave Balance</td><td style="text-align:left;padding:10px;">${emp.leaveBalance||''}</td></tr>
+<tr><td style="text-align:left;color:#666;padding:10px;">CA Balance</td><td style="text-align:left;padding:10px;">${emp.caBalance||''}</td></tr>
 </table>`;
 
         // ── LEAVE TAB ──
