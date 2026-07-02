@@ -1862,17 +1862,7 @@ html +=
 
 document.getElementById("adminEmployeeTable").innerHTML = html;
 
-document.getElementById("employeeSearchBar").innerHTML = `
-<input
-    id="employeeSearch"
-    onkeyup="searchEmployee()"
-    placeholder="Search Employee..."
-    style="width:320px;
-           padding:10px;
-           margin-bottom:15px;
-           border-radius:8px;
-           border:1px solid #ccc;">
-`;
+document.getElementById("employeeSearchBar").innerHTML = `<input id="employeeSearch" onkeyup="searchEmployee()" placeholder="Search Employee..." style="width:320px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;">`;
 
 renderPagination();
 
