@@ -691,6 +691,12 @@ Change PIN
 HR ADMIN
 </h2>
 
+<div style="text-align:center;padding:15px 0;border-bottom:1px solid rgba(255,255,255,0.2);margin-bottom:10px;">
+    <div style="font-size:13px;color:rgba(255,255,255,0.7);">Logged in as</div>
+    <div id="adminNameDisplay" style="font-size:15px;font-weight:bold;color:white;margin-top:4px;">Admin</div>
+    <div id="adminRoleDisplay" style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:2px;"></div>
+</div>
+
 <div class="menu" onclick="loadDashboard()">
 🏠 Dashboard
 </div>
@@ -1070,6 +1076,9 @@ if(data.result=="SUCCESS"){
 
     localStorage.setItem("adminSession", JSON.stringify(data));
     localStorage.removeItem("employeeSession");
+
+    document.getElementById("adminNameDisplay").innerHTML = data.adminName || "Admin";
+    document.getElementById("adminRoleDisplay").innerHTML = data.role || "";
 
     document.getElementById("adminLoginPage").style.display="none";
 
@@ -2509,6 +2518,11 @@ function restoreSession(){
 
     else if(adminSession){
         try{
+            else if(adminSession){
+        try{
+            let adminData = JSON.parse(adminSession);
+            document.getElementById("adminNameDisplay").innerHTML = adminData.adminName || "Admin";
+            document.getElementById("adminRoleDisplay").innerHTML = adminData.role || "";
             document.getElementById("loginPage").style.display="none";
             document.getElementById("adminLoginPage").style.display="none";
             document.getElementById("adminDashboard").style.display="block";
