@@ -691,7 +691,6 @@ Change PIN
     <div style="font-size:12px;color:rgba(255,255,255,0.6);">Welcome,</div>
     <div id="adminNameDisplay" style="font-size:18px;font-weight:bold;color:white;margin-top:4px;">Admin</div>
     <div id="adminRoleDisplay" style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:2px;"></div>
-    <div id="adminDateTime" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;"></div>
 </div>
 
 <div class="menu" onclick="loadDashboard()">
@@ -721,6 +720,12 @@ Change PIN
 
 
 <div class="content">
+
+<div style="display:flex;justify-content:flex-end;align-items:center;margin-bottom:20px;">
+    <div style="background:white;padding:10px 20px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1);text-align:right;">
+        <div id="adminDateTime" style="font-size:13px;color:#003566;font-weight:bold;"></div>
+    </div>
+</div>
 
 <div class="card adminPage" id="adminCompanyPage" style="display:none;padding:0;overflow:hidden;">
 
@@ -2569,8 +2574,8 @@ function updateDateTime(){
         minute:"2-digit",
         second:"2-digit"
     });
-    let el = document.getElementById("adminDateTime");
-    if(el) el.innerHTML = date + "<br>" + time;
+   let el = document.getElementById("adminDateTime");
+if(el) el.innerHTML = "📅 " + date + " &nbsp;|&nbsp; 🕐 " + time;
 }
 
 setInterval(updateDateTime, 1000);
