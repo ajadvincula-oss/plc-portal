@@ -360,6 +360,59 @@ button:hover{
     margin:0;
 }
 
+/* MODAL TABS */
+.modalTabs{
+    display:flex;
+    gap:5px;
+    padding:15px 25px 0;
+    border-bottom:2px solid #eee;
+    flex-wrap:wrap;
+}
+.modalTab{
+    padding:8px 14px;
+    border:none;
+    background:none;
+    font-size:13px;
+    cursor:pointer;
+    color:#666;
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+    border-radius:0;
+    font-weight:bold;
+}
+.modalTab:hover{
+    color:#0057d9;
+    transform:none;
+    box-shadow:none;
+}
+.modalTab.active{
+    color:#0057d9;
+    border-bottom:3px solid #0057d9;
+}
+.modalTabContent{
+    display:none;
+    padding:20px 25px;
+    font-size:13px;
+}
+.modalTabContent.active{
+    display:block;
+}
+.modalTabTable{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+    text-align:center;
+}
+.modalTabTable th{
+    background:#003566;
+    color:white;
+    padding:8px;
+}
+.modalTabTable td{
+    padding:8px;
+    border-bottom:1px solid #eee;
+}
+
 </style>
 
 </head>
@@ -880,7 +933,7 @@ Cash advance loading...
 
 <!-- EMPLOYEE PROFILE MODAL -->
 <div id="profileModal" style="display:flex;visibility:hidden;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9998;justify-content:center;align-items:center;">
-    <div style="background:white;border-radius:20px;width:500px;max-height:80vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,0.3);">
+    <div style="background:white;border-radius:20px;width:750px;max-height:85vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,0.3);">
         <div style="background:linear-gradient(135deg,#003566,#0057d9);padding:30px;text-align:center;border-radius:20px 20px 0 0;">
             <img id="modalPhoto" style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid white;margin-bottom:10px;">
             <h3 id="modalName" style="color:white;margin:0;font-size:18px;"></h3>
@@ -2603,6 +2656,12 @@ function showProfileModal(employeeID){
 
     document.getElementById("profileModal").style.visibility="visible";
 
+    // Show loading state
+    document.getElementById("modalPhoto").src = "https://via.placeholder.com/90";
+    document.getElementById("modalName").innerHTML = "Loading...";
+    document.getElementById("modalPosition").innerHTML = "";
+    document.getElementById("modalBody").innerHTML = "<p style='text-align:center;padding:30px;color:#999;'>Fetching employee records...</p>";
+
     fetch(API_URL,{
         method:"POST",
         body:JSON.stringify({
@@ -2619,24 +2678,112 @@ function showProfileModal(employeeID){
         document.getElementById("modalName").innerHTML = emp.name || "";
         document.getElementById("modalPosition").innerHTML = emp.position || "";
 
-        let html = `
-        <table style="width:100%;font-size:14px;border-collapse:collapse;">
-            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px;color:#666;width:40%;">Employee ID</td><td style="padding:10px;font-weight:bold;">${emp.id||''}</td></tr>
-            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px;color:#666;">Department</td><td style="padding:10px;">${emp.department||''}</td></tr>
-            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px;color:#666;">Position</td><td style="padding:10px;">${emp.position||''}</td></tr>
-            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px;color:#666;">Status</td><td style="padding:10px;">${getBadge(emp.access||'')}</td></tr>
-            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px;color:#666;">Device</td><td style="padding:10px;">${getBadge(emp.device||'')}</td></tr>
-            <tr style="border-bottom:1px solid #eee;"><td style="padding:10px;color:#666;">Username</td><td style="padding:10px;">${emp.username||''}</td></tr>
-            <tr><td style="padding:10px;color:#666;">Last Login</td><td style="padding:10px;">${emp.lastLogin||''}</td></tr>
-        </table>
-        `;
+        // ── OVERVIEW TAB ──
+        let overviewHtml = `
+        <table class="modalTabTable">
+            <tr><td style="text-align:left;color:#666;width:40%;padding:10px;">Employee ID</td><td style="text-align:left;padding:10px;font-weight:bold;">${emp.id||''}</td></tr>
+            <tr><td style="text-align:left;color:#666;padding:10px;">Department</td><td style="text-align:left;padding:10px;">${emp.department||''}</td></tr>
+            <tr><td style="text-align:left;color:#666;padding:10px;">Position</td><td style="text-align:left;padding:10px;">${emp.position||''}</td></tr>
+            <tr><td style="text-align:left;color:#666;padding:10px;">Status</td><td style="text-align:left;padding:10px;">${getBadge(emp.access||'')}</td></tr>
+            <tr><td style="text-align:left;color:#666;padding:10px;">Device</td><td style="text-align:left;padding:10px;">${getBadge(emp.device||'')}</td></tr>
+            <tr><td style="text-align:left;color:#666;padding:10px;">Username</td><td style="text-align:left;padding:10px;">${emp.username||''}</td></tr>
+            <tr><td style="text-align:left;color:#666;padding:10px;">Last Login</td><td style="text-align:left;padding:10px;">${emp.lastLogin||''}</td></tr>
+        </table>`;
 
-        document.getElementById("modalBody").innerHTML = html;
+        // ── LEAVE TAB ──
+        let leaveHtml = "";
+        if(!data.leaveHistory || data.leaveHistory.length==0){
+            leaveHtml = "<p style='color:#999;text-align:center;padding:20px;'>No leave records found.</p>";
+        } else {
+            leaveHtml = `<table class="modalTabTable">
+                <tr><th>Date Filed</th><th>Date of Leave</th><th>Type</th><th>Days</th><th>Reason</th><th>Pay Status</th><th>Status</th></tr>`;
+            data.leaveHistory.forEach(r=>{
+                leaveHtml += `<tr><td>${r.dateFiled}</td><td>${r.dateLeave}</td><td>${r.type}</td><td>${r.days}</td><td>${r.reason}</td><td>${r.payStatus||''}</td><td>${r.status}</td></tr>`;
+            });
+            leaveHtml += "</table>";
+        }
+
+        // ── MEDICAL TAB ──
+        let medHtml = "";
+        if(!data.medical || data.medical.length==0){
+            medHtml = "<p style='color:#999;text-align:center;padding:20px;'>No medical records found.</p>";
+        } else {
+            medHtml = `<table class="modalTabTable">
+                <tr><th>Type</th><th>Date</th><th>Result</th><th>Status</th></tr>`;
+            data.medical.forEach(r=>{
+                medHtml += `<tr><td>${r.type}</td><td>${r.date}</td><td>${r.result}</td><td>${r.status}</td></tr>`;
+            });
+            medHtml += "</table>";
+        }
+
+        // ── EVALUATION TAB ──
+        let evalHtml = "";
+        if(!data.evaluation || data.evaluation.length==0){
+            evalHtml = "<p style='color:#999;text-align:center;padding:20px;'>No evaluation records found.</p>";
+        } else {
+            evalHtml = `<table class="modalTabTable">
+                <tr><th>Date</th><th>Type</th><th>Score</th><th>Result</th></tr>`;
+            data.evaluation.forEach(r=>{
+                evalHtml += `<tr><td>${r.date}</td><td>${r.type}</td><td>${r.score}</td><td>${r.result}</td></tr>`;
+            });
+            evalHtml += "</table>";
+        }
+
+        // ── VIOLATION TAB ──
+        let violHtml = "";
+        if(!data.violation || data.violation.length==0){
+            violHtml = "<p style='color:#999;text-align:center;padding:20px;'>No violation records found.</p>";
+        } else {
+            violHtml = `<table class="modalTabTable">
+                <tr><th>Date</th><th>Violation</th><th>Action Taken</th><th>Status</th></tr>`;
+            data.violation.forEach(r=>{
+                violHtml += `<tr><td>${r.date}</td><td>${r.violation}</td><td>${r.action}</td><td>${r.status}</td></tr>`;
+            });
+            violHtml += "</table>";
+        }
+
+        // ── MOVEMENT TAB ──
+        let movHtml = "";
+        if(!data.movement || data.movement.length==0){
+            movHtml = "<p style='color:#999;text-align:center;padding:20px;'>No movement records found.</p>";
+        } else {
+            movHtml = `<table class="modalTabTable">
+                <tr><th>Date</th><th>Movement</th><th>Old</th><th>New</th></tr>`;
+            data.movement.forEach(r=>{
+                movHtml += `<tr><td>${r.date}</td><td>${r.movement}</td><td>${r.old}</td><td>${r.new}</td></tr>`;
+            });
+            movHtml += "</table>";
+        }
+
+        // ── BUILD MODAL BODY ──
+        document.getElementById("modalBody").innerHTML = `
+        <div class="modalTabs">
+            <button class="modalTab active" onclick="switchModalTab(this,'mtOverview')">👤 Overview</button>
+            <button class="modalTab" onclick="switchModalTab(this,'mtLeave')">🏖 Leave</button>
+            <button class="modalTab" onclick="switchModalTab(this,'mtMedical')">💉 Medical</button>
+            <button class="modalTab" onclick="switchModalTab(this,'mtEvaluation')">⭐ Evaluation</button>
+            <button class="modalTab" onclick="switchModalTab(this,'mtViolation')">⚠ Violation</button>
+            <button class="modalTab" onclick="switchModalTab(this,'mtMovement')">🔄 Movement</button>
+        </div>
+        <div class="modalTabContent active" id="mtOverview">${overviewHtml}</div>
+        <div class="modalTabContent" id="mtLeave">${leaveHtml}</div>
+        <div class="modalTabContent" id="mtMedical">${medHtml}</div>
+        <div class="modalTabContent" id="mtEvaluation">${evalHtml}</div>
+        <div class="modalTabContent" id="mtViolation">${violHtml}</div>
+        <div class="modalTabContent" id="mtMovement">${movHtml}</div>
+        `;
 
     })
     .catch(err=>{
-        document.getElementById("modalBody").innerHTML = "<p style='text-align:center;color:#999;'>Could not load details.</p>";
+        document.getElementById("modalBody").innerHTML = "<p style='text-align:center;color:#999;padding:30px;'>Could not load employee details.</p>";
     });
+}
+
+function switchModalTab(btn, tabID){
+    document.querySelectorAll(".modalTab").forEach(t=>t.classList.remove("active"));
+    document.querySelectorAll(".modalTabContent").forEach(t=>t.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(tabID).classList.add("active");
 }
 
 function closeProfileModal(){
