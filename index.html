@@ -2678,17 +2678,18 @@ function showProfileModal(employeeID){
         document.getElementById("modalName").innerHTML = emp.name || "";
         document.getElementById("modalPosition").innerHTML = emp.position || "";
 
-        // ── OVERVIEW TAB ──
-        let overviewHtml = `
-        <table class="modalTabTable">
-            <tr><td style="text-align:left;color:#666;width:40%;padding:10px;">Employee ID</td><td style="text-align:left;padding:10px;font-weight:bold;">${emp.id||''}</td></tr>
-            <tr><td style="text-align:left;color:#666;padding:10px;">Department</td><td style="text-align:left;padding:10px;">${emp.department||''}</td></tr>
-            <tr><td style="text-align:left;color:#666;padding:10px;">Position</td><td style="text-align:left;padding:10px;">${emp.position||''}</td></tr>
-            <tr><td style="text-align:left;color:#666;padding:10px;">Status</td><td style="text-align:left;padding:10px;">${getBadge(emp.access||'')}</td></tr>
-            <tr><td style="text-align:left;color:#666;padding:10px;">Device</td><td style="text-align:left;padding:10px;">${getBadge(emp.device||'')}</td></tr>
-            <tr><td style="text-align:left;color:#666;padding:10px;">Username</td><td style="text-align:left;padding:10px;">${emp.username||''}</td></tr>
-            <tr><td style="text-align:left;color:#666;padding:10px;">Last Login</td><td style="text-align:left;padding:10px;">${emp.lastLogin||''}</td></tr>
-        </table>`;
+       // — OVERVIEW TAB —
+let overviewHtml = `
+<table class="modalTabTable">
+    <tr><td style="text-align:left;color:#666;width:40%;padding:10px;">Employee ID</td><td style="text-align:left;padding:10px;font-weight:bold;">${emp.id||''}</td></tr>
+    <tr><td style="text-align:left;color:#666;padding:10px;">Name</td><td style="text-align:left;padding:10px;">${emp.name||''}</td></tr>
+    <tr><td style="text-align:left;color:#666;padding:10px;">Department</td><td style="text-align:left;padding:10px;">${emp.department||''}</td></tr>
+    <tr><td style="text-align:left;color:#666;padding:10px;">Position</td><td style="text-align:left;padding:10px;">${emp.position||''}</td></tr>
+    <tr><td style="text-align:left;color:#666;padding:10px;">Date Hired</td><td style="text-align:left;padding:10px;">${emp.dateHired||''}</td></tr>
+    <tr><td style="text-align:left;color:#666;padding:10px;">Status</td><td style="text-align:left;padding:10px;">${getBadge(emp.access||'')}</td></tr>
+    <tr><td style="text-align:left;color:#666;padding:10px;">Leave Balance</td><td style="text-align:left;padding:10px;">${emp.leaveBalance||''}</td></tr>
+    <tr><td style="text-align:left;color:#666;padding:10px;">Balance After Deduction</td><td style="text-align:left;padding:10px;">${emp.caBalance||''}</td></tr>
+</table>`;
 
         // ── LEAVE TAB ──
         let leaveHtml = "";
