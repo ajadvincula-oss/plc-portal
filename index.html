@@ -458,7 +458,7 @@ BACK TO EMPLOYEE
 
 
 <h2>
-PLC PORTAL
+Welcome
 </h2>
 
 <div class="sidebarInfo">
@@ -522,10 +522,11 @@ Position
 
 <div class="content">
 
-
-<h1 id="welcomeName">
-PLC EMPLOYEE DASHBOARD
-</h1> 
+<div style="display:flex;justify-content:flex-end;align-items:center;margin-bottom:20px;">
+    <div style="background:white;padding:10px 20px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1);text-align:right;">
+        <div id="empDateTime" style="font-size:13px;color:#003566;font-weight:bold;"></div>
+    </div>
+</div>
 
 <div class="card page" id="companyPage" style="display:none;padding:0;overflow:hidden;">
 
@@ -2574,8 +2575,11 @@ function updateDateTime(){
         minute:"2-digit",
         second:"2-digit"
     });
-   let el = document.getElementById("adminDateTime");
+let el = document.getElementById("adminDateTime");
 if(el) el.innerHTML = "📅 " + date + " &nbsp;|&nbsp; 🕐 " + time;
+
+let el2 = document.getElementById("empDateTime");
+if(el2) el2.innerHTML = "📅 " + date + " &nbsp;|&nbsp; 🕐 " + time;
 }
 
 setInterval(updateDateTime, 1000);
