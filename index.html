@@ -2518,8 +2518,6 @@ function restoreSession(){
 
     else if(adminSession){
         try{
-            else if(adminSession){
-        try{
             let adminData = JSON.parse(adminSession);
             document.getElementById("adminNameDisplay").innerHTML = adminData.adminName || "Admin";
             document.getElementById("adminRoleDisplay").innerHTML = adminData.role || "";
