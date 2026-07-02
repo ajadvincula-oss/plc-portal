@@ -413,6 +413,27 @@ button:hover{
     border-bottom:1px solid #eee;
 }
 
+/* PAGE HEADERS */
+.pageHeader{
+    margin:-20px -20px 20px -20px;
+    padding:25px 30px;
+    border-radius:15px 15px 0 0;
+    color:white;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.pageHeader h2{
+    margin:0;
+    font-size:20px;
+    letter-spacing:1px;
+}
+
+.pageHeader .pageIcon{
+    font-size:30px;
+}
+
 </style>
 
 </head>
@@ -617,10 +638,11 @@ Position
 
 <div class="card page" id="profilePage">
 
-<h2>
-Employee Profile
-</h2>
-
+<div class="pageHeader" style="background:linear-gradient(135deg,#003566,#0057d9);">
+    <span class="pageIcon">👤</span>
+    <h2>Employee Profile</h2>
+</div>
+  
 <p id="profileData">
 Employee data loading...
 </p>
@@ -709,7 +731,10 @@ No movement records loaded.
 
 <div class="card page" id="changePINPage" style="display:none;">
 
-<h2>Change PIN</h2>
+<div class="pageHeader" style="background:linear-gradient(135deg,#495057,#6c757d);">
+    <span class="pageIcon">🔑</span>
+    <h2>Change PIN</h2>
+</div>
 
 <p style="color:#666;margin-bottom:20px;">
 Palitan ang iyong PIN. Minimum 4 digits.
@@ -827,9 +852,10 @@ Loading dashboard...
 <div class="card adminPage" id="adminEmployeesPage" style="display:none;">
 
 
-<h2>
-Employee Management
-</h2>
+<div class="pageHeader" style="background:linear-gradient(135deg,#003566,#0057d9);">
+    <span class="pageIcon">👥</span>
+    <h2>Employee Management</h2>
+</div>
 
 <div id="employeeSearchBar"></div>
   
@@ -895,9 +921,10 @@ Action
   
 <div class="card adminPage" id="adminLeavePage" style="display:none;">
 
-<h2>
-Leave Approval
-</h2>
+<div class="pageHeader" style="background:linear-gradient(135deg,#1a6e35,#28a745);">
+    <span class="pageIcon">✅</span>
+    <h2>Leave Approval</h2>
+</div>
 
 <div id="adminLeaveTable">
 Leave records loading...
@@ -909,9 +936,10 @@ Leave records loading...
 
 <div class="card adminPage" id="adminCashPage" style="display:none;">
 
-<h2>
-Cash Advance Records
-</h2>
+<div class="pageHeader" style="background:linear-gradient(135deg,#856404,#ffc107);">
+    <span class="pageIcon">💰</span>
+    <h2>Cash Advance Records</h2>
+</div>
 
 <div id="adminCashTable">
 Cash advance loading...
@@ -1311,7 +1339,10 @@ html += "</table>";
 
 
 document.getElementById("leavePage").innerHTML =
-"<h2>Leave Records</h2>"+html;
+<div class="pageHeader" style="background:linear-gradient(135deg,#1a6e35,#28a745);">
+    <span class="pageIcon">🏖️</span>
+    <h2>Leave Records</h2>
+</div>
 
 
 }
@@ -1379,7 +1410,10 @@ html += "</table>";
 
 
 document.getElementById("cashPage").innerHTML =
-"<h2>Cash Advance History</h2>"+html;
+<div class="pageHeader" style="background:linear-gradient(135deg,#856404,#ffc107);">
+    <span class="pageIcon">💰</span>
+    <h2>Cash Advance History</h2>
+</div>
 
 
 }
@@ -1447,7 +1481,10 @@ html += "</table>";
 
 
 document.getElementById("medicalPage").innerHTML =
-"<h2>Medical Records</h2>"+html;
+<div class="pageHeader" style="background:linear-gradient(135deg,#0d6efd,#6ea8fe);">
+    <span class="pageIcon">🩺</span>
+    <h2>Medical Records</h2>
+</div>
 
 
 }
@@ -1511,7 +1548,10 @@ html += "</table>";
 
 
 document.getElementById("evaluationPage").innerHTML =
-"<h2>Evaluation Records</h2>"+html;
+<div class="pageHeader" style="background:linear-gradient(135deg,#6f42c1,#a78bfa);">
+    <span class="pageIcon">⭐</span>
+    <h2>Evaluation Records</h2>
+</div>
 
 
 }
@@ -1576,7 +1616,10 @@ html += "</table>";
 
 
 document.getElementById("violationPage").innerHTML =
-"<h2>Violation Records</h2>"+html;
+<div class="pageHeader" style="background:linear-gradient(135deg,#842029,#dc3545);">
+    <span class="pageIcon">⚠️</span>
+    <h2>Violation Records</h2>
+</div>
 
 
 }
@@ -1646,7 +1689,10 @@ html += "</table>";
 
 
 document.getElementById("movementPage").innerHTML =
-"<h2>Employment Movement</h2>"+html;
+<div class="pageHeader" style="background:linear-gradient(135deg,#0f5132,#20c997);">
+    <span class="pageIcon">📈</span>
+    <h2>Employment Movement</h2>
+</div>
 
 
 }
