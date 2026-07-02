@@ -528,8 +528,6 @@ function getDashboardHTML(data){
 <h3 style="color:#003566;margin-bottom:15px;">Dashboard Summary</h3>
 <div class="dashboardGrid">
     <div class="dashboardCard" onclick="showDashDetail('total')"><h3>Total Employees</h3><h1>${data.totalEmployees}</h1></div>
-    <div class="dashboardCard" onclick="showDashDetail('active')"><h3>Active</h3><h1>${data.active}</h1></div>
-    <div class="dashboardCard" onclick="showDashDetail('inactive')"><h3>Inactive</h3><h1>${data.inactive}</h1></div>
     <div class="dashboardCard" onclick="showDashDetail('leave')"><h3>Leave This Month</h3><h1>${data.pendingLeave}</h1></div>
     <div class="dashboardCard" onclick="showDashDetail('cash')"><h3>Cash Advances</h3><h1>${data.cashAdvance}</h1></div>
     <div class="dashboardCard" onclick="showDashDetail('locked')"><h3>Locked Devices</h3><h1>${data.locked}</h1></div>
