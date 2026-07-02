@@ -688,8 +688,10 @@ Change PIN
 <div class="sidebar">
 
 <div style="text-align:center;padding:15px 0;border-bottom:1px solid rgba(255,255,255,0.2);margin-bottom:10px;">
-    <div id="adminNameDisplay" style="font-size:16px;font-weight:bold;color:white;margin-top:4px;">Admin</div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.6);">Welcome,</div>
+    <div id="adminNameDisplay" style="font-size:18px;font-weight:bold;color:white;margin-top:4px;">Admin</div>
     <div id="adminRoleDisplay" style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:2px;"></div>
+    <div id="adminDateTime" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;"></div>
 </div>
 
 <div class="menu" onclick="loadDashboard()">
@@ -719,10 +721,6 @@ Change PIN
 
 
 <div class="content">
-
-<h1>
-DASHBOARD
-</h1>
 
 <div class="card adminPage" id="adminCompanyPage" style="display:none;padding:0;overflow:hidden;">
 
@@ -2552,6 +2550,31 @@ function showAdminCompanyProfile(){
         document.getElementById("adminCompanyValues").innerHTML = data.values || "";
     });
 }
+
+// ==========================
+// DATE AND TIME
+// ==========================
+
+function updateDateTime(){
+    let now = new Date();
+    let options = {
+        weekday:"short",
+        year:"numeric",
+        month:"short",
+        day:"numeric"
+    };
+    let date = now.toLocaleDateString("en-PH", options);
+    let time = now.toLocaleTimeString("en-PH",{
+        hour:"2-digit",
+        minute:"2-digit",
+        second:"2-digit"
+    });
+    let el = document.getElementById("adminDateTime");
+    if(el) el.innerHTML = date + "<br>" + time;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
   
 // ==========================
 // LOGOUT
