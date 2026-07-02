@@ -2508,7 +2508,6 @@ function restoreSession(){
             employeeData = JSON.parse(empSession);
             document.getElementById("loginPage").style.display="none";
             document.getElementById("employeeDashboard").style.display="block";
-            document.getElementById("welcomeName").innerHTML = "Welcome " + employeeData.name;
             loadProfile();
         }catch(e){
             localStorage.removeItem("employeeSession");
