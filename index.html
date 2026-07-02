@@ -1,543 +1,165 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <title>PLC Employee Portal</title>
-  
 <style>
-
-*{
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
-
-body{
-margin:0;
-background:#f4f6f9;
-}
-
-
-/* LOGIN */
+*{ box-sizing:border-box; font-family:Arial, sans-serif; }
+body{ margin:0; background:#f4f6f9; }
 
 .loginPage{
-
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-
-background:linear-gradient(
-135deg,
-#004aad,
-#00b4d8
-);
-
+    height:100vh; display:flex; flex-direction:column;
+    justify-content:center; align-items:center;
+    background:linear-gradient(135deg,#004aad,#00b4d8);
 }
-
-
 .loginBox{
-
-background:white;
-width:430px;
-padding:45px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,.25);
-
+    background:white; width:430px; padding:45px;
+    border-radius:25px; text-align:center;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
 }
-
-
-.icon{
-
-font-size:55px;
-
-}
-
-
-h2{
-
-letter-spacing:3px;
-
-}
-
-
+.icon{ font-size:55px; }
+h2{ letter-spacing:3px; }
 input{
-
-width:100%;
-padding:15px;
-margin:12px 0;
-border-radius:12px;
-border:1px solid #ccc;
-font-size:17px;
-
+    width:100%; padding:15px; margin:12px 0;
+    border-radius:12px; border:1px solid #ccc; font-size:17px;
 }
-
-
 button{
-
-padding:14px 35px;
-border:0;
-border-radius:12px;
-background:#0057d9;
-color:white;
-font-size:16px;
-cursor:pointer;
-margin-top:10px;
-
+    padding:14px 35px; border:0; border-radius:12px;
+    background:#0057d9; color:white; font-size:16px;
+    cursor:pointer; margin-top:10px;
 }
+.adminBtn{ background:#222; }
+.backBtn{ background:#777; }
 
-
-.adminBtn{
-
-background:#222;
-
-}
-
-
-.backBtn{
-
-background:#777;
-
-}
-
-
-
-/* DASHBOARD */
-
-
-.dashboard{
-
-display:none;
-height:100vh;
-
-}
-
+.dashboard{ display:none; height:100vh; }
 .sidebar{
-
-width:260px;
-min-height:100vh;
-float:left;
-background:#003566;
-color:white;
-padding:25px;
-
+    width:260px; min-height:100vh; float:left;
+    background:#003566; color:white; padding:25px;
 }
-
 .sidebarPhoto{
-
-width:120px;
-height:120px;
-border-radius:50%;
-object-fit:cover;
-display:block;
-margin:auto;
-border:3px solid white;
-
+    width:120px; height:120px; border-radius:50%;
+    object-fit:cover; display:block; margin:auto; border:3px solid white;
 }
-
-
-.sidebarInfo{
-
-text-align:center;
-margin-top:15px;
-font-size:14px;
-
-}
-
-
-.menu{
-
-padding:15px;
-border-bottom:1px solid rgba(255,255,255,.2);
-cursor:pointer;
-
-}
-
-
-.menu:hover{
-
-background:#0057d9;
-
-}
-
-
-
-.content{
-
-margin-left:260px;
-padding:40px;
-
-}
-
-
-
+.sidebarInfo{ text-align:center; margin-top:15px; font-size:14px; }
+.menu{ padding:15px; border-bottom:1px solid rgba(255,255,255,.2); cursor:pointer; }
+.menu:hover{ background:#0057d9; }
+.content{ margin-left:260px; padding:40px; }
 .card{
-
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 10px 30px #ddd;
-margin-bottom:20px;
-
+    background:white; padding:30px; border-radius:20px;
+    box-shadow:0 10px 30px #ddd; margin-bottom:20px;
 }
-
-.dashboardGrid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:20px;
-}
-
+.dashboardGrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; }
 .dashboardCard{
-background:white;
-border-radius:15px;
-padding:25px;
-text-align:center;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
+    background:white; border-radius:15px; padding:25px;
+    text-align:center; box-shadow:0 5px 15px rgba(0,0,0,.15);
+    cursor:pointer; transition:transform 0.2s ease, box-shadow 0.2s ease;
 }
+.dashboardCard:hover{ transform:translateY(-4px); box-shadow:0 10px 25px rgba(0,0,0,0.2); }
+.dashboardCard h3{ margin:0; font-size:16px; color:#666; }
+.dashboardCard h1{ margin-top:12px; font-size:42px; color:#004aad; }
 
-.dashboardCard h3{
-margin:0;
-font-size:16px;
-color:#666;
-}
+@keyframes fadeIn{ from{opacity:0;transform:translateY(15px);} to{opacity:1;transform:translateY(0);} }
+.card{ animation:fadeIn 0.3s ease; }
+.dashboardCard{ animation:fadeIn 0.4s ease; }
+.menu{ transition:background 0.2s ease, transform 0.2s ease; }
+.menu:hover{ transform:translateX(5px); }
+.loginBox{ animation:fadeIn 0.5s ease; }
+tbody tr{ animation:fadeIn 0.3s ease; }
 
-.dashboardCard h1{
-margin-top:12px;
-font-size:42px;
-color:#004aad;
-}
-
-/* ANIMATIONS */
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(15px);}
-    to{opacity:1; transform:translateY(0);}
-}
-
-.card{
-    animation:fadeIn 0.3s ease;
-}
-
-.dashboardCard{
-    animation:fadeIn 0.4s ease;
-}
-
-.menu{
-    transition:background 0.2s ease, transform 0.2s ease;
-}
-
-.menu:hover{
-    transform:translateX(5px);
-}
-
-.loginBox{
-    animation:fadeIn 0.5s ease;
-}
-
-tbody tr{
-    animation:fadeIn 0.3s ease;
-}
-
-.confirmBox{
-    animation:fadeIn 0.2s ease;
-}
-
-.successBox{
-    animation:fadeIn 0.2s ease;
-}
-
-/* CUSTOM CONFIRM DIALOG */
 .confirmOverlay{
-    display:none;
-    position:fixed;
-    top:0;left:0;
-    width:100%;height:100%;
-    background:rgba(0,0,0,0.5);
-    z-index:9999;
-    justify-content:center;
-    align-items:center;
+    display:none; position:fixed; top:0; left:0;
+    width:100%; height:100%; background:rgba(0,0,0,0.5);
+    z-index:9999; justify-content:center; align-items:center;
 }
-
 .confirmBox{
-    background:white;
-    padding:35px;
-    border-radius:15px;
-    text-align:center;
-    width:320px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    background:white; padding:35px; border-radius:15px;
+    text-align:center; width:320px; box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    animation:fadeIn 0.2s ease;
 }
-
-.confirmBox h3{
-    margin:0 0 10px 0;
-    font-size:18px;
-}
-
-.confirmBox p{
-    color:#666;
-    margin-bottom:25px;
-    font-size:14px;
-}
-
-.confirmButtons{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-}
-
+.confirmBox h3{ margin:0 0 10px 0; font-size:18px; }
+.confirmBox p{ color:#666; margin-bottom:25px; font-size:14px; }
+.confirmButtons{ display:flex; gap:10px; justify-content:center; }
 .confirmYes{
-    padding:10px 25px;
-    background:#dc3545;
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-size:14px;
-    cursor:pointer;
+    padding:10px 25px; background:#dc3545; color:white;
+    border:none; border-radius:8px; font-size:14px; cursor:pointer;
 }
-
-.confirmYes:hover{
-    transform:translateY(-2px);
-    box-shadow:0 5px 15px rgba(220,53,69,0.4);
-    transition:all 0.2s ease;
-}
-
-.confirmNo:hover{
-    transform:translateY(-2px);
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
-    transition:all 0.2s ease;
-}
-
-button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
-    transition:all 0.2s ease;
-}
-
 .confirmNo{
-    padding:10px 25px;
-    background:#aaa;
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-size:14px;
-    cursor:pointer;
+    padding:10px 25px; background:#aaa; color:white;
+    border:none; border-radius:8px; font-size:14px; cursor:pointer;
 }
+.confirmYes:hover{ transform:translateY(-2px); box-shadow:0 5px 15px rgba(220,53,69,0.4); transition:all 0.2s ease; }
+.confirmNo:hover{ transform:translateY(-2px); box-shadow:0 5px 15px rgba(0,0,0,0.2); transition:all 0.2s ease; }
+button:hover{ transform:translateY(-2px); box-shadow:0 5px 15px rgba(0,0,0,0.2); transition:all 0.2s ease; }
 
-/* CUSTOM SUCCESS POPUP */
 .successOverlay{
-    display:none;
-    position:fixed;
-    top:0;left:0;
-    width:100%;height:100%;
-    background:rgba(0,0,0,0.4);
-    z-index:9999;
-    justify-content:center;
-    align-items:center;
+    display:none; position:fixed; top:0; left:0;
+    width:100%; height:100%; background:rgba(0,0,0,0.4);
+    z-index:9999; justify-content:center; align-items:center;
 }
-
 .successBox{
-    background:white;
-    padding:40px;
-    border-radius:15px;
-    text-align:center;
-    width:300px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    background:white; padding:40px; border-radius:15px;
+    text-align:center; width:300px; box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    animation:fadeIn 0.2s ease;
 }
+.successIcon{ font-size:50px; margin-bottom:15px; }
+.successBox h3{ margin:0 0 8px 0; font-size:18px; color:#28a745; }
+.successBox p{ color:#666; font-size:14px; margin:0; }
 
-.successIcon{
-    font-size:50px;
-    margin-bottom:15px;
-}
-
-.successBox h3{
-    margin:0 0 8px 0;
-    font-size:18px;
-    color:#28a745;
-}
-
-.successBox p{
-    color:#666;
-    font-size:14px;
-    margin:0;
-}
-
-/* MODAL TABS */
-.modalTabs{
-    display:flex;
-    gap:5px;
-    padding:15px 25px 0;
-    border-bottom:2px solid #eee;
-    flex-wrap:wrap;
-}
+.modalTabs{ display:flex; gap:5px; padding:15px 25px 0; border-bottom:2px solid #eee; flex-wrap:wrap; }
 .modalTab{
-    padding:8px 14px;
-    border:none;
-    background:none;
-    font-size:13px;
-    cursor:pointer;
-    color:#666;
-    border-bottom:3px solid transparent;
-    margin-bottom:-2px;
-    border-radius:0;
-    font-weight:bold;
+    padding:8px 14px; border:none; background:none; font-size:13px;
+    cursor:pointer; color:#666; border-bottom:3px solid transparent;
+    margin-bottom:-2px; border-radius:0; font-weight:bold;
 }
-.modalTab:hover{
-    color:#0057d9;
-    transform:none;
-    box-shadow:none;
-}
-.modalTab.active{
-    color:#0057d9;
-    border-bottom:3px solid #0057d9;
-}
-.modalTabContent{
-    display:none;
-    padding:20px 25px;
-    font-size:13px;
-}
-.modalTabContent.active{
-    display:block;
-}
-.modalTabTable{
-    width:100%;
-    border-collapse:collapse;
-    font-size:13px;
-    text-align:center;
-}
-.modalTabTable th{
-    background:#003566;
-    color:white;
-    padding:8px;
-}
-.modalTabTable td{
-    padding:8px;
-    border-bottom:1px solid #eee;
-}
+.modalTab:hover{ color:#0057d9; transform:none; box-shadow:none; }
+.modalTab.active{ color:#0057d9; border-bottom:3px solid #0057d9; }
+.modalTabContent{ display:none; padding:20px 25px; font-size:13px; }
+.modalTabContent.active{ display:block; }
+.modalTabTable{ width:100%; border-collapse:collapse; font-size:13px; text-align:center; }
+.modalTabTable th{ background:#003566; color:white; padding:8px; }
+.modalTabTable td{ padding:8px; border-bottom:1px solid #eee; }
 
-/* PAGE HEADERS */
 .pageHeader{
-    margin:-20px -20px 20px -20px;
-    padding:25px 30px;
-    border-radius:15px 15px 0 0;
-    color:white;
-    display:flex;
-    align-items:center;
-    gap:15px;
+    margin:-20px -20px 20px -20px; padding:25px 30px;
+    border-radius:15px 15px 0 0; color:white;
+    display:flex; align-items:center; gap:15px;
 }
-
-.pageHeader h2{
-    margin:0;
-    font-size:20px;
-    letter-spacing:1px;
-}
-
-.pageHeader .pageIcon{
-    font-size:30px;
-}
-
+.pageHeader h2{ margin:0; font-size:20px; letter-spacing:1px; }
 </style>
-
 </head>
 
-<!-- EMPLOYEE LOGIN -->
-
 <div class="loginPage" id="loginPage">
-
 <div class="loginBox">
-
-<div class="icon">
-👤
-</div>
-
-<h2>
-Employee Portal
-</h2>
-
-
+<div class="icon">👤</div>
+<h2>Employee Portal</h2>
 <input id="username" placeholder="Username">
-
 <input id="pin" placeholder="PIN" type="password">
-
-
-<button onclick="employeeLogin()">
-LOGIN
-</button>
-
-
+<button onclick="employeeLogin()">LOGIN</button>
 <br><br>
-
-
-<button class="adminBtn" onclick="showAdminLogin()">
-HR ADMIN LOGIN
-</button>
-
-
+<button class="adminBtn" onclick="showAdminLogin()">HR ADMIN LOGIN</button>
 </div>
-
 </div>
-
-
-<!-- HR ADMIN LOGIN -->
-
 
 <div class="loginPage" id="adminLoginPage" style="display:none;">
-
 <div class="loginBox">
-
-<div class="icon">
-🛡
-</div>
-
-
-<h2>
-HR Admin Portal
-</h2>
-
-
+<div class="icon">🛡</div>
+<h2>HR Admin Portal</h2>
 <input id="adminUser" placeholder="Admin Username">
-
 <input id="adminPass" placeholder="Password" type="password">
-
-
-<button onclick="adminLogin()">
-LOGIN
-</button>
-
-
+<button onclick="adminLogin()">LOGIN</button>
 <br><br>
-
-
-<button class="backBtn" onclick="backEmployee()">
-BACK TO EMPLOYEE
-</button>
-
-
+<button class="backBtn" onclick="backEmployee()">BACK TO EMPLOYEE</button>
 </div>
-
 </div>
-
-
-<!-- EMPLOYEE DASHBOARD -->
-
 
 <div class="dashboard" id="employeeDashboard">
-
-
 <div class="sidebar">
-
 <h2>Welcome</h2>
-
 <div class="sidebarInfo">
-
 <img id="sidePhoto" class="sidebarPhoto">
-
 <h3 id="sideName">Employee Name</h3>
-
 <p id="sidePosition">Position</p>
-
 </div>
-
-<div class="menu" onclick="showPage('companyPage')">Company Profile</div>  
+<div class="menu" onclick="showPage('companyPage')">Company Profile</div>
 <div class="menu" onclick="showPage('profilePage')">Profile</div>
 <div class="menu" onclick="showPage('leavePage')">Leave Records</div>
 <div class="menu" onclick="showPage('cashPage')">Cash Advance</div>
@@ -547,82 +169,56 @@ BACK TO EMPLOYEE
 <div class="menu" onclick="showPage('movementPage')">Employment Movement</div>
 <div class="menu" onclick="showPage('changePINPage')">Change PIN</div>
 <div class="menu" onclick="logout()">Logout</div>
-
 </div>
 
-
 <div class="content">
-
 <div style="display:flex;justify-content:flex-end;align-items:center;margin-bottom:20px;">
-    <div style="background:white;padding:10px 20px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1);text-align:right;">
-        <div id="empDateTime" style="font-size:13px;color:#003566;font-weight:bold;"></div>
-    </div>
+<div style="background:white;padding:10px 20px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1);text-align:right;">
+<div id="empDateTime" style="font-size:13px;color:#003566;font-weight:bold;"></div>
+</div>
 </div>
 
 <div class="card page" id="companyPage" style="display:none;padding:0;overflow:hidden;">
 <div style="background:linear-gradient(135deg,#003566,#0057d9);padding:40px;text-align:center;">
-    <img id="companyLogo" style="width:220px;object-fit:contain;margin-bottom:20px;filter:drop-shadow(0 8px 15px rgba(0,0,0,0.2));">
-    <h2 id="companyName" style="color:white;margin:0;font-size:26px;letter-spacing:2px;"></h2>
-    <p id="companyEmail" style="color:rgba(255,255,255,0.8);margin-top:8px;font-size:14px;"></p>
+<img id="companyLogo" style="width:220px;object-fit:contain;margin-bottom:20px;filter:drop-shadow(0 8px 15px rgba(0,0,0,0.2));">
+<h2 id="companyName" style="color:white;margin:0;font-size:26px;letter-spacing:2px;"></h2>
+<p id="companyEmail" style="color:rgba(255,255,255,0.8);margin-top:8px;font-size:14px;"></p>
 </div>
 <div style="padding:30px;">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
-        <div style="background:#f0f4ff;border-left:5px solid #0057d9;border-radius:10px;padding:20px;">
-            <h3 style="color:#003566;margin:0 0 10px 0;font-size:15px;">Our Mission</h3>
-            <p id="companyMission" style="color:#444;line-height:1.7;margin:0;font-size:14px;"></p>
-        </div>
-        <div style="background:#f0fff4;border-left:5px solid #28a745;border-radius:10px;padding:20px;">
-            <h3 style="color:#1a6e35;margin:0 0 10px 0;font-size:15px;">Our Vision</h3>
-            <p id="companyVision" style="color:#444;line-height:1.7;margin:0;font-size:14px;"></p>
-        </div>
-        <div style="background:#fff8f0;border-left:5px solid #fd7e14;border-radius:10px;padding:20px;">
-            <h3 style="color:#8a4500;margin:0 0 10px 0;font-size:15px;">Our Values</h3>
-            <p id="companyValues" style="color:#444;line-height:1.7;margin:0;font-size:14px;"></p>
-        </div>
-    </div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+<div style="background:#f0f4ff;border-left:5px solid #0057d9;border-radius:10px;padding:20px;">
+<h3 style="color:#003566;margin:0 0 10px 0;font-size:15px;">Our Mission</h3>
+<p id="companyMission" style="color:#444;line-height:1.7;margin:0;font-size:14px;"></p>
+</div>
+<div style="background:#f0fff4;border-left:5px solid #28a745;border-radius:10px;padding:20px;">
+<h3 style="color:#1a6e35;margin:0 0 10px 0;font-size:15px;">Our Vision</h3>
+<p id="companyVision" style="color:#444;line-height:1.7;margin:0;font-size:14px;"></p>
+</div>
+<div style="background:#fff8f0;border-left:5px solid #fd7e14;border-radius:10px;padding:20px;">
+<h3 style="color:#8a4500;margin:0 0 10px 0;font-size:15px;">Our Values</h3>
+<p id="companyValues" style="color:#444;line-height:1.7;margin:0;font-size:14px;"></p>
+</div>
+</div>
 </div>
 </div>
 
 <div class="card page" id="profilePage">
 <div class="pageHeader" style="background:linear-gradient(135deg,#003566,#0057d9);">
-    <h2>Employee Profile</h2>
+<h2>Employee Profile</h2>
 </div>
 <p id="profileData">Employee data loading...</p>
 </div>
 
-<div class="card page" id="leavePage" style="display:none;">
-<h2>Leave Records</h2>
-<p>No leave records loaded.</p>
-</div>
-
-<div class="card page" id="cashPage" style="display:none;">
-<h2>Cash Advance History</h2>
-<p>No cash advance records loaded.</p>
-</div>
-
-<div class="card page" id="medicalPage" style="display:none;">
-<h2>Medical Records</h2>
-<p>No medical records loaded.</p>
-</div>
-
-<div class="card page" id="evaluationPage" style="display:none;">
-<h2>Evaluation Records</h2>
-<p>No evaluation records loaded.</p>
-</div>
-
-<div class="card page" id="violationPage" style="display:none;">
-<h2>Violation Records</h2>
-<p>No violation records loaded.</p>
-</div>
-
-<div class="card page" id="movementPage" style="display:none;">
-<h2>Employment Movement</h2>
-<p>No movement records loaded.</p>
-</div>
+<div class="card page" id="leavePage" style="display:none;"><p>Loading...</p></div>
+<div class="card page" id="cashPage" style="display:none;"><p>Loading...</p></div>
+<div class="card page" id="medicalPage" style="display:none;"><p>Loading...</p></div>
+<div class="card page" id="evaluationPage" style="display:none;"><p>Loading...</p></div>
+<div class="card page" id="violationPage" style="display:none;"><p>Loading...</p></div>
+<div class="card page" id="movementPage" style="display:none;"><p>Loading...</p></div>
 
 <div class="card page" id="changePINPage" style="display:none;">
 <div class="pageHeader" style="background:linear-gradient(135deg,#495057,#6c757d);">
-    <h2>Change PIN</h2>
+<h2>Change PIN</h2>
 </div>
 <p style="color:#666;margin-bottom:20px;">Palitan ang iyong PIN. Exactly 6 digits.</p>
 <input id="currentPIN" type="password" placeholder="Current PIN" style="width:300px;margin-bottom:10px;">
@@ -631,36 +227,28 @@ BACK TO EMPLOYEE
 <br>
 <button onclick="changePIN()" style="width:300px;padding:12px;background:#0057d9;color:white;border:none;border-radius:10px;font-size:15px;cursor:pointer;">Change PIN</button>
 </div>
-
 </div>
 </div>
-
-<!-- HR ADMIN DASHBOARD -->
 
 <div class="dashboard" id="adminDashboard">
-
 <div class="sidebar">
-
 <div style="text-align:center;padding:15px 0;border-bottom:1px solid rgba(255,255,255,0.2);margin-bottom:10px;">
-    <div style="font-size:12px;color:rgba(255,255,255,0.6);">Welcome,</div>
-    <div id="adminNameDisplay" style="font-size:18px;font-weight:bold;color:white;margin-top:4px;">Admin</div>
-    <div id="adminRoleDisplay" style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:2px;"></div>
+<div style="font-size:12px;color:rgba(255,255,255,0.6);">Welcome,</div>
+<div id="adminNameDisplay" style="font-size:18px;font-weight:bold;color:white;margin-top:4px;">Admin</div>
+<div id="adminRoleDisplay" style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:2px;"></div>
 </div>
-
 <div class="menu" onclick="loadDashboard()">Dashboard</div>
 <div class="menu" onclick="loadAdminEmployees()">Employees</div>
 <div class="menu" onclick="loadAdminLeaves()">Leave Approval</div>
 <div class="menu" onclick="loadAdminCash()">Cash Advance</div>
 <div class="menu" onclick="logout()">Logout</div>
-
 </div>
 
 <div class="content">
-
 <div style="display:flex;justify-content:flex-end;align-items:center;margin-bottom:20px;">
-    <div style="background:white;padding:10px 20px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1);text-align:right;">
-        <div id="adminDateTime" style="font-size:13px;color:#003566;font-weight:bold;"></div>
-    </div>
+<div style="background:white;padding:10px 20px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1);text-align:right;">
+<div id="adminDateTime" style="font-size:13px;color:#003566;font-weight:bold;"></div>
+</div>
 </div>
 
 <div class="card adminPage" id="adminHomePage">
@@ -669,7 +257,7 @@ BACK TO EMPLOYEE
 
 <div class="card adminPage" id="adminEmployeesPage" style="display:none;">
 <div class="pageHeader" style="background:linear-gradient(135deg,#003566,#0057d9);">
-    <h2>Employee Management</h2>
+<h2>Employee Management</h2>
 </div>
 <div id="employeeSearchBar"></div>
 <table style="width:100%;border-collapse:collapse;text-align:center;">
@@ -691,158 +279,127 @@ BACK TO EMPLOYEE
 
 <div class="card adminPage" id="adminLeavePage" style="display:none;">
 <div class="pageHeader" style="background:linear-gradient(135deg,#1a6e35,#28a745);">
-    <h2>Leave Approval</h2>
+<h2>Leave Approval</h2>
 </div>
 <div id="adminLeaveTable">Leave records loading...</div>
 </div>
 
 <div class="card adminPage" id="adminCashPage" style="display:none;">
 <div class="pageHeader" style="background:linear-gradient(135deg,#856404,#ffc107);">
-    <h2>Cash Advance Records</h2>
+<h2>Cash Advance Records</h2>
 </div>
 <div id="adminCashTable">Cash advance loading...</div>
 </div>
-
 </div>
 </div>
 
 <!-- DASHBOARD DETAIL MODAL -->
 <div id="dashDetailModal" style="display:flex;visibility:hidden;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9997;justify-content:center;align-items:center;">
-    <div style="background:white;border-radius:20px;width:700px;max-height:80vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,0.3);">
-        <div style="background:linear-gradient(135deg,#003566,#0057d9);padding:25px 30px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center;">
-            <h3 id="dashDetailTitle" style="color:white;margin:0;font-size:18px;"></h3>
-            <button onclick="closeDashDetail()" style="background:rgba(255,255,255,0.2);border:none;color:white;padding:5px 15px;border-radius:8px;cursor:pointer;font-size:14px;">Close</button>
-        </div>
-        <div style="padding:25px;" id="dashDetailBody"></div>
-    </div>
+<div style="background:white;border-radius:20px;width:750px;max-height:80vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,0.3);">
+<div style="background:linear-gradient(135deg,#003566,#0057d9);padding:25px 30px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:center;">
+<h3 id="dashDetailTitle" style="color:white;margin:0;font-size:18px;"></h3>
+<button onclick="closeDashDetail()" style="background:rgba(255,255,255,0.2);border:none;color:white;padding:5px 15px;border-radius:8px;cursor:pointer;font-size:14px;">Close</button>
+</div>
+<div style="padding:25px;" id="dashDetailBody"></div>
+</div>
 </div>
 
 <!-- EMPLOYEE PROFILE MODAL -->
 <div id="profileModal" style="display:flex;visibility:hidden;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9998;justify-content:center;align-items:center;">
-   <div style="background:white;border-radius:20px;width:900px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,0.3);">
-        <div style="background:linear-gradient(135deg,#003566,#0057d9);padding:30px;text-align:center;border-radius:20px 20px 0 0;">
-            <img id="modalPhoto" style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid white;margin-bottom:10px;">
-            <h3 id="modalName" style="color:white;margin:0;font-size:18px;"></h3>
-            <p id="modalPosition" style="color:rgba(255,255,255,0.8);margin:5px 0 0 0;font-size:13px;"></p>
-        </div>
-        <div style="padding:25px;" id="modalBody"></div>
-        <div style="text-align:center;padding:0 25px 25px;">
-            <button onclick="closeProfileModal()" style="padding:10px 30px;background:#003566;color:white;border:none;border-radius:10px;cursor:pointer;font-size:14px;">Close</button>
-        </div>
-    </div>
+<div style="background:white;border-radius:20px;width:900px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,0.3);">
+<div style="background:linear-gradient(135deg,#003566,#0057d9);padding:30px;text-align:center;border-radius:20px 20px 0 0;">
+<img id="modalPhoto" style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid white;margin-bottom:10px;">
+<h3 id="modalName" style="color:white;margin:0;font-size:18px;"></h3>
+<p id="modalPosition" style="color:rgba(255,255,255,0.8);margin:5px 0 0 0;font-size:13px;"></p>
+</div>
+<div style="padding:25px;" id="modalBody"></div>
+<div style="text-align:center;padding:0 25px 25px;">
+<button onclick="closeProfileModal()" style="padding:10px 30px;background:#003566;color:white;border:none;border-radius:10px;cursor:pointer;font-size:14px;">Close</button>
+</div>
+</div>
 </div>
 
-<!-- CUSTOM SUCCESS POPUP -->
+<!-- SUCCESS POPUP -->
 <div class="successOverlay" id="successOverlay">
-    <div class="successBox">
-        <div class="successIcon" id="successIcon">✅</div>
-        <h3 id="successTitle">Success!</h3>
-        <p id="successMessage">Action completed.</p>
-    </div>
+<div class="successBox">
+<div class="successIcon" id="successIcon">✅</div>
+<h3 id="successTitle">Success!</h3>
+<p id="successMessage">Action completed.</p>
+</div>
 </div>
 
-<!-- CUSTOM CONFIRM DIALOG -->
+<!-- CONFIRM DIALOG -->
 <div class="confirmOverlay" id="confirmOverlay">
-    <div class="confirmBox">
-        <h3 id="confirmTitle">Are you sure?</h3>
-        <p id="confirmMessage">This action cannot be undone.</p>
-        <div class="confirmButtons">
-            <button class="confirmYes" id="confirmYesBtn">Yes, Proceed</button>
-            <button class="confirmNo" onclick="closeConfirm()">Cancel</button>
-        </div>
-    </div>
+<div class="confirmBox">
+<h3 id="confirmTitle">Are you sure?</h3>
+<p id="confirmMessage">This action cannot be undone.</p>
+<div class="confirmButtons">
+<button class="confirmYes" id="confirmYesBtn">Yes, Proceed</button>
+<button class="confirmNo" onclick="closeConfirm()">Cancel</button>
+</div>
+</div>
 </div>
 
 <script>
-
 const API_URL = "https://script.google.com/macros/s/AKfycbzOhTHL9eSvXiZBtFNOOqSklkkelcPORIsBMYuWPZyPrqktTXFb6at4WrrYpi1T_e7FaA/exec";
 
 let employeeData={};
 let allEmployees=[];
 let currentPage=1;
 const rowsPerPage=10;
-
-// ==========================
-// EMPLOYEE LOGIN
-// ==========================
+let dashboardData={};
+let lastTimestamp=0;
 
 function employeeLogin(){
-    let username = document.getElementById("username").value;
-    let pin = document.getElementById("pin").value;
-    fetch(API_URL,{
-        method:"POST",
-        body:JSON.stringify({ action:"login", username:username, pin:pin, deviceID:navigator.userAgent })
-    })
+    let username=document.getElementById("username").value;
+    let pin=document.getElementById("pin").value;
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"login",username:username,pin:pin,deviceID:navigator.userAgent})})
     .then(res=>res.json())
     .then(data=>{
         if(data.result=="SUCCESS"){
-            data.username = username;
-            data.pin = pin;
-            employeeData = data;
-            localStorage.setItem("employeeSession", JSON.stringify(data));
+            data.username=username; data.pin=pin;
+            employeeData=data;
+            localStorage.setItem("employeeSession",JSON.stringify(data));
             localStorage.removeItem("adminSession");
             document.getElementById("loginPage").style.display="none";
             document.getElementById("employeeDashboard").style.display="block";
             loadProfile();
-        }else{
-            alert(data.error || "Invalid Login");
-        }
+        }else{ alert(data.error||"Invalid Login"); }
     })
     .catch(err=>{ alert("Connection Error"); });
 }
-
-// ==========================
-// SHOW ADMIN LOGIN
-// ==========================
 
 function showAdminLogin(){
     document.getElementById("loginPage").style.display="none";
     document.getElementById("adminLoginPage").style.display="flex";
 }
 
-// ==========================
-// BACK EMPLOYEE LOGIN
-// ==========================
-
 function backEmployee(){
     document.getElementById("adminLoginPage").style.display="none";
     document.getElementById("loginPage").style.display="flex";
 }
 
-// ==========================
-// ADMIN LOGIN
-// ==========================
-
 function adminLogin(){
-    let user = document.getElementById("adminUser").value;
-    let pass = document.getElementById("adminPass").value;
-    fetch(API_URL,{
-        method:"POST",
-        body:JSON.stringify({ action:"adminLogin", username:user, password:pass })
-    })
+    let user=document.getElementById("adminUser").value;
+    let pass=document.getElementById("adminPass").value;
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"adminLogin",username:user,password:pass})})
     .then(res=>res.json())
     .then(data=>{
         if(data.result=="SUCCESS"){
-            localStorage.setItem("adminSession", JSON.stringify(data));
+            localStorage.setItem("adminSession",JSON.stringify(data));
             localStorage.removeItem("employeeSession");
-            document.getElementById("adminNameDisplay").innerHTML = data.adminName || "Admin";
-            document.getElementById("adminRoleDisplay").innerHTML = data.role || "";
+            document.getElementById("adminNameDisplay").innerHTML=data.adminName||"Admin";
+            document.getElementById("adminRoleDisplay").innerHTML=data.role||"";
             document.getElementById("adminLoginPage").style.display="none";
             document.getElementById("adminDashboard").style.display="block";
             loadDashboard();
-        }else{
-            alert(data.error || "Invalid Admin Login");
-        }
+        }else{ alert(data.error||"Invalid Admin Login"); }
     })
     .catch(err=>{ alert("Connection Error"); });
 }
 
-// ==========================
-// LOAD EMPLOYEE PROFILE
-// ==========================
-
 function loadProfile(){
-    document.getElementById("profileData").innerHTML =
+    document.getElementById("profileData").innerHTML=
         "<b>Employee ID:</b> "+employeeData.employeeID+
         "<br><br><b>Name:</b> "+employeeData.name+
         "<br><br><b>Department:</b> "+employeeData.department+
@@ -851,499 +408,103 @@ function loadProfile(){
         "<br><br><b>Status:</b> "+employeeData.empStatus+
         "<br><br><b>Leave Balance:</b> "+employeeData.leave+
         "<br><br><b>Balance After Deduction:</b> "+employeeData.caBalance;
-    document.getElementById("sidePhoto").src = employeeData.photo;
-    document.getElementById("sideName").innerHTML = employeeData.name;
-    document.getElementById("sidePosition").innerHTML = employeeData.position;
-    loadLeave();
-    loadCash();
-    loadMedical();
-    loadEvaluation();
-    loadViolation();
-    loadMovement();
+    document.getElementById("sidePhoto").src=employeeData.photo;
+    document.getElementById("sideName").innerHTML=employeeData.name;
+    document.getElementById("sidePosition").innerHTML=employeeData.position;
+    loadLeave(); loadCash(); loadMedical(); loadEvaluation(); loadViolation(); loadMovement();
     loadCompanyProfile();
 }
 
-// ==========================
-// LOAD LEAVE
-// ==========================
-
 function loadLeave(){
     let html="";
-    if(!employeeData.leaveHistory || employeeData.leaveHistory.length==0){
-        html = "No leave records found.";
-    }else{
-        html += "<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
-            "<tr style='background:#003566;color:white;height:35px;'>"+
-            "<th style='padding:10px;'>Date Filed</th>"+
-            "<th style='padding:10px;'>Date of Leave</th>"+
-            "<th style='padding:10px;'>Type</th>"+
-            "<th style='padding:10px;'>No. of Leave</th>"+
-            "<th style='padding:10px;'>Reason</th>"+
-            "<th style='padding:10px;'>Pay Status</th>"+
-            "<th style='padding:10px;'>Status</th>"+
-            "</tr>";
-        employeeData.leaveHistory.forEach(r=>{
-            html += "<tr style='border-bottom:1px solid #ddd;'>"+
-                "<td style='padding:10px;'>"+r.dateFiled+"</td>"+
-                "<td style='padding:10px;'>"+r.dateLeave+"</td>"+
-                "<td style='padding:10px;'>"+r.type+"</td>"+
-                "<td style='padding:10px;'>"+r.days+"</td>"+
-                "<td style='padding:10px;'>"+r.reason+"</td>"+
-                "<td style='padding:10px;'>"+(r.payStatus || "")+"</td>"+
-                "<td style='padding:10px;'>"+r.status+"</td>"+
-                "</tr>";
-        });
-        html += "</table>";
+    if(!employeeData.leaveHistory||employeeData.leaveHistory.length==0){ html="No leave records found."; }
+    else{
+        html="<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'><tr style='background:#003566;color:white;height:35px;'><th style='padding:10px;'>Date Filed</th><th style='padding:10px;'>Date of Leave</th><th style='padding:10px;'>Type</th><th style='padding:10px;'>No. of Leave</th><th style='padding:10px;'>Reason</th><th style='padding:10px;'>Pay Status</th><th style='padding:10px;'>Status</th></tr>";
+        employeeData.leaveHistory.forEach(r=>{ html+="<tr style='border-bottom:1px solid #ddd;'><td style='padding:10px;'>"+r.dateFiled+"</td><td style='padding:10px;'>"+r.dateLeave+"</td><td style='padding:10px;'>"+r.type+"</td><td style='padding:10px;'>"+r.days+"</td><td style='padding:10px;'>"+r.reason+"</td><td style='padding:10px;'>"+(r.payStatus||"")+"</td><td style='padding:10px;'>"+r.status+"</td></tr>"; });
+        html+="</table>";
     }
-    document.getElementById("leavePage").innerHTML =
-        "<div class='pageHeader' style='background:linear-gradient(135deg,#1a6e35,#28a745);'><h2>Leave Records</h2></div>" + html;
+    document.getElementById("leavePage").innerHTML="<div class='pageHeader' style='background:linear-gradient(135deg,#1a6e35,#28a745);'><h2>Leave Records</h2></div>"+html;
 }
-
-// ==========================
-// LOAD CASH ADVANCE
-// ==========================
 
 function loadCash(){
     let html="";
-    if(!employeeData.cashHistory || employeeData.cashHistory.length==0){
-        html = "No cash advance records found.";
-    }else{
-        html += "<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
-            "<tr style='background:#003566;color:white;height:35px;'>"+
-            "<th style='padding:10px;'>Date</th>"+
-            "<th style='padding:10px;'>Amount</th>"+
-            "<th style='padding:10px;'>Deduction</th>"+
-            "</tr>";
-        employeeData.cashHistory.forEach(r=>{
-            html += "<tr style='border-bottom:1px solid #ddd;'>"+
-                "<td style='padding:10px;'>"+r.date+"</td>"+
-                "<td style='padding:10px;'>"+r.amount+"</td>"+
-                "<td style='padding:10px;'>"+r.deduction+"</td>"+
-                "</tr>";
-        });
-        html += "</table>";
+    if(!employeeData.cashHistory||employeeData.cashHistory.length==0){ html="No cash advance records found."; }
+    else{
+        html="<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'><tr style='background:#003566;color:white;height:35px;'><th style='padding:10px;'>Date</th><th style='padding:10px;'>Amount</th><th style='padding:10px;'>Deduction</th></tr>";
+        employeeData.cashHistory.forEach(r=>{ html+="<tr style='border-bottom:1px solid #ddd;'><td style='padding:10px;'>"+r.date+"</td><td style='padding:10px;'>"+r.amount+"</td><td style='padding:10px;'>"+r.deduction+"</td></tr>"; });
+        html+="</table>";
     }
-    document.getElementById("cashPage").innerHTML =
-        "<div class='pageHeader' style='background:linear-gradient(135deg,#856404,#ffc107);'><h2>Cash Advance History</h2></div>" + html;
+    document.getElementById("cashPage").innerHTML="<div class='pageHeader' style='background:linear-gradient(135deg,#856404,#ffc107);'><h2>Cash Advance History</h2></div>"+html;
 }
-
-// ==========================
-// LOAD MEDICAL
-// ==========================
 
 function loadMedical(){
     let html="";
-    if(!employeeData.medical || employeeData.medical.length==0){
-        html = "No medical records found.";
-    }else{
-        html += "<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
-            "<tr style='background:#003566;color:white;height:35px;'>"+
-            "<th style='padding:10px;'>Type</th>"+
-            "<th style='padding:10px;'>Date</th>"+
-            "<th style='padding:10px;'>Status</th>"+
-            "</tr>";
-        employeeData.medical.forEach(r=>{
-            html += "<tr style='border-bottom:1px solid #ddd;'>"+
-                "<td style='padding:10px;'>"+r.type+"</td>"+
-                "<td style='padding:10px;'>"+r.date+"</td>"+
-                "<td style='padding:10px;'>"+r.status+"</td>"+
-                "</tr>";
-        });
-        html += "</table>";
+    if(!employeeData.medical||employeeData.medical.length==0){ html="No medical records found."; }
+    else{
+        html="<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'><tr style='background:#003566;color:white;height:35px;'><th style='padding:10px;'>Type</th><th style='padding:10px;'>Date</th><th style='padding:10px;'>Status</th></tr>";
+        employeeData.medical.forEach(r=>{ html+="<tr style='border-bottom:1px solid #ddd;'><td style='padding:10px;'>"+r.type+"</td><td style='padding:10px;'>"+r.date+"</td><td style='padding:10px;'>"+r.status+"</td></tr>"; });
+        html+="</table>";
     }
-    document.getElementById("medicalPage").innerHTML =
-        "<div class='pageHeader' style='background:linear-gradient(135deg,#0d6efd,#6ea8fe);'><h2>Medical Records</h2></div>" + html;
+    document.getElementById("medicalPage").innerHTML="<div class='pageHeader' style='background:linear-gradient(135deg,#0d6efd,#6ea8fe);'><h2>Medical Records</h2></div>"+html;
 }
-
-// ==========================
-// LOAD EVALUATION
-// ==========================
 
 function loadEvaluation(){
     let html="";
-    if(!employeeData.evaluation || employeeData.evaluation.length==0){
-        html = "No evaluation records found.";
-    }else{
-        html += "<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
-            "<tr style='background:#003566;color:white;height:35px;'>"+
-            "<th style='padding:10px;'>Date</th>"+
-            "<th style='padding:10px;'>Evaluation Type</th>"+
-            "<th style='padding:10px;'>Score</th>"+
-            "<th style='padding:10px;'>Result</th>"+
-            "</tr>";
-        employeeData.evaluation.forEach(r=>{
-            html += "<tr style='border-bottom:1px solid #ddd;'>"+
-                "<td style='padding:10px;'>"+r.date+"</td>"+
-                "<td style='padding:10px;'>"+r.type+"</td>"+
-                "<td style='padding:10px;'>"+r.score+"</td>"+
-                "<td style='padding:10px;'>"+r.result+"</td>"+
-                "</tr>";
-        });
-        html += "</table>";
+    if(!employeeData.evaluation||employeeData.evaluation.length==0){ html="No evaluation records found."; }
+    else{
+        html="<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'><tr style='background:#003566;color:white;height:35px;'><th style='padding:10px;'>Date</th><th style='padding:10px;'>Evaluation Type</th><th style='padding:10px;'>Score</th><th style='padding:10px;'>Result</th></tr>";
+        employeeData.evaluation.forEach(r=>{ html+="<tr style='border-bottom:1px solid #ddd;'><td style='padding:10px;'>"+r.date+"</td><td style='padding:10px;'>"+r.type+"</td><td style='padding:10px;'>"+r.score+"</td><td style='padding:10px;'>"+r.result+"</td></tr>"; });
+        html+="</table>";
     }
-    document.getElementById("evaluationPage").innerHTML =
-        "<div class='pageHeader' style='background:linear-gradient(135deg,#6f42c1,#a78bfa);'><h2>Evaluation Records</h2></div>" + html;
+    document.getElementById("evaluationPage").innerHTML="<div class='pageHeader' style='background:linear-gradient(135deg,#6f42c1,#a78bfa);'><h2>Evaluation Records</h2></div>"+html;
 }
-
-// ==========================
-// LOAD VIOLATION
-// ==========================
 
 function loadViolation(){
     let html="";
-    if(!employeeData.violation || employeeData.violation.length==0){
-        html = "No violation records found.";
-    }else{
-        html += "<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
-            "<tr style='background:#003566;color:white;height:35px;'>"+
-            "<th style='padding:10px;'>Date</th>"+
-            "<th style='padding:10px;'>Violation</th>"+
-            "<th style='padding:10px;'>Action Taken</th>"+
-            "<th style='padding:10px;'>Status</th>"+
-            "</tr>";
-        employeeData.violation.forEach(r=>{
-            html += "<tr style='border-bottom:1px solid #ddd;'>"+
-                "<td style='padding:10px;'>"+r.date+"</td>"+
-                "<td style='padding:10px;'>"+r.violation+"</td>"+
-                "<td style='padding:10px;'>"+r.action+"</td>"+
-                "<td style='padding:10px;'>"+r.status+"</td>"+
-                "</tr>";
-        });
-        html += "</table>";
+    if(!employeeData.violation||employeeData.violation.length==0){ html="No violation records found."; }
+    else{
+        html="<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'><tr style='background:#003566;color:white;height:35px;'><th style='padding:10px;'>Date</th><th style='padding:10px;'>Violation</th><th style='padding:10px;'>Action Taken</th><th style='padding:10px;'>Status</th></tr>";
+        employeeData.violation.forEach(r=>{ html+="<tr style='border-bottom:1px solid #ddd;'><td style='padding:10px;'>"+r.date+"</td><td style='padding:10px;'>"+r.violation+"</td><td style='padding:10px;'>"+r.action+"</td><td style='padding:10px;'>"+r.status+"</td></tr>"; });
+        html+="</table>";
     }
-    document.getElementById("violationPage").innerHTML =
-        "<div class='pageHeader' style='background:linear-gradient(135deg,#842029,#dc3545);'><h2>Violation Records</h2></div>" + html;
+    document.getElementById("violationPage").innerHTML="<div class='pageHeader' style='background:linear-gradient(135deg,#842029,#dc3545);'><h2>Violation Records</h2></div>"+html;
 }
-
-// ==========================
-// LOAD MOVEMENT
-// ==========================
 
 function loadMovement(){
     let html="";
-    if(!employeeData.movement || employeeData.movement.length==0){
-        html = "No movement records found.";
-    }else{
-        html += "<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'>"+
-            "<tr style='background:#003566;color:white;height:35px;'>"+
-            "<th style='padding:10px;'>Date</th>"+
-            "<th style='padding:10px;'>Movement</th>"+
-            "<th style='padding:10px;'>Old</th>"+
-            "<th style='padding:10px;'>New</th>"+
-            "</tr>";
-        employeeData.movement.forEach(r=>{
-            html += "<tr style='border-bottom:1px solid #ddd;'>"+
-                "<td style='padding:10px;'>"+r.date+"</td>"+
-                "<td style='padding:10px;'>"+r.movement+"</td>"+
-                "<td style='padding:10px;'>"+r.old+"</td>"+
-                "<td style='padding:10px;'>"+r.new+"</td>"+
-                "</tr>";
-        });
-        html += "</table>";
+    if(!employeeData.movement||employeeData.movement.length==0){ html="No movement records found."; }
+    else{
+        html="<table style='width:100%;border-collapse:collapse;text-align:center;font-size:15px;'><tr style='background:#003566;color:white;height:35px;'><th style='padding:10px;'>Date</th><th style='padding:10px;'>Movement</th><th style='padding:10px;'>Old</th><th style='padding:10px;'>New</th></tr>";
+        employeeData.movement.forEach(r=>{ html+="<tr style='border-bottom:1px solid #ddd;'><td style='padding:10px;'>"+r.date+"</td><td style='padding:10px;'>"+r.movement+"</td><td style='padding:10px;'>"+r.old+"</td><td style='padding:10px;'>"+r.new+"</td></tr>"; });
+        html+="</table>";
     }
-    document.getElementById("movementPage").innerHTML =
-        "<div class='pageHeader' style='background:linear-gradient(135deg,#0f5132,#20c997);'><h2>Employment Movement</h2></div>" + html;
+    document.getElementById("movementPage").innerHTML="<div class='pageHeader' style='background:linear-gradient(135deg,#0f5132,#20c997);'><h2>Employment Movement</h2></div>"+html;
 }
 
-// ==========================
-// LOAD COMPANY PROFILE
-// ==========================
-
 function loadCompanyProfile(){
-    document.getElementById("companyLogo").src = employeeData.logo || "";
-    document.getElementById("companyName").innerHTML = employeeData.companyName || "";
-    document.getElementById("companyEmail").innerHTML = employeeData.companyEmail || "";
-    document.getElementById("companyMission").innerHTML = employeeData.mission || "";
-    document.getElementById("companyVision").innerHTML = employeeData.vision || "";
-    document.getElementById("companyValues").innerHTML = employeeData.values || "";
+    document.getElementById("companyLogo").src=employeeData.logo||"";
+    document.getElementById("companyName").innerHTML=employeeData.companyName||"";
+    document.getElementById("companyEmail").innerHTML=employeeData.companyEmail||"";
+    document.getElementById("companyMission").innerHTML=employeeData.mission||"";
+    document.getElementById("companyVision").innerHTML=employeeData.vision||"";
+    document.getElementById("companyValues").innerHTML=employeeData.values||"";
     showPage("companyPage");
 }
 
-// ==========================
-// SHOW EMPLOYEE PAGE
-// ==========================
-
 function showPage(pageID){
-    let pages = document.querySelectorAll(".page");
-    pages.forEach(p=>{ p.style.display="none"; });
-    let el = document.getElementById(pageID);
-    el.style.display="block";
-    el.style.animation="none";
-    el.offsetHeight;
-    el.style.animation="fadeIn 0.3s ease";
+    document.querySelectorAll(".page").forEach(p=>{ p.style.display="none"; });
+    let el=document.getElementById(pageID);
+    el.style.display="block"; el.style.animation="none"; el.offsetHeight; el.style.animation="fadeIn 0.3s ease";
 }
-
-// ==========================
-// SHOW ADMIN PAGE
-// ==========================
 
 function showAdminPage(pageID){
-    let pages = document.querySelectorAll(".adminPage");
-    pages.forEach(p=>{ p.style.display="none"; });
-    let el = document.getElementById(pageID);
-    el.style.display="block";
-    el.style.animation="none";
-    el.offsetHeight;
-    el.style.animation="fadeIn 0.3s ease";
+    document.querySelectorAll(".adminPage").forEach(p=>{ p.style.display="none"; });
+    let el=document.getElementById(pageID);
+    el.style.display="block"; el.style.animation="none"; el.offsetHeight; el.style.animation="fadeIn 0.3s ease";
 }
-
-// ==========================
-// LOAD ADMIN EMPLOYEES
-// ==========================
-
-function loadAdminEmployees(){
-    showAdminPage("adminEmployeesPage");
-    fetch(API_URL,{
-        method:"POST",
-        body:JSON.stringify({ action:"getEmployees" })
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        allEmployees = data.employees;
-        currentPage = 1;
-        renderEmployeeTable();
-    });
-}
-
-function silentRefreshEmployees(){
-    fetch(API_URL,{
-        method:"POST",
-        body:JSON.stringify({ action:"getEmployees" })
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        allEmployees = data.employees;
-        renderEmployeeTable();
-    });
-}
-
-function renderEmployeeTable(){
-    let start = (currentPage-1) * rowsPerPage;
-    let end = start + rowsPerPage;
-    let pageData = allEmployees.slice(start, end);
-    let html="";
-    pageData.forEach(e=>{
-        html += "<tr>"+
-            "<td>"+e.id+"</td>"+
-            "<td style='cursor:pointer;color:#0057d9;font-weight:bold;' onclick=\"showProfileModal('"+e.id+"')\">"+e.name+"</td>"+
-            "<td>"+e.department+"</td>"+
-            "<td>"+e.position+"</td>"+
-            "<td>"+getBadge(e.access)+"</td>"+
-            "<td>"+getBadge(e.device)+"</td>"+
-            "<td>"+
-            "<button onclick=\"resetPIN('"+e.id+"')\" style='display:block;width:100px;padding:5px 0;font-size:11px;margin:2px auto;border-radius:6px;background:#0057d9;color:white;border:none;cursor:pointer;'>Reset PIN</button>"+
-            "<button onclick=\"resetDevice('"+e.id+"')\" style='display:block;width:100px;padding:5px 0;font-size:11px;margin:2px auto;border-radius:6px;background:#0057d9;color:white;border:none;cursor:pointer;'>Reset Device</button>"+
-            "</td>"+
-            "</tr>";
-    });
-    document.getElementById("adminEmployeeTable").innerHTML = html;
-    document.getElementById("employeeSearchBar").innerHTML = "<input id='employeeSearch' onkeyup='searchEmployee()' placeholder='Search Employee...' style='width:320px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
-    renderPagination();
-}
-
-function renderPagination(){
-    let totalPages = Math.ceil(allEmployees.length / rowsPerPage);
-    if(totalPages <= 1){
-        document.getElementById("paginationBar").innerHTML = "";
-        return;
-    }
-    let html = "<div style='margin-top:15px;text-align:center;'>";
-    for(let i=1; i<=totalPages; i++){
-        let active = i===currentPage ? "background:#003566;color:white;" : "background:#eee;color:#333;";
-        html += "<button onclick='goToPage("+i+")' style='"+active+"border:none;padding:7px 14px;margin:2px;border-radius:6px;cursor:pointer;font-size:13px;'>"+i+"</button>";
-    }
-    html += "</div>";
-    document.getElementById("paginationBar").innerHTML = html;
-}
-
-function goToPage(page){
-    currentPage = page;
-    renderEmployeeTable();
-}
-
-// ==========================
-// RESET DEVICE
-// ==========================
-
-function resetDevice(employeeID){
-    showConfirm("Reset Device","I-reset ang device ng empleyado?",function(){
-        fetch(API_URL,{
-            method:"POST",
-            body:JSON.stringify({ action:"resetDevice", employeeID:employeeID })
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            showSuccess("Device Reset!", data.message);
-            loadAdminEmployees();
-            silentRefreshDashboard();
-        })
-        .catch(err=>{ alert("Reset Failed"); });
-    });
-}
-
-// ==========================
-// RESET PIN
-// ==========================
-
-function resetPIN(empID){
-    showConfirm("Reset PIN","I-reset ang PIN ng empleyado to 123456?",function(){
-        fetch(API_URL,{
-            method:"POST",
-            body:JSON.stringify({ action:"resetPIN", employeeID:empID })
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            showSuccess("PIN Reset!", data.message);
-            loadAdminEmployees();
-        })
-        .catch(err=>{ alert("Connection Error"); });
-    });
-}
-
-// ==========================
-// LOAD ADMIN LEAVES
-// ==========================
-
-function loadAdminLeaves(){
-    showAdminPage("adminLeavePage");
-    fetch(API_URL,{
-        method:"POST",
-        body:JSON.stringify({ action:"getAdminLeaves" })
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        let html="";
-        html += "<input id='leaveSearch' onkeyup='searchLeave()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
-        html += "<table id='leaveTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;table-layout:fixed;'>"+
-            "<tr style='background:#003566;color:white;height:35px;'>"+
-            "<th>Date Filed</th><th>Employee</th><th>Date Leave</th><th>Type</th><th>No.</th><th>Reason</th><th>Pay Status</th><th>Status</th>"+
-            "</tr>";
-        data.leaves.forEach(l=>{
-            html += "<tr style='border-bottom:1px solid #ddd;'>"+
-                "<td style='padding:8px;'>"+l.dateFiled+"</td>"+
-                "<td style='padding:8px;'>"+l.name+"</td>"+
-                "<td style='padding:8px;'>"+l.dateLeave+"</td>"+
-                "<td style='padding:8px;'>"+l.type+"</td>"+
-                "<td style='padding:8px;'>"+l.days+"</td>"+
-                "<td style='padding:8px;'>"+l.reason+"</td>"+
-                "<td style='padding:8px;'>"+l.payStatus+"</td>"+
-                "<td style='padding:8px;'>"+l.status+"</td>"+
-                "</tr>";
-        });
-        html += "</table>";
-        document.getElementById("adminLeaveTable").innerHTML = html;
-    });
-}
-
-// ==========================
-// LOAD ADMIN CASH
-// ==========================
-
-function loadAdminCash(){
-    showAdminPage("adminCashPage");
-    fetch(API_URL,{
-        method:"POST",
-        body:JSON.stringify({ action:"getAdminCash" })
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        if(!data.cash){
-            document.getElementById("adminCashTable").innerHTML = "No cash records found.";
-            return;
-        }
-        let html="";
-        html += "<input id='cashSearch' onkeyup='searchCash()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
-        html += "<table id='cashTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'>"+
-            "<tr style='background:#003566;color:white;height:35px;'>"+
-            "<th>Date</th><th>Employee</th><th>Amount</th><th>Deduction</th>"+
-            "</tr>";
-        data.cash.forEach(c=>{
-            html += "<tr style='border-bottom:1px solid #ddd;'>"+
-                "<td>"+c.date+"</td><td>"+c.name+"</td><td>"+c.amount+"</td><td>"+c.deduction+"</td>"+
-                "</tr>";
-        });
-        html += "</table>";
-        document.getElementById("adminCashTable").innerHTML = html;
-    })
-    .catch(err=>{ document.getElementById("adminCashTable").innerHTML = "Cash connection error"; });
-}
-
-// ==========================
-// SEARCH FUNCTIONS
-// ==========================
-
-function searchCash(){
-    let input = document.getElementById("cashSearch").value.toLowerCase();
-    let rows = document.querySelectorAll("#cashTable tr");
-    for(let i=1;i<rows.length;i++){
-        let name = rows[i].cells[1].innerText.toLowerCase();
-        rows[i].style.display = name.includes(input) ? "" : "none";
-    }
-}
-
-function searchLeave(){
-    let input = document.getElementById("leaveSearch").value.toLowerCase();
-    let rows = document.querySelectorAll("#leaveTable tr");
-    for(let i=1;i<rows.length;i++){
-        let name = rows[i].cells[1].innerText.toLowerCase();
-        rows[i].style.display = name.includes(input) ? "" : "none";
-    }
-}
-
-function searchEmployee(){
-    let input = document.getElementById("employeeSearch").value.toLowerCase();
-    let rows = document.querySelectorAll("#adminEmployeeTable tr");
-    rows.forEach(row=>{
-        let text = row.innerText.toLowerCase();
-        row.style.display = text.includes(input) ? "" : "none";
-    });
-}
-
-// ==========================
-// SILENT REFRESH FUNCTIONS
-// ==========================
-
-function silentRefreshLeaves(){
-    fetch(API_URL,{ method:"POST", body:JSON.stringify({ action:"getAdminLeaves" }) })
-    .then(res=>res.json())
-    .then(data=>{
-        let html="";
-        html += "<input id='leaveSearch' onkeyup='searchLeave()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
-        html += "<table id='leaveTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;table-layout:fixed;'><tr style='background:#003566;color:white;height:35px;'><th>Date Filed</th><th>Employee</th><th>Date Leave</th><th>Type</th><th>No.</th><th>Reason</th><th>Pay Status</th><th>Status</th></tr>";
-        data.leaves.forEach(l=>{ html += "<tr style='border-bottom:1px solid #ddd;'><td style='padding:8px;'>"+l.dateFiled+"</td><td style='padding:8px;'>"+l.name+"</td><td style='padding:8px;'>"+l.dateLeave+"</td><td style='padding:8px;'>"+l.type+"</td><td style='padding:8px;'>"+l.days+"</td><td style='padding:8px;'>"+l.reason+"</td><td style='padding:8px;'>"+l.payStatus+"</td><td style='padding:8px;'>"+l.status+"</td></tr>"; });
-        html += "</table>";
-        document.getElementById("adminLeaveTable").innerHTML = html;
-    });
-}
-
-function silentRefreshCash(){
-    fetch(API_URL,{ method:"POST", body:JSON.stringify({ action:"getAdminCash" }) })
-    .then(res=>res.json())
-    .then(data=>{
-        if(!data.cash) return;
-        let html="";
-        html += "<input id='cashSearch' onkeyup='searchCash()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
-        html += "<table id='cashTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'><tr style='background:#003566;color:white;height:35px;'><th>Date</th><th>Employee</th><th>Amount</th><th>Deduction</th></tr>";
-        data.cash.forEach(c=>{ html += "<tr style='border-bottom:1px solid #ddd;'><td>"+c.date+"</td><td>"+c.name+"</td><td>"+c.amount+"</td><td>"+c.deduction+"</td></tr>"; });
-        html += "</table>";
-        document.getElementById("adminCashTable").innerHTML = html;
-    });
-}
-
-function silentRefreshDashboard(){
-    fetch(API_URL,{ method:"POST", body:JSON.stringify({ action:"dashboard" }) })
-    .then(res=>res.json())
-    .then(data=>{
-        document.getElementById("dashboardCards").innerHTML = getDashboardHTML(data);
-    });
-}
-
-// ==========================
-// LOAD DASHBOARD
-// ==========================
 
 function getDashboardHTML(data){
-    dashboardData = data;
+    dashboardData=data;
     return `
 <div style="text-align:center;margin-bottom:30px;padding:30px;background:linear-gradient(135deg,#003566,#0057d9);border-radius:15px;">
     <img src="${data.logo||''}" style="width:180px;object-fit:contain;filter:drop-shadow(0 8px 15px rgba(0,0,0,0.3));margin-bottom:15px;">
@@ -1366,149 +527,269 @@ function getDashboardHTML(data){
 </div>
 <h3 style="color:#003566;margin-bottom:15px;">Dashboard Summary</h3>
 <div class="dashboardGrid">
-    <div class="dashboardCard" onclick="showDashDetail('total')" style="cursor:pointer;">
-        <h3>Total Employees</h3><h1>${data.totalEmployees}</h1>
-    </div>
-    <div class="dashboardCard" onclick="showDashDetail('active')" style="cursor:pointer;">
-        <h3>Active</h3><h1>${data.active}</h1>
-    </div>
-    <div class="dashboardCard" onclick="showDashDetail('inactive')" style="cursor:pointer;">
-        <h3>Inactive</h3><h1>${data.inactive}</h1>
-    </div>
-    <div class="dashboardCard" onclick="showDashDetail('leave')" style="cursor:pointer;">
-        <h3>Pending Leave</h3><h1>${data.pendingLeave}</h1>
-    </div>
-    <div class="dashboardCard" onclick="showDashDetail('cash')" style="cursor:pointer;">
-        <h3>Cash Advances</h3><h1>${data.cashAdvance}</h1>
-    </div>
-    <div class="dashboardCard" onclick="showDashDetail('locked')" style="cursor:pointer;">
-        <h3>Locked Devices</h3><h1>${data.locked}</h1>
-    </div>
-</div>
+    <div class="dashboardCard" onclick="showDashDetail('total')"><h3>Total Employees</h3><h1>${data.totalEmployees}</h1></div>
+    <div class="dashboardCard" onclick="showDashDetail('active')"><h3>Active</h3><h1>${data.active}</h1></div>
+    <div class="dashboardCard" onclick="showDashDetail('inactive')"><h3>Inactive</h3><h1>${data.inactive}</h1></div>
+    <div class="dashboardCard" onclick="showDashDetail('leave')"><h3>Leave This Month</h3><h1>${data.pendingLeave}</h1></div>
+    <div class="dashboardCard" onclick="showDashDetail('cash')"><h3>Cash Advances</h3><h1>${data.cashAdvance}</h1></div>
+    <div class="dashboardCard" onclick="showDashDetail('locked')"><h3>Locked Devices</h3><h1>${data.locked}</h1></div>
+</div>`;
 }
 
 function loadDashboard(){
     showAdminPage("adminHomePage");
-    fetch(API_URL,{ method:"POST", body:JSON.stringify({ action:"dashboard" }) })
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"dashboard"})})
     .then(res=>res.json())
-    .then(data=>{ document.getElementById("dashboardCards").innerHTML = getDashboardHTML(data); });
+    .then(data=>{ document.getElementById("dashboardCards").innerHTML=getDashboardHTML(data); });
 }
 
-// ==========================
-// GET STATUS BADGE
-// ==========================
+function silentRefreshDashboard(){
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"dashboard"})})
+    .then(res=>res.json())
+    .then(data=>{ document.getElementById("dashboardCards").innerHTML=getDashboardHTML(data); });
+}
+
+function showDashDetail(type){
+    document.getElementById("dashDetailModal").style.visibility="visible";
+    let title=""; let html="";
+    let empList=dashboardData.empList||[];
+    let leaveList=dashboardData.leaveList||[];
+    let caList=dashboardData.caList||[];
+
+    if(type==="total"){ title="All Employees ("+empList.length+")"; html=buildEmpTable(empList); }
+    else if(type==="active"){ let l=empList.filter(e=>String(e.access).toUpperCase()==="ACTIVE"); title="Active Employees ("+l.length+")"; html=buildEmpTable(l); }
+    else if(type==="inactive"){ let l=empList.filter(e=>String(e.access).toUpperCase()!=="ACTIVE"); title="Inactive Employees ("+l.length+")"; html=buildEmpTable(l); }
+    else if(type==="leave"){
+        title="Leave Filed This Month ("+leaveList.length+")";
+        if(leaveList.length===0){ html="<p style='text-align:center;color:#999;padding:20px;'>No leave records this month.</p>"; }
+        else{
+            html="<table style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'><tr style='background:#003566;color:white;'><th style='padding:10px;'>Date Filed</th><th>Employee</th><th>Type</th><th>Days</th><th>Reason</th><th>Status</th></tr>";
+            leaveList.forEach(l=>{ html+="<tr style='border-bottom:1px solid #eee;'><td style='padding:8px;'>"+l.dateFiled+"</td><td style='padding:8px;'>"+l.name+"</td><td style='padding:8px;'>"+l.type+"</td><td style='padding:8px;'>"+l.days+"</td><td style='padding:8px;'>"+l.reason+"</td><td style='padding:8px;'>"+l.status+"</td></tr>"; });
+            html+="</table>";
+        }
+    }
+    else if(type==="cash"){
+        title="Employees with CA Balance ("+caList.length+")";
+        if(caList.length===0){ html="<p style='text-align:center;color:#999;padding:20px;'>No outstanding cash advances.</p>"; }
+        else{
+            html="<table style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'><tr style='background:#003566;color:white;'><th style='padding:10px;'>Employee ID</th><th>Name</th><th>Department</th><th>Position</th><th>CA Balance</th></tr>";
+            caList.forEach(c=>{ html+="<tr style='border-bottom:1px solid #eee;'><td style='padding:8px;'>"+c.id+"</td><td style='padding:8px;'>"+c.name+"</td><td style='padding:8px;'>"+c.department+"</td><td style='padding:8px;'>"+c.position+"</td><td style='padding:8px;font-weight:bold;color:#dc3545;'>"+c.caBalance+"</td></tr>"; });
+            html+="</table>";
+        }
+    }
+    else if(type==="locked"){ let l=empList.filter(e=>String(e.device).toUpperCase()==="LOCKED"); title="Locked Devices ("+l.length+")"; html=buildEmpTable(l); }
+
+    document.getElementById("dashDetailTitle").innerHTML=title;
+    document.getElementById("dashDetailBody").innerHTML=html;
+}
+
+function buildEmpTable(list){
+    if(list.length===0) return "<p style='text-align:center;color:#999;padding:20px;'>No records found.</p>";
+    let html="<table style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'><tr style='background:#003566;color:white;'><th style='padding:10px;'>Employee ID</th><th>Name</th><th>Department</th><th>Position</th><th>Status</th><th>Device</th></tr>";
+    list.forEach(e=>{ html+="<tr style='border-bottom:1px solid #eee;'><td style='padding:8px;'>"+e.id+"</td><td style='padding:8px;'>"+e.name+"</td><td style='padding:8px;'>"+e.department+"</td><td style='padding:8px;'>"+e.position+"</td><td style='padding:8px;'>"+getBadge(e.access)+"</td><td style='padding:8px;'>"+getBadge(e.device)+"</td></tr>"; });
+    html+="</table>";
+    return html;
+}
+
+function closeDashDetail(){ document.getElementById("dashDetailModal").style.visibility="hidden"; }
+
+function loadAdminEmployees(){
+    showAdminPage("adminEmployeesPage");
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"getEmployees"})})
+    .then(res=>res.json())
+    .then(data=>{ allEmployees=data.employees; currentPage=1; renderEmployeeTable(); });
+}
+
+function silentRefreshEmployees(){
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"getEmployees"})})
+    .then(res=>res.json())
+    .then(data=>{ allEmployees=data.employees; renderEmployeeTable(); });
+}
+
+function renderEmployeeTable(){
+    let start=(currentPage-1)*rowsPerPage; let end=start+rowsPerPage;
+    let pageData=allEmployees.slice(start,end); let html="";
+    pageData.forEach(e=>{
+        html+="<tr><td>"+e.id+"</td><td style='cursor:pointer;color:#0057d9;font-weight:bold;' onclick=\"showProfileModal('"+e.id+"')\">"+e.name+"</td><td>"+e.department+"</td><td>"+e.position+"</td><td>"+getBadge(e.access)+"</td><td>"+getBadge(e.device)+"</td><td>"+"<button onclick=\"resetPIN('"+e.id+"')\" style='display:block;width:100px;padding:5px 0;font-size:11px;margin:2px auto;border-radius:6px;background:#0057d9;color:white;border:none;cursor:pointer;'>Reset PIN</button>"+"<button onclick=\"resetDevice('"+e.id+"')\" style='display:block;width:100px;padding:5px 0;font-size:11px;margin:2px auto;border-radius:6px;background:#0057d9;color:white;border:none;cursor:pointer;'>Reset Device</button>"+"</td></tr>";
+    });
+    document.getElementById("adminEmployeeTable").innerHTML=html;
+    document.getElementById("employeeSearchBar").innerHTML="<input id='employeeSearch' onkeyup='searchEmployee()' placeholder='Search Employee...' style='width:320px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+    renderPagination();
+}
+
+function renderPagination(){
+    let totalPages=Math.ceil(allEmployees.length/rowsPerPage);
+    if(totalPages<=1){ document.getElementById("paginationBar").innerHTML=""; return; }
+    let html="<div style='margin-top:15px;text-align:center;'>";
+    for(let i=1;i<=totalPages;i++){
+        let active=i===currentPage?"background:#003566;color:white;":"background:#eee;color:#333;";
+        html+="<button onclick='goToPage("+i+")' style='"+active+"border:none;padding:7px 14px;margin:2px;border-radius:6px;cursor:pointer;font-size:13px;'>"+i+"</button>";
+    }
+    html+="</div>";
+    document.getElementById("paginationBar").innerHTML=html;
+}
+
+function goToPage(page){ currentPage=page; renderEmployeeTable(); }
+
+function resetDevice(employeeID){
+    showConfirm("Reset Device","I-reset ang device ng empleyado?",function(){
+        fetch(API_URL,{method:"POST",body:JSON.stringify({action:"resetDevice",employeeID:employeeID})})
+        .then(res=>res.json())
+        .then(data=>{ showSuccess("Device Reset!",data.message); silentRefreshEmployees(); silentRefreshDashboard(); })
+        .catch(err=>{ alert("Reset Failed"); });
+    });
+}
+
+function resetPIN(empID){
+    showConfirm("Reset PIN","I-reset ang PIN ng empleyado to 123456?",function(){
+        fetch(API_URL,{method:"POST",body:JSON.stringify({action:"resetPIN",employeeID:empID})})
+        .then(res=>res.json())
+        .then(data=>{ showSuccess("PIN Reset!",data.message); silentRefreshEmployees(); })
+        .catch(err=>{ alert("Connection Error"); });
+    });
+}
+
+function loadAdminLeaves(){
+    showAdminPage("adminLeavePage");
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"getAdminLeaves"})})
+    .then(res=>res.json())
+    .then(data=>{
+        let html="<input id='leaveSearch' onkeyup='searchLeave()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+        html+="<table id='leaveTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;table-layout:fixed;'><tr style='background:#003566;color:white;height:35px;'><th>Date Filed</th><th>Employee</th><th>Date Leave</th><th>Type</th><th>No.</th><th>Reason</th><th>Pay Status</th><th>Status</th></tr>";
+        data.leaves.forEach(l=>{ html+="<tr style='border-bottom:1px solid #ddd;'><td style='padding:8px;'>"+l.dateFiled+"</td><td style='padding:8px;'>"+l.name+"</td><td style='padding:8px;'>"+l.dateLeave+"</td><td style='padding:8px;'>"+l.type+"</td><td style='padding:8px;'>"+l.days+"</td><td style='padding:8px;'>"+l.reason+"</td><td style='padding:8px;'>"+l.payStatus+"</td><td style='padding:8px;'>"+l.status+"</td></tr>"; });
+        html+="</table>";
+        document.getElementById("adminLeaveTable").innerHTML=html;
+    });
+}
+
+function loadAdminCash(){
+    showAdminPage("adminCashPage");
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"getAdminCash"})})
+    .then(res=>res.json())
+    .then(data=>{
+        if(!data.cash){ document.getElementById("adminCashTable").innerHTML="No cash records found."; return; }
+        let html="<input id='cashSearch' onkeyup='searchCash()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+        html+="<table id='cashTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'><tr style='background:#003566;color:white;height:35px;'><th>Date</th><th>Employee</th><th>Amount</th><th>Deduction</th></tr>";
+        data.cash.forEach(c=>{ html+="<tr style='border-bottom:1px solid #ddd;'><td>"+c.date+"</td><td>"+c.name+"</td><td>"+c.amount+"</td><td>"+c.deduction+"</td></tr>"; });
+        html+="</table>";
+        document.getElementById("adminCashTable").innerHTML=html;
+    })
+    .catch(err=>{ document.getElementById("adminCashTable").innerHTML="Cash connection error"; });
+}
+
+function silentRefreshLeaves(){
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"getAdminLeaves"})})
+    .then(res=>res.json())
+    .then(data=>{
+        let html="<input id='leaveSearch' onkeyup='searchLeave()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+        html+="<table id='leaveTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;table-layout:fixed;'><tr style='background:#003566;color:white;height:35px;'><th>Date Filed</th><th>Employee</th><th>Date Leave</th><th>Type</th><th>No.</th><th>Reason</th><th>Pay Status</th><th>Status</th></tr>";
+        data.leaves.forEach(l=>{ html+="<tr style='border-bottom:1px solid #ddd;'><td style='padding:8px;'>"+l.dateFiled+"</td><td style='padding:8px;'>"+l.name+"</td><td style='padding:8px;'>"+l.dateLeave+"</td><td style='padding:8px;'>"+l.type+"</td><td style='padding:8px;'>"+l.days+"</td><td style='padding:8px;'>"+l.reason+"</td><td style='padding:8px;'>"+l.payStatus+"</td><td style='padding:8px;'>"+l.status+"</td></tr>"; });
+        html+="</table>";
+        document.getElementById("adminLeaveTable").innerHTML=html;
+    });
+}
+
+function silentRefreshCash(){
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"getAdminCash"})})
+    .then(res=>res.json())
+    .then(data=>{
+        if(!data.cash) return;
+        let html="<input id='cashSearch' onkeyup='searchCash()' placeholder='Search Employee Name...' style='width:300px;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;'>";
+        html+="<table id='cashTable' style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'><tr style='background:#003566;color:white;height:35px;'><th>Date</th><th>Employee</th><th>Amount</th><th>Deduction</th></tr>";
+        data.cash.forEach(c=>{ html+="<tr style='border-bottom:1px solid #ddd;'><td>"+c.date+"</td><td>"+c.name+"</td><td>"+c.amount+"</td><td>"+c.deduction+"</td></tr>"; });
+        html+="</table>";
+        document.getElementById("adminCashTable").innerHTML=html;
+    });
+}
+
+function searchCash(){
+    let input=document.getElementById("cashSearch").value.toLowerCase();
+    let rows=document.querySelectorAll("#cashTable tr");
+    for(let i=1;i<rows.length;i++){ let name=rows[i].cells[1].innerText.toLowerCase(); rows[i].style.display=name.includes(input)?"":"none"; }
+}
+
+function searchLeave(){
+    let input=document.getElementById("leaveSearch").value.toLowerCase();
+    let rows=document.querySelectorAll("#leaveTable tr");
+    for(let i=1;i<rows.length;i++){ let name=rows[i].cells[1].innerText.toLowerCase(); rows[i].style.display=name.includes(input)?"":"none"; }
+}
+
+function searchEmployee(){
+    let input=document.getElementById("employeeSearch").value.toLowerCase();
+    let rows=document.querySelectorAll("#adminEmployeeTable tr");
+    rows.forEach(row=>{ let text=row.innerText.toLowerCase(); row.style.display=text.includes(input)?"":"none"; });
+}
 
 function getBadge(value){
     if(!value) return "";
-    let color = "#aaa";
-    let v = value.toUpperCase();
-    if(v === "ACTIVE")   color = "#28a745";
-    if(v === "INACTIVE") color = "#6c757d";
-    if(v === "LOCKED")   color = "#dc3545";
-    if(v === "UNLOCKED") color = "#28a745";
+    let color="#aaa"; let v=value.toUpperCase();
+    if(v==="ACTIVE") color="#28a745";
+    if(v==="INACTIVE") color="#6c757d";
+    if(v==="LOCKED") color="#dc3545";
+    if(v==="UNLOCKED") color="#28a745";
     return "<span style='background:"+color+";color:white;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:bold;'>"+value+"</span>";
 }
 
-// ==========================
-// CUSTOM SUCCESS POPUP
-// ==========================
-
-function showSuccess(title, message){
-    document.getElementById("successIcon").innerHTML = "✅";
-    document.getElementById("successTitle").innerHTML = title;
-    document.getElementById("successMessage").innerHTML = message;
-    document.getElementById("successOverlay").style.display = "flex";
-    setTimeout(function(){ document.getElementById("successOverlay").style.display = "none"; }, 2000);
+function showSuccess(title,message){
+    document.getElementById("successIcon").innerHTML="✅";
+    document.getElementById("successTitle").innerHTML=title;
+    document.getElementById("successMessage").innerHTML=message;
+    document.getElementById("successOverlay").style.display="flex";
+    setTimeout(function(){ document.getElementById("successOverlay").style.display="none"; },2000);
 }
-
-// ==========================
-// CUSTOM ERROR POPUP
-// ==========================
 
 function showError(message){
-    document.getElementById("successIcon").innerHTML = "❌";
-    document.getElementById("successTitle").innerHTML = "<span style='color:#dc3545;'>Error</span>";
-    document.getElementById("successMessage").innerHTML = message;
-    document.getElementById("successOverlay").style.display = "flex";
-    setTimeout(function(){
-        document.getElementById("successOverlay").style.display = "none";
-        document.getElementById("successIcon").innerHTML = "✅";
-        document.getElementById("successTitle").innerHTML = "<span style='color:#28a745;'>Success!</span>";
-    }, 2500);
+    document.getElementById("successIcon").innerHTML="❌";
+    document.getElementById("successTitle").innerHTML="<span style='color:#dc3545;'>Error</span>";
+    document.getElementById("successMessage").innerHTML=message;
+    document.getElementById("successOverlay").style.display="flex";
+    setTimeout(function(){ document.getElementById("successOverlay").style.display="none"; document.getElementById("successIcon").innerHTML="✅"; document.getElementById("successTitle").innerHTML="<span style='color:#28a745;'>Success!</span>"; },2500);
 }
 
-// ==========================
-// CUSTOM CONFIRM DIALOG
-// ==========================
-
-function showConfirm(title, message, onYes){
-    document.getElementById("confirmTitle").innerHTML = title;
-    document.getElementById("confirmMessage").innerHTML = message;
-    document.getElementById("confirmOverlay").style.display = "flex";
-    document.getElementById("confirmYesBtn").onclick = function(){
-        closeConfirm();
-        onYes();
-    };
+function showConfirm(title,message,onYes){
+    document.getElementById("confirmTitle").innerHTML=title;
+    document.getElementById("confirmMessage").innerHTML=message;
+    document.getElementById("confirmOverlay").style.display="flex";
+    document.getElementById("confirmYesBtn").onclick=function(){ closeConfirm(); onYes(); };
 }
 
-function closeConfirm(){
-    document.getElementById("confirmOverlay").style.display = "none";
-}
-
-// ==========================
-// CHANGE PIN
-// ==========================
+function closeConfirm(){ document.getElementById("confirmOverlay").style.display="none"; }
 
 function changePIN(){
-    let current = document.getElementById("currentPIN").value;
-    let newP = document.getElementById("newPIN").value;
-    let confirm = document.getElementById("confirmPIN").value;
-    if(!current || !newP || !confirm){ showError("Punan ang lahat ng fields."); return; }
-    if(newP.length !== 6 || isNaN(newP)){ showError("6 digits lang ang PIN. Numbers only."); return; }
-    if(newP !== confirm){ showError("Hindi magkatugma ang bagong PIN."); return; }
-    fetch(API_URL,{
-        method:"POST",
-        body:JSON.stringify({ action:"changePin", employeeID:employeeData.employeeID, currentPin:current, newPin:newP })
-    })
+    let current=document.getElementById("currentPIN").value;
+    let newP=document.getElementById("newPIN").value;
+    let confirm=document.getElementById("confirmPIN").value;
+    if(!current||!newP||!confirm){ showError("Punan ang lahat ng fields."); return; }
+    if(newP.length!==6||isNaN(newP)){ showError("6 digits lang ang PIN. Numbers only."); return; }
+    if(newP!==confirm){ showError("Hindi magkatugma ang bagong PIN."); return; }
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"changePin",employeeID:employeeData.employeeID,currentPin:current,newPin:newP})})
     .then(res=>res.json())
     .then(data=>{
-        if(data.result === "SUCCESS"){
-            showSuccess("PIN Changed!", "Matagumpay na nabago ang iyong PIN.");
-            document.getElementById("currentPIN").value = "";
-            document.getElementById("newPIN").value = "";
-            document.getElementById("confirmPIN").value = "";
-        }else{
-            showError(data.error || "Hindi na-change ang PIN.");
-        }
+        if(data.result==="SUCCESS"){ showSuccess("PIN Changed!","Matagumpay na nabago ang iyong PIN."); document.getElementById("currentPIN").value=""; document.getElementById("newPIN").value=""; document.getElementById("confirmPIN").value=""; }
+        else{ showError(data.error||"Hindi na-change ang PIN."); }
     })
     .catch(err=>{ showError("Connection Error."); });
 }
 
-// ==========================
-// AUTO REFRESH
-// ==========================
-
-let lastTimestamp = 0;
-
 function startAutoRefresh(){
     setInterval(function(){
-        fetch(API_URL,{ method:"POST", body:JSON.stringify({ action:"getLastModified" }) })
+        fetch(API_URL,{method:"POST",body:JSON.stringify({action:"getLastModified"})})
         .then(res=>res.json())
         .then(data=>{
-            if(data.timestamp === lastTimestamp) return;
-            lastTimestamp = data.timestamp;
+            if(data.timestamp===lastTimestamp) return;
+            lastTimestamp=data.timestamp;
             if(document.getElementById("employeeDashboard").style.display=="block"){
-                fetch(API_URL,{ method:"POST", body:JSON.stringify({ action:"getEmployeeData", employeeID:employeeData.employeeID }) })
+                fetch(API_URL,{method:"POST",body:JSON.stringify({action:"getEmployeeData",employeeID:employeeData.employeeID})})
                 .then(res=>res.json())
                 .then(data=>{
                     if(data.result=="SUCCESS"){
-                        employeeData.leaveHistory = data.leaveHistory;
-                        employeeData.cashHistory = data.caHistory.records;
-                        employeeData.caBalance = data.caHistory.balance;
-                        employeeData.medical = data.medical;
-                        employeeData.evaluation = data.evaluation;
-                        employeeData.violation = data.violation;
-                        employeeData.movement = data.movement;
+                        employeeData.leaveHistory=data.leaveHistory;
+                        employeeData.cashHistory=data.caHistory.records;
+                        employeeData.caBalance=data.caHistory.balance;
+                        employeeData.medical=data.medical;
+                        employeeData.evaluation=data.evaluation;
+                        employeeData.violation=data.violation;
+                        employeeData.movement=data.movement;
                         loadLeave(); loadCash(); loadMedical(); loadEvaluation(); loadViolation(); loadMovement();
                     }
                 })
@@ -1522,28 +803,24 @@ function startAutoRefresh(){
             }
         })
         .catch(err=>console.log("Timestamp check error:",err));
-    }, 15000);
+    },15000);
 }
 
-// ==========================
-// RESTORE SESSION
-// ==========================
-
 function restoreSession(){
-    let empSession = localStorage.getItem("employeeSession");
-    let adminSession = localStorage.getItem("adminSession");
+    let empSession=localStorage.getItem("employeeSession");
+    let adminSession=localStorage.getItem("adminSession");
     if(empSession){
         try{
-            employeeData = JSON.parse(empSession);
+            employeeData=JSON.parse(empSession);
             document.getElementById("loginPage").style.display="none";
             document.getElementById("employeeDashboard").style.display="block";
             loadProfile();
         }catch(e){ localStorage.removeItem("employeeSession"); }
     } else if(adminSession){
         try{
-            let adminData = JSON.parse(adminSession);
-            document.getElementById("adminNameDisplay").innerHTML = adminData.adminName || "Admin";
-            document.getElementById("adminRoleDisplay").innerHTML = adminData.role || "";
+            let adminData=JSON.parse(adminSession);
+            document.getElementById("adminNameDisplay").innerHTML=adminData.adminName||"Admin";
+            document.getElementById("adminRoleDisplay").innerHTML=adminData.role||"";
             document.getElementById("loginPage").style.display="none";
             document.getElementById("adminLoginPage").style.display="none";
             document.getElementById("adminDashboard").style.display="block";
@@ -1552,53 +829,32 @@ function restoreSession(){
     }
 }
 
-restoreSession();
-startAutoRefresh();
-
-// ==========================
-// DATE AND TIME
-// ==========================
-
 function updateDateTime(){
-    let now = new Date();
-    let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-    let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-    let day = days[now.getDay()];
-    let month = months[now.getMonth()];
-    let date = day + ", " + month + " " + now.getDate() + ", " + now.getFullYear();
-    let hours = now.getHours();
-    let mins = String(now.getMinutes()).padStart(2,"0");
-    let secs = String(now.getSeconds()).padStart(2,"0");
-    let ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12 || 12;
-    let time = String(hours).padStart(2,"0") + ":" + mins + ":" + secs + " " + ampm;
-    let el = document.getElementById("adminDateTime");
-    if(el) el.innerHTML = date + " &nbsp;|&nbsp; " + time;
-    let el2 = document.getElementById("empDateTime");
-    if(el2) el2.innerHTML = date + " &nbsp;|&nbsp; " + time;
+    let now=new Date();
+    let days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    let months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    let date=days[now.getDay()]+", "+months[now.getMonth()]+" "+now.getDate()+", "+now.getFullYear();
+    let hours=now.getHours(); let mins=String(now.getMinutes()).padStart(2,"0"); let secs=String(now.getSeconds()).padStart(2,"0");
+    let ampm=hours>=12?"PM":"AM"; hours=hours%12||12;
+    let time=String(hours).padStart(2,"0")+":"+mins+":"+secs+" "+ampm;
+    let el=document.getElementById("adminDateTime"); if(el) el.innerHTML=date+" &nbsp;|&nbsp; "+time;
+    let el2=document.getElementById("empDateTime"); if(el2) el2.innerHTML=date+" &nbsp;|&nbsp; "+time;
 }
-
-setInterval(updateDateTime, 1000);
-updateDateTime();
-
-// ==========================
-// EMPLOYEE PROFILE MODAL
-// ==========================
 
 function showProfileModal(employeeID){
     document.getElementById("profileModal").style.visibility="visible";
-    document.getElementById("modalPhoto").src = "";
-    document.getElementById("modalName").innerHTML = "Loading...";
-    document.getElementById("modalPosition").innerHTML = "";
-    document.getElementById("modalBody").innerHTML = "<p style='text-align:center;padding:30px;color:#999;'>Fetching employee records...</p>";
-    fetch(API_URL,{ method:"POST", body:JSON.stringify({ action:"getEmployeeData", employeeID:employeeID }) })
+    document.getElementById("modalPhoto").src="";
+    document.getElementById("modalName").innerHTML="Loading...";
+    document.getElementById("modalPosition").innerHTML="";
+    document.getElementById("modalBody").innerHTML="<p style='text-align:center;padding:30px;color:#999;'>Fetching employee records...</p>";
+    fetch(API_URL,{method:"POST",body:JSON.stringify({action:"getEmployeeData",employeeID:employeeID})})
     .then(res=>res.json())
     .then(data=>{
-        let emp = allEmployees.find(e=>e.id==employeeID) || {};
-        document.getElementById("modalPhoto").src = emp.photo || "";
-        document.getElementById("modalName").innerHTML = emp.name || "";
-        document.getElementById("modalPosition").innerHTML = emp.position || "";
-        let overviewHtml = `<table class="modalTabTable">
+        let emp=allEmployees.find(e=>e.id==employeeID)||{};
+        document.getElementById("modalPhoto").src=emp.photo||"";
+        document.getElementById("modalName").innerHTML=emp.name||"";
+        document.getElementById("modalPosition").innerHTML=emp.position||"";
+        let overviewHtml=`<table class="modalTabTable">
             <tr><td style="text-align:left;color:#666;width:40%;padding:10px;">Employee ID</td><td style="text-align:left;padding:10px;font-weight:bold;">${emp.id||''}</td></tr>
             <tr><td style="text-align:left;color:#666;padding:10px;">Name</td><td style="text-align:left;padding:10px;">${emp.name||''}</td></tr>
             <tr><td style="text-align:left;color:#666;padding:10px;">Department</td><td style="text-align:left;padding:10px;">${emp.department||''}</td></tr>
@@ -1609,22 +865,12 @@ function showProfileModal(employeeID){
             <tr><td style="text-align:left;color:#666;padding:10px;">Leave Balance</td><td style="text-align:left;padding:10px;">${emp.leaveBalance||''}</td></tr>
             <tr><td style="text-align:left;color:#666;padding:10px;">CA Balance</td><td style="text-align:left;padding:10px;">${emp.caBalance||''}</td></tr>
         </table>`;
-        let leaveHtml = "";
-        if(!data.leaveHistory || data.leaveHistory.length==0){ leaveHtml = "<p style='color:#999;text-align:center;padding:20px;'>No leave records found.</p>"; }
-        else { leaveHtml = "<table class='modalTabTable'><tr><th>Date Filed</th><th>Date of Leave</th><th>Type</th><th>Days</th><th>Reason</th><th>Pay Status</th><th>Status</th></tr>"; data.leaveHistory.forEach(r=>{ leaveHtml += "<tr><td>"+r.dateFiled+"</td><td>"+r.dateLeave+"</td><td>"+r.type+"</td><td>"+r.days+"</td><td>"+r.reason+"</td><td>"+(r.payStatus||'')+"</td><td>"+r.status+"</td></tr>"; }); leaveHtml += "</table>"; }
-        let medHtml = "";
-        if(!data.medical || data.medical.length==0){ medHtml = "<p style='color:#999;text-align:center;padding:20px;'>No medical records found.</p>"; }
-        else { medHtml = "<table class='modalTabTable'><tr><th>Type</th><th>Date</th><th>Result</th><th>Status</th></tr>"; data.medical.forEach(r=>{ medHtml += "<tr><td>"+r.type+"</td><td>"+r.date+"</td><td>"+r.result+"</td><td>"+r.status+"</td></tr>"; }); medHtml += "</table>"; }
-        let evalHtml = "";
-        if(!data.evaluation || data.evaluation.length==0){ evalHtml = "<p style='color:#999;text-align:center;padding:20px;'>No evaluation records found.</p>"; }
-        else { evalHtml = "<table class='modalTabTable'><tr><th>Date</th><th>Type</th><th>Score</th><th>Result</th></tr>"; data.evaluation.forEach(r=>{ evalHtml += "<tr><td>"+r.date+"</td><td>"+r.type+"</td><td>"+r.score+"</td><td>"+r.result+"</td></tr>"; }); evalHtml += "</table>"; }
-        let violHtml = "";
-        if(!data.violation || data.violation.length==0){ violHtml = "<p style='color:#999;text-align:center;padding:20px;'>No violation records found.</p>"; }
-        else { violHtml = "<table class='modalTabTable'><tr><th>Date</th><th>Violation</th><th>Action Taken</th><th>Status</th></tr>"; data.violation.forEach(r=>{ violHtml += "<tr><td>"+r.date+"</td><td>"+r.violation+"</td><td>"+r.action+"</td><td>"+r.status+"</td></tr>"; }); violHtml += "</table>"; }
-        let movHtml = "";
-        if(!data.movement || data.movement.length==0){ movHtml = "<p style='color:#999;text-align:center;padding:20px;'>No movement records found.</p>"; }
-        else { movHtml = "<table class='modalTabTable'><tr><th>Date</th><th>Movement</th><th>Old</th><th>New</th></tr>"; data.movement.forEach(r=>{ movHtml += "<tr><td>"+r.date+"</td><td>"+r.movement+"</td><td>"+r.old+"</td><td>"+r.new+"</td></tr>"; }); movHtml += "</table>"; }
-        document.getElementById("modalBody").innerHTML = `
+        let leaveHtml=""; if(!data.leaveHistory||data.leaveHistory.length==0){ leaveHtml="<p style='color:#999;text-align:center;padding:20px;'>No leave records found.</p>"; } else { leaveHtml="<table class='modalTabTable'><tr><th>Date Filed</th><th>Date of Leave</th><th>Type</th><th>Days</th><th>Reason</th><th>Pay Status</th><th>Status</th></tr>"; data.leaveHistory.forEach(r=>{ leaveHtml+="<tr><td>"+r.dateFiled+"</td><td>"+r.dateLeave+"</td><td>"+r.type+"</td><td>"+r.days+"</td><td>"+r.reason+"</td><td>"+(r.payStatus||'')+"</td><td>"+r.status+"</td></tr>"; }); leaveHtml+="</table>"; }
+        let medHtml=""; if(!data.medical||data.medical.length==0){ medHtml="<p style='color:#999;text-align:center;padding:20px;'>No medical records found.</p>"; } else { medHtml="<table class='modalTabTable'><tr><th>Type</th><th>Date</th><th>Result</th><th>Status</th></tr>"; data.medical.forEach(r=>{ medHtml+="<tr><td>"+r.type+"</td><td>"+r.date+"</td><td>"+r.result+"</td><td>"+r.status+"</td></tr>"; }); medHtml+="</table>"; }
+        let evalHtml=""; if(!data.evaluation||data.evaluation.length==0){ evalHtml="<p style='color:#999;text-align:center;padding:20px;'>No evaluation records found.</p>"; } else { evalHtml="<table class='modalTabTable'><tr><th>Date</th><th>Type</th><th>Score</th><th>Result</th></tr>"; data.evaluation.forEach(r=>{ evalHtml+="<tr><td>"+r.date+"</td><td>"+r.type+"</td><td>"+r.score+"</td><td>"+r.result+"</td></tr>"; }); evalHtml+="</table>"; }
+        let violHtml=""; if(!data.violation||data.violation.length==0){ violHtml="<p style='color:#999;text-align:center;padding:20px;'>No violation records found.</p>"; } else { violHtml="<table class='modalTabTable'><tr><th>Date</th><th>Violation</th><th>Action Taken</th><th>Status</th></tr>"; data.violation.forEach(r=>{ violHtml+="<tr><td>"+r.date+"</td><td>"+r.violation+"</td><td>"+r.action+"</td><td>"+r.status+"</td></tr>"; }); violHtml+="</table>"; }
+        let movHtml=""; if(!data.movement||data.movement.length==0){ movHtml="<p style='color:#999;text-align:center;padding:20px;'>No movement records found.</p>"; } else { movHtml="<table class='modalTabTable'><tr><th>Date</th><th>Movement</th><th>Old</th><th>New</th></tr>"; data.movement.forEach(r=>{ movHtml+="<tr><td>"+r.date+"</td><td>"+r.movement+"</td><td>"+r.old+"</td><td>"+r.new+"</td></tr>"; }); movHtml+="</table>"; }
+        document.getElementById("modalBody").innerHTML=`
         <div class="modalTabs">
             <button class="modalTab active" onclick="switchModalTab(this,'mtOverview')">Overview</button>
             <button class="modalTab" onclick="switchModalTab(this,'mtLeave')">Leave</button>
@@ -1640,137 +886,29 @@ function showProfileModal(employeeID){
         <div class="modalTabContent" id="mtViolation">${violHtml}</div>
         <div class="modalTabContent" id="mtMovement">${movHtml}</div>`;
     })
-    .catch(err=>{ document.getElementById("modalBody").innerHTML = "<p style='text-align:center;color:#999;padding:30px;'>Could not load employee details.</p>"; });
+    .catch(err=>{ document.getElementById("modalBody").innerHTML="<p style='text-align:center;color:#999;padding:30px;'>Could not load employee details.</p>"; });
 }
 
-function switchModalTab(btn, tabID){
+function switchModalTab(btn,tabID){
     document.querySelectorAll(".modalTab").forEach(t=>t.classList.remove("active"));
     document.querySelectorAll(".modalTabContent").forEach(t=>t.classList.remove("active"));
-    btn.classList.add("active");
-    document.getElementById(tabID).classList.add("active");
+    btn.classList.add("active"); document.getElementById(tabID).classList.add("active");
 }
 
-function closeProfileModal(){
-    document.getElementById("profileModal").style.visibility="hidden";
-}
-
-// ==========================
-// DASHBOARD DETAIL MODAL
-// ==========================
-
-let dashboardData = {};
-
-function showDashDetail(type){
-
-    document.getElementById("dashDetailModal").style.visibility="visible";
-
-    let title = "";
-    let html = "";
-
-    let empList = dashboardData.empList || [];
-    let leaveList = dashboardData.leaveList || [];
-    let caList = dashboardData.caList || [];
-
-    if(type==="total"){
-        title = "All Employees ("+empList.length+")";
-        html = buildEmpTable(empList);
-    }
-    else if(type==="active"){
-        let list = empList.filter(e=>String(e.access).toUpperCase()==="ACTIVE");
-        title = "Active Employees ("+list.length+")";
-        html = buildEmpTable(list);
-    }
-    else if(type==="inactive"){
-        let list = empList.filter(e=>String(e.access).toUpperCase()!=="ACTIVE");
-        title = "Inactive Employees ("+list.length+")";
-        html = buildEmpTable(list);
-    }
-    else if(type==="leave"){
-        title = "Leave Filed This Month ("+leaveList.length+")";
-        if(leaveList.length===0){
-            html = "<p style='text-align:center;color:#999;padding:20px;'>No leave records this month.</p>";
-        }else{
-            html = "<table style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'>";
-            html += "<tr style='background:#003566;color:white;'><th style='padding:10px;'>Date Filed</th><th>Employee</th><th>Type</th><th>Days</th><th>Reason</th><th>Status</th></tr>";
-            leaveList.forEach(l=>{
-                html += "<tr style='border-bottom:1px solid #eee;'>";
-                html += "<td style='padding:8px;'>"+l.dateFiled+"</td>";
-                html += "<td style='padding:8px;'>"+l.name+"</td>";
-                html += "<td style='padding:8px;'>"+l.type+"</td>";
-                html += "<td style='padding:8px;'>"+l.days+"</td>";
-                html += "<td style='padding:8px;'>"+l.reason+"</td>";
-                html += "<td style='padding:8px;'>"+l.status+"</td>";
-                html += "</tr>";
-            });
-            html += "</table>";
-        }
-    }
-    else if(type==="cash"){
-        title = "Employees with CA Balance ("+caList.length+")";
-        if(caList.length===0){
-            html = "<p style='text-align:center;color:#999;padding:20px;'>No outstanding cash advances.</p>";
-        }else{
-            html = "<table style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'>";
-            html += "<tr style='background:#003566;color:white;'><th style='padding:10px;'>Employee ID</th><th>Name</th><th>Department</th><th>Position</th><th>CA Balance</th></tr>";
-            caList.forEach(c=>{
-                html += "<tr style='border-bottom:1px solid #eee;'>";
-                html += "<td style='padding:8px;'>"+c.id+"</td>";
-                html += "<td style='padding:8px;'>"+c.name+"</td>";
-                html += "<td style='padding:8px;'>"+c.department+"</td>";
-                html += "<td style='padding:8px;'>"+c.position+"</td>";
-                html += "<td style='padding:8px;font-weight:bold;color:#dc3545;'>"+c.caBalance+"</td>";
-                html += "</tr>";
-            });
-            html += "</table>";
-        }
-    }
-    else if(type==="locked"){
-        let list = empList.filter(e=>String(e.device).toUpperCase()==="LOCKED");
-        title = "Locked Devices ("+list.length+")";
-        html = buildEmpTable(list);
-    }
-
-    document.getElementById("dashDetailTitle").innerHTML = title;
-    document.getElementById("dashDetailBody").innerHTML = html;
-}
-
-function buildEmpTable(list){
-    if(list.length===0) return "<p style='text-align:center;color:#999;padding:20px;'>No records found.</p>";
-    let html = "<table style='width:100%;border-collapse:collapse;text-align:center;font-size:13px;'>";
-    html += "<tr style='background:#003566;color:white;'><th style='padding:10px;'>Employee ID</th><th>Name</th><th>Department</th><th>Position</th><th>Status</th><th>Device</th></tr>";
-    list.forEach(e=>{
-        html += "<tr style='border-bottom:1px solid #eee;'>";
-        html += "<td style='padding:8px;'>"+e.id+"</td>";
-        html += "<td style='padding:8px;'>"+e.name+"</td>";
-        html += "<td style='padding:8px;'>"+e.department+"</td>";
-        html += "<td style='padding:8px;'>"+e.position+"</td>";
-        html += "<td style='padding:8px;'>"+getBadge(e.access)+"</td>";
-        html += "<td style='padding:8px;'>"+getBadge(e.device)+"</td>";
-        html += "</tr>";
-    });
-    html += "</table>";
-    return html;
-}
-
-function closeDashDetail(){
-    document.getElementById("dashDetailModal").style.visibility="hidden";
-}
-
-// ==========================
-// LOGOUT
-// ==========================
+function closeProfileModal(){ document.getElementById("profileModal").style.visibility="hidden"; }
 
 function logout(){
-    localStorage.removeItem("employeeSession");
-    localStorage.removeItem("adminSession");
+    localStorage.removeItem("employeeSession"); localStorage.removeItem("adminSession");
     document.getElementById("loginPage").style.display="flex";
     document.getElementById("employeeDashboard").style.display="none";
     document.getElementById("adminDashboard").style.display="none";
     document.getElementById("adminLoginPage").style.display="none";
 }
 
+restoreSession();
+startAutoRefresh();
+setInterval(updateDateTime,1000);
+updateDateTime();
 </script>
-
 </body>
-
 </html>
